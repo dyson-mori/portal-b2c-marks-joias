@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 
+import { Header as HeaderPrisma } from '@prisma/client';
+
 import { CartContext } from '@context/shopping';
 
 import { ShoppingCart, Logo } from '@assets';
@@ -9,11 +11,7 @@ import { Container, Icon, Nav, LinkStyle } from './styles';
 interface HeaderProps {
   hide: boolean;
   param: string;
-  header: {
-    href: string;
-    label: string;
-    public: boolean;
-  }[];
+  header: HeaderPrisma[];
 };
 
 export default function Header({ hide, param, header }: HeaderProps) {
@@ -31,10 +29,10 @@ export default function Header({ hide, param, header }: HeaderProps) {
       <Nav>
         {header.map((item, index) => item.public && (
           <LinkStyle
-            param={String(param === item.href)}
+            param={String(param === item.param)}
             key={index}
-            href={item.href}
-          >{item.label}</LinkStyle>
+            href={item.param}
+          >{item.title}</LinkStyle>
         ))}
       </Nav>
       <Icon href='/cart'>

@@ -5,6 +5,8 @@ export const Container = styled.main`
 
   margin: 10px 50px;
 
+  height: 100%;
+
   @media (max-width: 710px){
     flex-direction: column;
   };

@@ -9,6 +9,8 @@ export const Container = styled(Link)`
 
   margin: 0px 3px 7px 7px;
 
+  aspect-ratio: 1 / 1;
+
   img {
     width: 100%;
     height: 100%;

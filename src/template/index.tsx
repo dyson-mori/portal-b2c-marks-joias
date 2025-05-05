@@ -5,6 +5,8 @@ import { ThemeProvider } from "styled-components";
 
 import { usePathname } from "next/navigation";
 
+import { Header as HeaderPrisma } from "@prisma/client";
+
 import Global from "../global/styles";
 import themes from "../global/theme";
 import ShoppingProvider from '../context/shopping';
@@ -15,11 +17,7 @@ import Splash from "./splash";
 
 type Template = {
   children: React.ReactNode;
-  header: {
-    href: string;
-    label: string;
-    public: boolean;
-  }[];
+  header: HeaderPrisma[];
 };
 
 export default function Template({ children, header }: Readonly<Template>) {

@@ -1,28 +1,12 @@
-// console.log(process.env.VITE_SERGIO_ENVIRONMENT_VARIABLE);
+import { prisma } from "@services/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const header = [
-    {
-      href: '/',
-      label: 'Produtos',
-      public: true
-    },
-    {
-      href: '/panel',
-      label: 'Panel',
-      public: false
-    },
-    {
-      href: '/tracking',
-      label: 'Rastreamento',
-      public: true
-    }
-  ];
+  const header = await prisma.header.findMany();
 
   if (!header) {
-    throw new Error('Category Server Error')
+    return NextResponse.json([], { status: 400, statusText: 'products not received' });
   };
 
-  return NextResponse.json(header);
+  return NextResponse.json(header, { status: 200, statusText: 'products received successfully' });
 };
