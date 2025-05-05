@@ -3,9 +3,6 @@
 import React, { useState } from 'react';
 import { DotLottiePlayer } from '@dotlottie/react-player';
 
-import { useTheme } from 'styled-components';
-import { SubCategory } from '@prisma/client';
-
 import { Product } from '@components';
 import { CategoryProps, ProductProps } from "@global/interfaces";
 
@@ -16,12 +13,8 @@ type Props = {
   categories: CategoryProps[];
 };
 
-export default function Products({ products, categories }: Props) {
+export default function Products({ products }: Props) {
   const [label] = useState('');
-  const [selects, setSelects] = useState([] as SubCategory[]);
-
-  const theme = useTheme();
-
   const lottie_styles = {
     display: 'flex',
     maxWidth: "300px"
