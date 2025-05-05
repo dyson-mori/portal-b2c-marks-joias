@@ -1,0 +1,37 @@
+import { DotLottiePlayer } from "@dotlottie/react-player";
+
+import { ProductProps } from "@global/interfaces";
+
+import { Container, Lottie, Information } from "./styles";
+
+const lottie_styles = {
+  display: 'flex',
+  maxWidth: "150px"
+};
+
+type CheckOutProps = {
+  storage: ProductProps[];
+};
+
+export default function CheckOut({ storage }: CheckOutProps) {
+  if (storage.length === 0) {
+    return (
+      <Container>
+        <Lottie>
+          <DotLottiePlayer style={lottie_styles} src="/lottie/marks-empty-card.lottie" autoplay />
+        </Lottie>
+      </Container>
+    )
+  };
+
+  return (
+    <Container>
+      {storage.map((e, index) => (
+        <Information key={index.toString()}>
+          <p>{e.name}</p>
+          <h4>{e.price}</h4>
+        </Information>
+      ))}
+    </Container>
+  )
+};

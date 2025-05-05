@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  # web:
+  #   build: ./web
+  #   container_name: web
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - database
+
+  postgres:
+    image: postgres:latest
+    container_name: database
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_DB: database
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./sql/setup.sql:/docker-entrypoint-initdb.d/init.sql
+  # nginx:
+  #   build: ./nginx
+  #   container_name: nginx
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - web
+
+volumes:
+  postgres:
