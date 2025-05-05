@@ -10,3 +10,6 @@
 
 ## note <br />
   - remover o "export const dynamic = 'force-dynamic';"# portal-b2c-marks-joias
+
+## Ideia
+  - alterar as categorias, deixa-las entre os produtos e o header
