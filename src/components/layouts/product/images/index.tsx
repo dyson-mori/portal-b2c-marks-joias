@@ -14,22 +14,20 @@ type Props = {
 export default function Images({ data }: Props) {
   return (
     <Fragment>
-      <MainImage data={data} />
+      <DesktopImage data={data} />
       <ContainerMobile>
         {data.images.map((item, index) => (
           <Image
             key={index}
             priority
-            width={50}
-            height={50}
+            width={300}
+            height={300}
             // width={width - 20}
             // height={width - 20}
             src={item}
             alt={item}
             style={{
-              marginRight: 5,
               objectFit: 'cover',
-              borderRadius: 3,
               scrollSnapAlign: 'start'
             }}
           />
@@ -39,7 +37,7 @@ export default function Images({ data }: Props) {
   )
 }
 
-function MainImage({ data }: Props) {
+function DesktopImage({ data }: Props) {
   const [select, setSelect] = useState(0);
 
   const OptionsComponent = () => {

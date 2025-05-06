@@ -65,10 +65,6 @@ export default function ShoppingCard() {
             <Shopping.FirstStage storage={storage} control={control} methodsPayments={methodsPayments} sumPrices={sumPrices} />
           }
 
-          {/* {currentStep === 1 &&
-            <Shopping.SecondStage control={control} />
-          } */}
-
         </Shopping.Form>
       </Container>
     </Suspense>

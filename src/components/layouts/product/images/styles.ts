@@ -18,10 +18,16 @@ export const ContainerMobile = styled.section`
 
   scroll-snap-type: x mandatory;
 
+  aspect-ratio: 1 / 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
   ${({ theme }) => css`
     @media (max-width: ${theme.settings.responsive.maxWidth}) {
       display: flex;
-      border-radius: ${theme.settings.radius.small};
     };
   `};
 `;

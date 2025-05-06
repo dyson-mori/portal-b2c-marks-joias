@@ -9,6 +9,12 @@ export const Container = styled.div`
   height: 100%;
 
   padding: 5px 10px;
+
+  ${({ theme }) => css`
+    @media (max-width: ${theme.settings.responsive.maxWidth}) {
+      min-height: 150px;
+    }
+  `};
 `;
 
 export const Lottie = styled.div`
@@ -25,7 +31,7 @@ export const Information = styled.div`
   ${({ theme }) => css`
     p {
       max-width: 70%;
-      white-space: nowrap;                  
+      white-space: nowrap;
       overflow: hidden; /* "overflow" value must be different from "visible" */
       text-overflow: ellipsis;
     }

@@ -11,6 +11,7 @@ export const Container = styled.main`
     @media (max-width: ${theme.settings.responsive.maxWidth}){
       flex-direction: column;
       padding: ${theme.settings.responsive.padding};
+      padding: 10px;
     };
   `};
 `;

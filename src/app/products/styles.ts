@@ -16,6 +16,9 @@ export const Products = styled.section`
   display: flex;
 
   flex-wrap: wrap;
+
+  justify-content: space-between;
+
   /* margin-left: 5px; */
 
   /* width: 100%; */

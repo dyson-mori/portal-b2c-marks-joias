@@ -23,7 +23,8 @@ export const Container = styled.section`
     ${({ theme }) => css`
       @media (max-width: ${theme.settings.responsive.maxWidth}) {
         padding: 0;
-        margin: 20px 0;
+        /* margin: 20px 0; */
+        width: 100%;
       };
     `};
   `};

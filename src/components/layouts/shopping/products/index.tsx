@@ -29,7 +29,7 @@ export default function SavedProducts({ storage, setStorage }: Props) {
       <Container style={test}>
         <CartEmpty>
           <DotLottiePlayer style={lottie_styles} src="/lottie/marks-empty-card.lottie" autoplay />
-          <p>Your cart is empty</p>
+          <p>Seu carrinho está vazio</p>
         </CartEmpty>
       </Container>
     )
@@ -48,10 +48,7 @@ export default function SavedProducts({ storage, setStorage }: Props) {
             width={300}
             height={300}
             alt={item.name}
-            style={{
-              objectFit: 'cover',
-              borderRadius: 3,
-            }}
+            style={{ objectFit: 'cover' }}
           />
         </Product>
       ))}

@@ -6,7 +6,8 @@ export const Container = styled(Link)`
 
   display: flex;
 
-  /* margin: 0px 3px 10px 7px; */
+  width: calc((100% / 4) - 4px);
+
   margin: 2px;
 
   aspect-ratio: 1 / 1;

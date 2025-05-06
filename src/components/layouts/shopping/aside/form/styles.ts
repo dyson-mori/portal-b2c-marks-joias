@@ -18,8 +18,10 @@ export const Container = styled.form`
     border-radius: ${theme.settings.radius.small};
     background-color: ${theme.colors.white};
 
-    /* @media (max-width: ${theme.settings.responsive.maxWidth}) {
-      width: 100%;
-    } */
+    @media (max-width: ${theme.settings.responsive.maxWidth}) {
+      max-width: 100%;
+      min-width: 100%;
+      border-radius: 0;
+    }
   `};
 `;

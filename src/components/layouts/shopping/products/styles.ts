@@ -10,27 +10,23 @@ export const Container = styled.section`
   margin-right: 5px;
 
   ${({ theme }) => css`
-    border-radius: 4px;
     box-shadow: ${theme.settings.box.simple};
     background-color: ${theme.colors.white};
 
     @media (max-width: ${theme.settings.responsive.maxWidth}){
-      min-height: 40vh;
       margin-bottom: 10px;
-      justify-content: space-evenly;
+      margin-right: 0px;
 
-      padding: 1.5px 0;
+      padding: 0;
+      background-color: transparent;
+      box-shadow: 0 0 0 0 transparent;
 
-      a {
-        margin: 1.5px 0;
-        width: calc(100% / 2);
-        height: calc(100% / 2);
-      };
+      display: flex;
 
-      img {
-        width: 100%;
-        height: 100%;
-      }
+      overflow-x: scroll;
+
+      scroll-snap-type: x mandatory;
+      aspect-ratio: 1 / 1;
     };
   `};
 `;
@@ -45,6 +41,20 @@ export const CartEmpty = styled.div`
 export const Product = styled.div`
   position: relative;
   display: flex;
+
+  ${({ theme }) => css`
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      width: 100%;
+      height: 100%;
+
+      aspect-ratio: 1 / 1;
+
+      img {
+        width: 100%;
+        height: 100%;
+      };
+    };
+  `};
 `;
 
 export const Delete = styled.button`
