@@ -13,3 +13,6 @@
 
 ## Ideia
   - alterar as categorias, deixa-las entre os produtos e o header
+
+## Success Payment Links <br />
+  - http://localhost:3000/success?session_id=cs_test_b1ViffhKeVPpgC1ntCuZur8jNxeYnlIixLqO47sSCLFiVDjo0LA8nW9iS6

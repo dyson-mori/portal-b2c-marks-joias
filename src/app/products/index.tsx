@@ -6,7 +6,7 @@ import { DotLottiePlayer } from '@dotlottie/react-player';
 import { Product } from '@components';
 import { CategoryProps, ProductProps } from "@global/interfaces";
 
-import { Container, Products as ProductsStyled, ProductEmpty } from './styles';
+import { Container, SectionProducts, ProductEmpty } from './styles';
 
 type Props = {
   products: ProductProps[];
@@ -36,7 +36,7 @@ export default function Products({ products }: Props) {
 
       {
         products.filter(e => e.name.toLowerCase().includes(label.toLowerCase())).length !== 0 && (
-          <ProductsStyled>
+          <SectionProducts>
             {
               products.filter(pro => pro.name.toLowerCase().includes(label.toLowerCase())
                 // products.filter(pro =>
@@ -47,7 +47,7 @@ export default function Products({ products }: Props) {
                 .map((item, index) =>
                   <Product key={index.toString()} product={item} href={`/product?id=${item.id}`} />
                 )}
-          </ProductsStyled>
+          </SectionProducts>
         )}
     </Container>
   )

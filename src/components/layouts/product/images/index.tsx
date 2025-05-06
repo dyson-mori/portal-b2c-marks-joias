@@ -52,10 +52,7 @@ function DesktopImage({ data }: Props) {
               src={item}
               alt={item}
               loading="eager"
-              style={{
-                objectFit: 'cover',
-                // borderRadius: 3,
-              }}
+              style={{ objectFit: 'cover' }}
             />
           </Button>
         ))}

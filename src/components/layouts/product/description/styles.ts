@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.section`
-  width: calc(100% / 2);
+  width: 80%;
   padding: 0 40px;
 
   ${({ theme }) => css`
@@ -11,7 +11,7 @@ export const Container = styled.section`
       width: 100%;
     }
     h1 {
-      font-size: 20px;
+      font-size: 24px;
       color: ${theme.colors.dark_charcoal};
       font-weight: ${theme.font.weight[600]};
     };
@@ -23,7 +23,6 @@ export const Container = styled.section`
     ${({ theme }) => css`
       @media (max-width: ${theme.settings.responsive.maxWidth}) {
         padding: 0;
-        /* margin: 20px 0; */
         width: 100%;
       };
     `};

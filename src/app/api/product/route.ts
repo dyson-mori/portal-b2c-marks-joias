@@ -18,11 +18,12 @@ export async function GET(request: NextRequest) {
   const filter = {
     id: product.id,
     name: product.name,
-    images: product.images,
     description: product.description,
     unit_amount: formats.formatDecimal(String(price.unit_amount)),
     price: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price.unit_amount! / 100),
-    defaultPriceId: price.id
+    defaultPriceId: price.id,
+    quantity: product.metadata.quantity,
+    images: product.images,
   };
 
   if (!product) {
@@ -53,8 +54,8 @@ export async function POST(request: NextRequest) {
     },
     default_price_data: {
       currency: 'brl',
-      unit_amount: Number(String(price).replace('.', '')),
-      unit_amount_decimal: String(price).replace('.', '')
+      unit_amount: price,
+      // unit_amount_decimal: String(price).replace('.', '')
     },
   });
 

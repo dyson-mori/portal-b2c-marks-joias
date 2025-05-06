@@ -12,13 +12,15 @@ export const Container = styled.main`
   };
 `;
 
-export const Products = styled.section`
+export const SectionProducts = styled.section`
   display: flex;
 
   flex-wrap: wrap;
-
   justify-content: space-between;
 
+  width: 100%;
+
+  /* justify-content: space-between; */
   /* margin-left: 5px; */
 
   /* width: 100%; */

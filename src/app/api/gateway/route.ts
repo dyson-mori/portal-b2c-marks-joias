@@ -44,9 +44,8 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const { products, email } = await request.json() as Gateway;
 
-
-  const successUrl = `${process.env.NEXT_PUBLIC_URL}/success?session_id={CHECKOUT_SESSION_ID}`;
-  const cancelUrl = `${process.env.NEXT_PUBLIC_URL}/`;
+  const successUrl = `${process.env.NEXT_PUBLIC_MARKS_URL}/success?session_id={CHECKOUT_SESSION_ID}`;
+  const cancelUrl = `${process.env.NEXT_PUBLIC_MARKS_URL}/cart`;
 
   const checkoutSession = await stripe.checkout.sessions.create({
     success_url: successUrl.replace('/api', ''),

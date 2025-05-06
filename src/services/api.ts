@@ -12,7 +12,7 @@ interface FetcherParams {
   header?: HeadersInit;
 }
 
-const NEXT_URL = process.env.NEXT_FETCHER_URL;
+const NEXT_URL = process.env.NEXT_PUBLIC_MARKS_URL;
 
 const fetcher = async ({
   url,
@@ -25,7 +25,6 @@ const fetcher = async ({
     const fullUrl = `${NEXT_URL}${url}`;
 
     const isBodyAllowed = method !== 'GET' && method !== 'DELETE';
-    // const isHeaders = 
 
     const res = await fetch(fullUrl, {
       method,
@@ -67,7 +66,6 @@ export const api = {
   },
   gateway: {
     find: (session_id: string) => fetcher({ method: 'GET', url: `/gateway?session_id=${session_id}` }),
-
     create: (body: object) => fetcher({ method: 'POST', url: '/gateway', body })
   },
   header: {

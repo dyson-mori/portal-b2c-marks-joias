@@ -30,11 +30,12 @@ export default function Description({ data, storage, handleBuy, onAddToCart }: P
       </DeliveryStyled>
 
       <h2>{data.price}</h2>
+      <p>6x sem juros de R$ 50,20</p>
 
-      <DeliveryStyled>
+      {/* <DeliveryStyled>
         <Delivery width={20} height={20} fill="#47C747" /> &nbsp;&nbsp;
         <p>Enviamos para todo o Brasil</p>
-      </DeliveryStyled>
+      </DeliveryStyled> */}
 
       <DeliveryStyled>
         <Devolution width={20} height={20} stroke="#47C747" strokeWidth={1.8} /> &nbsp;&nbsp;

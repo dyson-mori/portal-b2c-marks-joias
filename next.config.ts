@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'files.stripe.com',
         port: ''
+      },
+      {
+        protocol: 'https',
+        hostname: 'jouomoizalhobjxhlmkc.supabase.co',
+        port: ''
       }
     ]
   },

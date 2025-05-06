@@ -8,7 +8,7 @@ export const Container = styled(Link)`
 
   width: calc((100% / 4) - 4px);
 
-  margin: 2px;
+  margin-bottom: 6px;
 
   aspect-ratio: 1 / 1;
 

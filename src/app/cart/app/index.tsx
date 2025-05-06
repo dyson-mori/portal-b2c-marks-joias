@@ -43,6 +43,8 @@ export default function ShoppingCard() {
 
     if (data.method === "clyp6mut5000ay4iw0rcg2vve") {
       const result = await api.gateway.create({ ...data, products: storage });
+      console.log(result);
+
       if (result) {
         route.push(result);
       };
