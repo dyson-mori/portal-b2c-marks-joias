@@ -3,53 +3,27 @@ import styled from 'styled-components';
 export const Container = styled.main`
   display: flex;
 
-  margin: 10px 50px;
+  padding: 10px 50px;
 
-  height: 100%;
-
-  @media (max-width: 710px){
-    flex-direction: column;
-  };
-
-  @media (max-width: 1090px){
-    margin: 10px 20px;
-  }
-`;
-
-export const Aside = styled.aside`
-  @media (max-width: 710px){
-    position: relative;
-    top: 0px;
-  };
-
-  position: -webkit-sticky;
-  position: sticky;
-
-  top: 60px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  width: 350px;
-  height: 100%;
+  width: 100%;
 
   @media (max-width: 710px){
-    width: 100%;
+    padding: 3px 0;
   };
 `;
 
 export const Products = styled.section`
-  display: grid;
+  display: flex;
 
-  margin-left: 5px;
+  flex-wrap: wrap;
+  /* margin-left: 5px; */
 
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  /* height: 100%; */
 
-  @media (max-width: 1920px){
+  /* @media (max-width: 1920px){
     grid-template-columns: repeat(auto-fill, minmax(calc(100% / 3), 1fr));
-  };
+  }; */
 
   /* @media (max-width: 1280px){
     grid-template-columns: repeat(auto-fill, minmax(calc(100% / 4), 1fr));

@@ -5,9 +5,9 @@ export const Container = styled(Link)`
   position: relative;
 
   display: flex;
-  align-items: center;
 
-  margin: 0px 3px 7px 7px;
+  /* margin: 0px 3px 10px 7px; */
+  margin: 2px;
 
   aspect-ratio: 1 / 1;
 
@@ -19,13 +19,11 @@ export const Container = styled(Link)`
   ${({ theme }) => css`
     box-shadow: ${theme.settings.box.simple};
     background-color: ${theme.colors.white};
-    border-radius: ${theme.settings.radius.small};
-
-    @media (max-width: ${theme.settings.responsive.maxWidth}) {
-      width: calc(100%);
-      height: calc(100vw / 5);
-    };
   `};
+
+  @media (max-width: 710px){
+    width: calc(100% / 2.05);
+  };
 `;
 
 export const Footer = styled.footer`
@@ -40,8 +38,6 @@ export const Footer = styled.footer`
 
   width: 100%;
   padding: 10px;
-
-  border-radius: 0 0 5px 5px;
 
   background: linear-gradient(180deg, rgba(48,48,48,0) 0%, rgba(48,48,48,1) 100%, rgba(0,212,255,1) 100%);
 
