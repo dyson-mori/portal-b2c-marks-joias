@@ -1,5 +1,5 @@
-import { prisma } from "@services/prisma";
 import { NextResponse } from "next/server";
+import { prisma } from "@services/prisma";
 
 export async function GET() {
   const header = await prisma.header.findMany();

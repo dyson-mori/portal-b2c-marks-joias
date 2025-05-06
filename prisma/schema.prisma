@@ -6,13 +6,12 @@
 
 generator client {
   provider = "prisma-client-js"
-  // output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  url       = env("NEXT_DATABASE_URL")
+  directUrl = env("NEXT_DIRECT_URL")
 }
 
 model Product {
@@ -25,8 +24,8 @@ model Product {
   price       Decimal
   quantity    Int
 
-  created_at DateTime  @default(now())
-  updated_at DateTime? @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   files Files[]
 

@@ -12,7 +12,7 @@ interface FetcherParams {
   header?: HeadersInit;
 }
 
-const NEXTURL = process.env.NEXT_PUBLIC_URL;
+const NEXT_URL = process.env.NEXT_FETCHER_URL;
 
 const fetcher = async ({
   url,
@@ -22,7 +22,7 @@ const fetcher = async ({
 }: FetcherParams) => {
   try {
     // const cookieStore = cookies();
-    const fullUrl = `${NEXTURL}${url}`;
+    const fullUrl = `${NEXT_URL}${url}`;
 
     const isBodyAllowed = method !== 'GET' && method !== 'DELETE';
     // const isHeaders = 
