@@ -5,7 +5,7 @@ import { ProductProps } from '@global/interfaces';
 
 import { Container, Delivery as DeliveryStyled } from './styles';
 
-import { Delivery, Devolution } from '@assets';
+import { Devolution } from '@assets';
 
 type Props = {
   data: ProductProps;
