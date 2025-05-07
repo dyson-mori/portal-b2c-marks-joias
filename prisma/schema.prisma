@@ -62,8 +62,11 @@ model Header {
 model Category {
   id String @id @default(cuid())
 
-  title String @unique
-  code  Int    @unique
+  title String  @unique
+  code  Int     @unique
+  photo String?
+
+  show_on_landing Boolean? @default(false)
 
   sub     SubCategory[]
   product Product[]

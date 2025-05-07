@@ -72,6 +72,6 @@ export const api = {
     list: () => fetcher({ method: 'GET', url: '/header' })
   },
   category: {
-    list: () => fetcher({ method: 'GET', url: '/category' })
+    list: () => fetcher({ method: 'GET', url: '/category' }),
   }
 };

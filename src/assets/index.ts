@@ -13,6 +13,9 @@ import { ReactComponent as User } from './user.svg';
 import { ReactComponent as TextAlignLeft } from './textalign-left.svg';
 import { ReactComponent as Routing } from './routing.svg';
 import { ReactComponent as Trash } from './trash.svg';
+import { ReactComponent as Location } from './location.svg';
+import { ReactComponent as Box } from './box.svg';
+import { ReactComponent as Clock } from './clock.svg';
 
 export {
   Logo,
@@ -29,5 +32,8 @@ export {
   User,
   TextAlignLeft,
   Routing,
-  Trash
+  Trash,
+  Location,
+  Box,
+  Clock
 }

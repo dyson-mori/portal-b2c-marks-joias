@@ -5,13 +5,18 @@ import { prisma } from "@services/prisma";
 
 export async function GET() {
   const category = await prisma.category.findMany({
+    where: {
+      show_on_landing: true
+    },
     orderBy: {
       title: 'asc'
     },
     select: {
-      id: true,
+      code: true,
       title: true,
-      sub: true
+      sub: true,
+      photo: true,
+      show_on_landing: true
     }
   });
 
@@ -38,16 +43,14 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   const url = new URL(request.url);
-  const id = url.searchParams.get("id") as string;
+  const code = url.searchParams.get("code") as string;
   const body = await request.json() as Category;
 
   const category = await prisma.category.update({
     where: {
-      id
+      code: Number(code)
     },
-    data: {
-      title: body.title,
-    },
+    data: body,
   });
 
   if (!category) {
