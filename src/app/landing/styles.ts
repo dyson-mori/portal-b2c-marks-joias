@@ -6,7 +6,6 @@ const prefix = {
 
 export const Container = styled.main`
   font-family: sans-serif;
-  color: #000;
 `;
 
 export const Hero = styled.section`
@@ -56,7 +55,7 @@ export const InfoBar = styled.section`
   ${({ theme }) => css`
     div > p {
       font-weight: ${theme.font.weight[500]};
-      font-size: ${theme.font.size.semiBold};
+      font-size: ${theme.font.size.normal};
       color: ${theme.colors.dark_charcoal};
     };
   `};
@@ -71,15 +70,15 @@ export const Categories = styled.section`
     cursor: pointer;
   }
 
-  h2 {
+  h3 {
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: #e91e63;
   }
 
   img {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   };
 
@@ -93,6 +92,8 @@ export const Categories = styled.section`
     position: relative;
 
     margin: 5px;
+
+    width: 100%;
   };
 
   .categories > button:nth-child(1) {
@@ -120,10 +121,13 @@ export const Categories = styled.section`
 
     text-transform: capitalize;
 
-    font-size: 16px;
     font-weight: 500;
     font-family: var(--font-montserrat-alternates), sans-serif;
     letter-spacing: 1.5px;
+
+    ${({ theme }) => css`
+      font-size: ${theme.font.size.normal};
+    `};
   }
 `;
 
@@ -133,14 +137,18 @@ export const Banner = styled.div`
   background: rgb(250,11,91);
   background: linear-gradient(90deg, rgba(250,11,91,1) 0%, rgba(57,95,245,1) 100%, rgba(0,212,255,1) 100%);
   color: white;
+
+  ${({ theme }) => css`
+    font-size: ${theme.font.size.normal};
+  `};
 `;
 
 export const TopVendas = styled.section`
   padding: ${prefix.padding_spacing};
 
-  h2 {
+  h3 {
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0.875rem;
     color: #e91e63;
   }
 
@@ -199,7 +207,7 @@ export const Sobre = styled.section`
 
   .images > .middle > img:nth-child(1) {
     width: 100%;
-    height: 50%;
+    height: 100%;
 
     object-fit: cover;
   };
@@ -207,6 +215,7 @@ export const Sobre = styled.section`
   .images > .middle > .under {
     display: flex;
     width: 100%;
+    height: 100%;
   };
 
   .under > img {

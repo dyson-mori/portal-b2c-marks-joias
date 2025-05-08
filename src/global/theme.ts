@@ -29,16 +29,18 @@ const themes = {
   },
   font: {
     size: {
-      thin: '6px',
-      extraLight: '8px',
-      light: '10px',
-      normal: '12px',
-      medium: '14px',
-      semiBold: '16px',
-      bold: '18px',
-      extraBold: '20px',
-      black: '22px',
-      extraBlack: '24px',
+      thin: '0.375rem',
+      extraLight: '0.5rem',
+      light: '0.625rem',
+
+      normal: '0.875rem', // 14px
+
+      medium: '0.938rem',
+      semiBold: '1rem',
+      bold: '1.125rem',
+      extraBold: '1.25rem',
+      black: '1.375rem',
+      extraBlack: '1.5rem',
       large: '18px'
     },
     weight: {

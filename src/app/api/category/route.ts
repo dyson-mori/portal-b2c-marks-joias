@@ -46,11 +46,17 @@ export async function PUT(request: NextRequest) {
   const code = url.searchParams.get("code") as string;
   const body = await request.json() as Category;
 
-  const category = await prisma.category.update({
+  const find_category = await prisma.category.findFirst({
     where: {
       code: Number(code)
     },
-    data: body,
+  });
+
+  const category = await prisma.category.update({
+    where: {
+      id: find_category?.id
+    },
+    data: body
   });
 
   if (!category) {

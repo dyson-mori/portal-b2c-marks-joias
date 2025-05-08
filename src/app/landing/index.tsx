@@ -61,7 +61,7 @@ export default function LandingPage({ products, categories }: LandingPageProps) 
       </InfoBar>
 
       <Categories>
-        <h2>Selecione sua Categoria</h2>
+        <h3>Selecione sua Categoria</h3>
         <div className='categories'>
           {categories.map(el => (
             <button key={el.title}>
@@ -81,7 +81,7 @@ export default function LandingPage({ products, categories }: LandingPageProps) 
       </Banner>
 
       <TopVendas>
-        <h2>Top Vendidos</h2>
+        <h3>Top Vendidos</h3>
         <div className='products'>
           {[...products, products[0], products[1]].map((el, index) => (
             <div key={el.name + index} className='product'>
@@ -105,11 +105,11 @@ export default function LandingPage({ products, categories }: LandingPageProps) 
           <div className='middle' style={{ height: width / 4 }}>
             <img src="https://i.pinimg.com/736x/c4/b3/1d/c4b31d1f1e2631d4c89a28318d3c1046.jpg" alt='photo' />
             {/* <img src="https://i.pinimg.com/736x/8d/05/f8/8d05f8f80f985ba3239998ec2cd694bf.jpg" alt='photo' /> */}
-            <div className='under'>
+            {/* <div className='under'>
               <img src="https://i.pinimg.com/736x/2c/4c/96/2c4c96161a0d6387684b9542034a1471.jpg" alt='photo' />
               <span />
               <img src="https://i.pinimg.com/736x/c0/93/7b/c0937b370b136f69016ce04aafea2c3f.jpg" alt='photo' />
-            </div>
+            </div> */}
           </div>
           <Image width={width / 4} height={width / 4} src="https://i.pinimg.com/736x/c1/aa/ef/c1aaef2f1f69e9df51c16eaac1a083e9.jpg" alt='photo' />
         </div>
