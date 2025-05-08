@@ -49,6 +49,8 @@ export const Icon = styled(Link)`
     };
 
     svg {
+      width: 100%;
+      height: 100%;
       stroke: ${theme.colors.primary};
     };
   `};
@@ -78,13 +80,13 @@ export const LinkStyle = styled(Link) <{ param: string }>`
   text-decoration: none;
 
   ${({ theme, param }) => css`
-    font-size: ${theme.font.size.medium};
+    font-size: ${theme.font.size.normal};
     font-weight: ${theme.font.weight[400]};
     color: ${theme.colors.text};
     
     ${param === 'true' && css`
       color: ${theme.colors.primary};
-      font-weight: ${theme.font.weight[600]};
+      font-weight: ${theme.font.weight[500]};
     `};
 
     @media (max-width: ${theme.settings.responsive.maxWidth}){

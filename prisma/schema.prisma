@@ -48,7 +48,7 @@ model Files {
 }
 
 model Header {
-  code String @id @default(cuid())
+  id String @id @default(cuid()) @map("code")
 
   title  String
   param  String
