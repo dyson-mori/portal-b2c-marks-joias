@@ -44,15 +44,19 @@ export const Icon = styled(Link)`
       top: 5px;
       left: 5px;
       color: ${theme.colors.primary};
-      font-size: ${theme.font.size.light};
+      font-size: ${theme.font.size.extraLight};
       font-weight: ${theme.font.weight[700]};
     };
 
-    svg {
+    .logo {
       width: 100%;
       height: 100%;
       stroke: ${theme.colors.primary};
     };
+
+    .shopping-cart {
+      stroke: ${theme.colors.primary};
+    }
   `};
 `;
 

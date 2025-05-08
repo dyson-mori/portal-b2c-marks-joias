@@ -24,7 +24,7 @@ export default function Header({ hide, param, header }: HeaderProps) {
   return (
     <Container>
       <Icon href='/'>
-        <Logo width={30} height={30} />
+        <Logo className='logo' width={30} height={30} />
       </Icon>
       <Nav>
         {header.map((item, index) => item.public && (
@@ -36,8 +36,8 @@ export default function Header({ hide, param, header }: HeaderProps) {
         ))}
       </Nav>
       <Icon href='/cart'>
-        <ShoppingCart width={30} height={30} strokeWidth={param === '/cart' ? 2.5 : 1.5} />
-        <p id='count-cart'>{storage.length}</p>
+        <ShoppingCart className='shopping-cart' width={30} height={30} strokeWidth={param === '/cart' ? 2.5 : 1.5} />
+        <p>{storage.length}</p>
       </Icon>
     </Container>
   )

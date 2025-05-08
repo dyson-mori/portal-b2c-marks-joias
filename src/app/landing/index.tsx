@@ -8,7 +8,7 @@ import { ProductProps } from '@global/interfaces';
 import { useWindowDimensions } from '@hooks';
 import { Landing } from '@components';
 
-import { Container, Hero, Banner } from './styles';
+import { Container, Banner } from './styles';
 
 type LandingPageProps = {
   products: ProductProps[];
@@ -39,11 +39,12 @@ export default function LandingPage({ products, categories }: LandingPageProps) 
 
   return (
     <Container>
-      <Hero>
-        <img src="https://i.pinimg.com/736x/73/e4/fd/73e4fd4077ce10f47eb458dea380cc2e.jpg" alt="Background" className="bg" />
-        <img src="/mercedes.png" alt="Carro" className="car" />
-      </Hero>
+      {/* <Hero>
+        <img src="https://i.pinimg.com/736x/33/7f/5a/337f5a2525696df44203c46071b81193.jpg" alt="Background" className="bg" />
+        <img src="https://i.pinimg.com/736x/33/7f/5a/337f5a2525696df44203c46071b81193.jpg" alt="Carro" className="car" />
+      </Hero> */}
 
+      <Landing.Banner />
       <Landing.Info info={info} />
       <Landing.Categories categories={categories} />
 
