@@ -88,7 +88,7 @@ export const Menu = styled.nav<{ isClosing: boolean }>`
 
       font-size: ${theme.font.size.normal};
       font-weight: ${theme.font.weight[400]};
-      color: ${theme.colors.text};
+      color: ${theme.colors.dark_charcoal};
     };
 
     svg {

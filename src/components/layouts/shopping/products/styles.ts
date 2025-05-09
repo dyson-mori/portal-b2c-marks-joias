@@ -27,6 +27,14 @@ export const Container = styled.section`
 
       scroll-snap-type: x mandatory;
       aspect-ratio: 1 / 1;
+
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      img {
+        width: 100%;
+        height: 100%;
+      };
     };
   `};
 `;
@@ -41,11 +49,27 @@ export const CartEmpty = styled.div`
 export const Product = styled.div`
   position: relative;
   display: flex;
+  margin: 5px;
+
+  p {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-weight: 500;
+    color: transparent;
+    letter-spacing: 2px;
+  };
 
   ${({ theme }) => css`
     @media (max-width: ${theme.settings.responsive.maxWidth}){
+      p {
+        color: #fff;
+      }
+
       width: 100%;
       height: 100%;
+
+      scroll-snap-align: start;
 
       aspect-ratio: 1 / 1;
 

@@ -40,10 +40,12 @@ export const ContainerMobile = styled.section`
 
   aspect-ratio: 1 / 1;
 
+  scrollbar-width: none;
+
   img {
     width: 100%;
     height: 100%;
-  }
+  };
 
   ${({ theme }) => css`
     @media (max-width: ${theme.settings.responsive.maxWidth}) {

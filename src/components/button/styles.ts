@@ -31,14 +31,14 @@ export const Container = styled.button<{ $variant: Variant }>`
     `};
 
     ${$variant === 'error' && css`
-      background-color: ${theme.colors.text};
+      background-color: ${theme.colors.dark_charcoal};
       color: ${theme.colors.white};
       font-weight: 600;
     `};
 
     ${$variant === 'select' && css`
       background-color: ${theme.colors.white};
-      color: ${theme.colors.text};
+      color: ${theme.colors.dark_charcoal};
       font-weight: 600;
       box-shadow: ${theme.settings.box.border};
     `};

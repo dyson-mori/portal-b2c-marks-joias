@@ -2,20 +2,11 @@ const success = '#47C747';
 const warning = '#f9BE14';
 
 const themes = {
-  colors: {
+  colors: { // remover cores
     primary: '#FA0B5B',
-    primary_loading: '#962349',
-    primary_disabled: '#962349',
-
-    secondary: '#395FF5',
-    secondary_disabled: '#1c2f7a',
 
     white: '#fff',
 
-    text: '#47474D',
-
-    select: '#888',
-    // background: '#fff',
     background: '#FCFCFC',
 
     hover: '#f1f1f1',
@@ -45,7 +36,7 @@ const themes = {
       montserrat: 'var(--font-montserrat), sans-serif',
       montserrat_alternates: 'var(--font-montserrat-alternates), sans-serif',
     },
-    weight: {
+    weight: { // remover isso
       '100': 100,
       '200': 200,
       '300': 300,

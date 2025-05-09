@@ -87,7 +87,7 @@ export const LinkStyle = styled(Link) <{ param: string }>`
   ${({ theme, param }) => css`
     font-size: ${theme.font.size.normal};
     font-weight: ${theme.font.weight[400]};
-    color: ${theme.colors.text};
+    color: ${theme.colors.dark_charcoal};
     
     ${param === 'true' && css`
       color: ${theme.colors.primary};

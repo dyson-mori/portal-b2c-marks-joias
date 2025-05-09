@@ -50,6 +50,7 @@ export default function SavedProducts({ storage, setStorage }: Props) {
             alt={item.name}
             style={{ objectFit: 'cover' }}
           />
+          <p>{index + 1}/{storage.length}</p>
         </Product>
       ))}
     </Container>

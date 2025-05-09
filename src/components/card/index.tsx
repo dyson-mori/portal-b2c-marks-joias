@@ -84,7 +84,7 @@ export const Card: React.FC<CardProps> = ({ data, title, icon: Icon, selects, se
               key={item.id}
               style={{
                 backgroundColor: theme.colors[isSelected ? 'primary' : 'white'],
-                color: theme.colors[isSelected ? 'white' : 'text'],
+                color: theme.colors[isSelected ? 'white' : 'philippine_gray'],
                 fontWeight: isSelected ? 600 : 500,
               }}
               onClick={() => toggleSelect(item)}

@@ -24,6 +24,7 @@ export const Container = styled(Link)`
 
   @media (max-width: 710px){
     width: calc(100% / 2.05);
+    margin-bottom: 3px;
   };
 `;
 

@@ -24,6 +24,7 @@ export const Container = styled.section`
       @media (max-width: ${theme.settings.responsive.maxWidth}) {
         padding: 0;
         width: 100%;
+        margin-top: 10px;
       };
     `};
   `};

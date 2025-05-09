@@ -10,7 +10,7 @@ export const Container = styled.article`
   min-height: 82vh;
 
   ${({ theme }) => css`
-    color: ${theme.colors.text};
+    color: ${theme.colors.dark_charcoal};
 
     @media (max-width: ${theme.settings.responsive.maxWidth}){
       padding: 10px;

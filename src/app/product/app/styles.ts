@@ -3,6 +3,12 @@ import styled, { css } from 'styled-components';
 export const Container = styled.main`
   width: 100%;
   padding: 25px 50px;
+
+  ${({ theme }) => css`
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      padding: 25px 10px;
+    };
+  `};
 `;
 
 export const Content = styled.article`
@@ -13,8 +19,8 @@ export const Content = styled.article`
   ${({ theme }) => css`
     @media (max-width: ${theme.settings.responsive.maxWidth}){
       flex-direction: column;
-      padding: ${theme.settings.responsive.padding};
-      padding: 10px;
+      /* padding: ${theme.settings.responsive.padding}; */
+      /* padding: 10px; */
     };
   `};
 `;
