@@ -39,6 +39,10 @@ export const Container = styled.section`
     width: 100%;
   };
 
+  .categories > button > img {
+    aspect-ratio: 1/1;
+  };
+
   .categories > button:nth-child(1) {
     position: relative;
 
