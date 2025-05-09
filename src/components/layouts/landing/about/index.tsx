@@ -33,18 +33,30 @@ export default function About({ width }: { width: number }) {
       </Description>
 
       <Images>
-        <Image width={width / 4} height={width / 4} src="https://i.pinimg.com/736x/c1/aa/ef/c1aaef2f1f69e9df51c16eaac1a083e9.jpg" alt='photo' />
-        <div className='middle' style={{ height: width / 4 }}>
-          <img src="https://i.pinimg.com/736x/c4/b3/1d/c4b31d1f1e2631d4c89a28318d3c1046.jpg" alt='photo' />
-          {/* <img src="https://i.pinimg.com/736x/8d/05/f8/8d05f8f80f985ba3239998ec2cd694bf.jpg" alt='photo' /> */}
-          {/* <div className='under'>
-            <img src="https://i.pinimg.com/736x/2c/4c/96/2c4c96161a0d6387684b9542034a1471.jpg" alt='photo' />
-            <span />
-            <img src="https://i.pinimg.com/736x/c0/93/7b/c0937b370b136f69016ce04aafea2c3f.jpg" alt='photo' />
-          </div> */}
-        </div>
-        <Image width={width / 4} height={width / 4} src="https://i.pinimg.com/736x/c1/aa/ef/c1aaef2f1f69e9df51c16eaac1a083e9.jpg" alt='photo' />
+        <Image
+          style={{ objectFit: 'cover' }}
+          width={width / 4}
+          height={width / 4}
+          src="https://jouomoizalhobjxhlmkc.supabase.co/storage/v1/object/sign/marks-joias-files/IMG_7057.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5X2I2ZGIwMjQ4LTkyYzgtNDZkOS05NmE5LWUzNzJlZjUzMGNkZiJ9.eyJ1cmwiOiJtYXJrcy1qb2lhcy1maWxlcy9JTUdfNzA1Ny5qcGciLCJpYXQiOjE3NDY4MDgzNzIsImV4cCI6MTc3ODM0NDM3Mn0.mKiL-JWrKLi8RIG-GQ7H3VOIG6moiGfR8lNqcvIB_uA"
+          alt='photo'
+        />
+        <Image
+          style={{ objectFit: 'cover' }}
+          width={width / 2.33}
+          height={width / 4}
+          src="https://jouomoizalhobjxhlmkc.supabase.co/storage/v1/object/sign/marks-joias-files/loja-logo.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5X2I2ZGIwMjQ4LTkyYzgtNDZkOS05NmE5LWUzNzJlZjUzMGNkZiJ9.eyJ1cmwiOiJtYXJrcy1qb2lhcy1maWxlcy9sb2phLWxvZ28uanBnIiwiaWF0IjoxNzQ2ODA4MjY0LCJleHAiOjE3NzgzNDQyNjR9.nU9z9Bpzm0pkvLlfqsczymtk4240VHqHrHWl9uXMaaQ"
+          alt='photo'
+        />
+        <Image
+          style={{ objectFit: 'cover' }}
+          width={width / 4}
+          height={width / 4}
+          src="https://jouomoizalhobjxhlmkc.supabase.co/storage/v1/object/sign/marks-joias-files/IMG_7058.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5X2I2ZGIwMjQ4LTkyYzgtNDZkOS05NmE5LWUzNzJlZjUzMGNkZiJ9.eyJ1cmwiOiJtYXJrcy1qb2lhcy1maWxlcy9JTUdfNzA1OC5qcGciLCJpYXQiOjE3NDY4MDgzMTEsImV4cCI6MTc3ODM0NDMxMX0.Ukm6wgst12LANcXjVOQb3XocBs0gq03hsiMoZE2w4xA"
+          alt='photo'
+        />
       </Images>
     </Container>
   )
 }
+
+// <img src="https://i.pinimg.com/736x/8d/05/f8/8d05f8f80f985ba3239998ec2cd694bf.jpg" alt='photo' />

@@ -93,32 +93,4 @@ export const Images = styled.div`
   img {
     object-fit: cover;
   };
-
-  .middle {
-    width: 100%;
-    margin: 0 5px;
-  };
-
-  .middle > img:nth-child(1) {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-  };
-
-  .middle > .under {
-    display: flex;
-    width: 100%;
-    height: 100%;
-  };
-
-  .under > img {
-    width: 100%;
-    height: 195px;
-    object-fit: cover;
-  };
-
-  .under > span {
-    width: 10px;
-  };
 `;

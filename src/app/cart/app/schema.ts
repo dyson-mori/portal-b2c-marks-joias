@@ -24,7 +24,7 @@ export type schemaProps = yup.InferType<typeof schema>;
 export const methodsPayments = [
   {
     id: 'clyp6mut5000ay4iw0rcg2vve',
-    title: 'Credit Cart'
+    title: 'Cartão'
   },
   {
     id: 'clyrlct24000ka4h0qjmxm39i',

@@ -26,18 +26,34 @@ export const Lottie = styled.div`
 export const Information = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 5px;
+  border: 0 1px 0 0 #000;
 
   ${({ theme }) => css`
+    h4 {
+      font-size: ${theme.font.size.medium};
+      font-weight: ${theme.font.weight[600]};
+    };
+
     p {
       max-width: 70%;
       white-space: nowrap;
       overflow: hidden; /* "overflow" value must be different from "visible" */
       text-overflow: ellipsis;
-    }
-    h4 {
-      font-size: ${theme.font.size.medium};
-      font-weight: ${theme.font.weight[600]};
+    };
+
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      margin-top: 10px;
+
+      h4 {
+        font-size: ${theme.font.size.light};
+        font-weight: ${theme.font.weight[500]};
+      };
+
+      p {
+        max-width: 75%;
+      }
     };
   `};
 `;

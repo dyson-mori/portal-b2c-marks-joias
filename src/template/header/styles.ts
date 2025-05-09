@@ -45,6 +45,13 @@ export const Icon = styled(Link)`
       font-weight: ${theme.font.weight[700]};
     };
 
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      p {
+        font-size: ${theme.font.size.thin};
+        font-weight: ${theme.font.weight[600]};
+      }
+    };
+
     .logo {
       width: 100%;
       height: 100%;

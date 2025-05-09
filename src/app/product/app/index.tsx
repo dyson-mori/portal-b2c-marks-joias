@@ -9,7 +9,7 @@ import { CartContext } from '@context/shopping';
 
 import { ProductComponent, Splash } from '@components';
 
-import { Container, Content, LabelTag } from './styles';
+import { Container, Content } from './styles';
 
 type Props = {
   product: ProductProps;
@@ -33,9 +33,9 @@ export default function ProductScreen({ product }: Props) {
   return (
     <Suspense fallback={<Splash />}>
       <Container>
-        <LabelTag>
+        {/* <LabelTag>
           <p>{'Produto > '}<strong>{product.name}</strong></p>
-        </LabelTag>
+        </LabelTag> */}
         <Content>
           <ProductComponent.Images data={product} />
           <ProductComponent.Description data={product} storage={storage} handleBuy={handleBuyNow} onAddToCart={onAddToCart} />

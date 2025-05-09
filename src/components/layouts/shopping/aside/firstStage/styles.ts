@@ -10,7 +10,7 @@ export const Container = styled.div`
   height: 100%;
 `;
 
-export const Methods = styled.button`
+export const Methods = styled.button<{ $selected: boolean }>`
   border: 0;
   cursor: pointer;
 
@@ -30,13 +30,14 @@ export const Methods = styled.button`
     margin: 0 10px;
   };
 
-  ${({ theme, disabled }) => css`
+  ${({ theme, disabled, $selected }) => css`
     box-shadow: ${theme.settings.box.default};
     border-radius: ${theme.settings.radius.small};
     background-color: ${theme.colors.white};
 
     p {
-      font-size: ${theme.font.size.medium};
+      color: ${theme.colors.dark_charcoal};
+      font-size: ${theme.font.size.normal};
       font-weight: ${theme.font.weight[500]};
     };
 
@@ -47,12 +48,17 @@ export const Methods = styled.button`
 
     ${disabled && css`
       cursor: default;
+      opacity: .5;
     `};
     
     ${!disabled && css`
       &:hover {
         box-shadow: ${theme.settings.box.defaultHoverPrimary};
       };
+    `};
+
+    ${$selected && css`
+      border: 1px ${theme.colors.primary};  
     `};
   `};
 `;

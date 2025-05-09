@@ -20,10 +20,17 @@ export const Container = styled.header`
     svg {
       stroke: ${theme.colors.primary};
     };
+
     p {
       font-size: ${theme.font.size.normal};
       font-weight: ${theme.font.weight[500]};
       margin-right: 8px;
+    };
+
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      p {
+        font-size: ${theme.font.size.light};
+      }
     };
   `};
 `;

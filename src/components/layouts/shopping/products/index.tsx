@@ -19,14 +19,14 @@ export default function SavedProducts({ storage, setStorage }: Props) {
     maxWidth: "300px"
   };
 
-  const test: CSSProperties = {
-    justifyItems: 'center',
-    gridTemplateColumns: `repeat(auto-fill, minmax(calc(100% / ${storage.length >= 3 ? 3 : 1}), 1fr))`
-  };
+  // const test: CSSProperties = {
+  //   justifyItems: 'center',
+  //   gridTemplateColumns: `repeat(auto-fill, minmax(calc(100% / ${storage.length >= 3 ? 3 : 1}), 1fr))`
+  // };
 
   if (storage.length === 0) {
     return (
-      <Container style={test}>
+      <Container>
         <CartEmpty>
           <DotLottiePlayer style={lottie_styles} src="/lottie/marks-empty-card.lottie" autoplay />
           <p>Seu carrinho está vazio</p>
@@ -36,7 +36,7 @@ export default function SavedProducts({ storage, setStorage }: Props) {
   }
 
   return (
-    <Container style={test}>
+    <Container>
       {storage.map((item, index) => (
         <Product key={index.toString()}>
           <Delete type='button' onClick={() => setStorage(item)}>

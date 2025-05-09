@@ -18,7 +18,7 @@ export default function Categories({ categories }: CategoryProps) {
             {el.photo ? (
               <Image src={el.photo} width={150} height={150} alt={el.title} />
             ) : (
-              <img src="https://jouomoizalhobjxhlmkc.supabase.co/storage/v1/object/sign/marks-joias-files/IMG_7033.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5X2I2ZGIwMjQ4LTkyYzgtNDZkOS05NmE5LWUzNzJlZjUzMGNkZiJ9.eyJ1cmwiOiJtYXJrcy1qb2lhcy1maWxlcy9JTUdfNzAzMy5qcGciLCJpYXQiOjE3NDY1NTQzODIsImV4cCI6MTc3ODA5MDM4Mn0.Xd6pRyBF2nQGR9AkkNb_smH28w2k7-YICaLXmB6N_6A" alt="Argolas" />
+                <img src="https://i.pinimg.com/736x/da/76/56/da76569e2d9535bb27678f95cbf220b2.jpg" alt="Argolas" />
             )}
             <p>{el.title}</p>
           </button>

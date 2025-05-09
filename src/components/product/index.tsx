@@ -23,8 +23,8 @@ const Product: React.FC<Props> = ({ product, href }) => (
       }}
     />
     <Footer>
-      <span id='title'>{product.name}</span>
-      <span id='price'>{product.price}</span>
+      <p id='title'>{product.name}</p>
+      <p id='price'>{product.price}</p>
     </Footer>
   </Container>
 )

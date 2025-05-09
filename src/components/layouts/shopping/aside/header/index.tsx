@@ -32,7 +32,7 @@ export default function Header({ steps, method, currentStep, setStep }: Props) {
       <h4>{
         currentStep === 2 ? steps.find(e => e.id === method)?.name : steps[currentStep].name
       }</h4>
-      <p>{currentStep + 1}/{steps.length}</p>
+      <p>{currentStep + 1}/?</p>
     </Container>
   )
 }

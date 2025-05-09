@@ -60,7 +60,7 @@ export default function ShoppingCard() {
       <Container>
         <Shopping.SavedProducts storage={storage} setStorage={setStorage} />
 
-        <Shopping.Form currentStep={currentStep} onSubmit={handleSubmit(processForm)} loadingButton={loading}>
+        <Shopping.Form disabled={storage.length === 0} currentStep={currentStep} onSubmit={handleSubmit(processForm)} loadingButton={loading}>
           <Shopping.Header currentStep={currentStep} method={method!} steps={steps} setStep={prev} />
 
           {currentStep === 0 &&
@@ -72,5 +72,3 @@ export default function ShoppingCard() {
     </Suspense>
   )
 }
-
-// https://checkout.stripe.com/c/pay/cs_test_a1XRAGiWLW4t7MRQ3ZnDnbX8YSyPJOAJ7pQnM1zXIDQ6fWGoMggiGUXp6V#fidkdWxOYHwnPyd1blpxYHZxWjA0V0k2V2lVcVxyZ0YwRHBxQEB8dlBGXGg2a1dxdWY3NHVKTFJ%2FYFNORk1rQmlsT0E3RzxmV0hxcGtwTk5CPHFcdWtXb2dSa0RxYEBDUU5DM3VVdnA0fHJRNTVBQFVIQ1NBdScpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl

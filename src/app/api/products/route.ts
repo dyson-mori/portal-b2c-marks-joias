@@ -17,9 +17,13 @@ function formatCode(code: number, last_product: number) {
   return Number(`${code}00000`) + last_product
 };
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const url = new URL(request.url);
+  const limit = url.searchParams.get("limit");
+
   const product = await stripe.products.list({
-    expand: ['data.default_price']
+    expand: ['data.default_price'],
+    limit: limit ? Number(limit) : 16
   });
 
   const data = product.data.map(row => {
@@ -35,15 +39,6 @@ export async function GET() {
       }).format(price.unit_amount! / 100)
     }
   })
-
-  // const product = await prisma.product.findMany({
-  //   orderBy: {
-  //     created_at: 'desc'
-  //   },
-  //   include: {
-  //     files: true,
-  //   }
-  // });
 
   if (!product) {
     return NextResponse.json(product, { status: 400, statusText: 'database does not return data' });
@@ -87,7 +82,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(product, { status: 400, statusText: 'register fail' });
   };
 
-  return NextResponse.json(product, { status: 201, statusText: 'products received successfully' });
+  return NextResponse.json(true, { status: 201, statusText: 'products received successfully' });
 };
 
 // export async function PUT(request: NextRequest) {

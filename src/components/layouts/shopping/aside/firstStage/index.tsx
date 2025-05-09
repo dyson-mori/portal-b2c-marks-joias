@@ -27,9 +27,8 @@ type Props = {
 
 
 const Icons = ({ id }: { id: string }) => {
-  if (id === 'clyp6mut5000ay4iw0rcg2vve') {
-    return <Cards width={20} height={20} strokeWidth={1.5} stroke="#000" />
-  };
+  if (id === 'clyp6mut5000ay4iw0rcg2vve')
+    return <Cards width={20} height={20} strokeWidth={1.5} stroke="#FA0B5B" />
 
   return <Pix width={20} height={20} />;
 };
@@ -43,9 +42,10 @@ export default function Body({ storage, control, methodsPayments, sumPrices }: P
           key={i}
           name='method'
           control={control}
-          render={({ field: { onChange } }) => (
+          render={({ field: { value, onChange } }) => (
             <Methods
               key={i}
+              $selected={!!methodsPayments.find(el => el.id === value)}
               type='button'
               disabled={storage?.length === 0}
               onClick={() => onChange(meth.id)}

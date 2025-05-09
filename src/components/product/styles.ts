@@ -35,7 +35,6 @@ export const Footer = styled.footer`
 
   display: flex;
 
-  align-items: center;
   justify-content: space-between;
 
   width: 100%;
@@ -68,12 +67,22 @@ export const Footer = styled.footer`
 
   ${({ theme }) => css`
     @media (max-width: ${theme.settings.responsive.maxWidth}) {
+      flex-direction: column;
+      padding: 5px;
+
       #title {
-        font-size: ${theme.font.size.normal};
+        font-size: ${theme.font.size.light};
+        margin-bottom: 0px;
+
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden; /* "overflow" value must be different from "visible" */
+        text-overflow: ellipsis;
       };
 
       #price {
-        font-size: ${theme.font.size.normal};
+        text-align: start;
+        font-size: ${theme.font.size.light};
       };
     };
   `};

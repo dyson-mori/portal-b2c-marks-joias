@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.section`
-  display: grid;
+  display: flex;
+  justify-content: center;
   align-items: center;
 
   width: 100%;
@@ -24,6 +25,7 @@ export const Container = styled.section`
       display: flex;
 
       overflow-x: scroll;
+      overflow-y: hidden;
 
       scroll-snap-type: x mandatory;
       aspect-ratio: 1 / 1;
@@ -57,14 +59,15 @@ export const Product = styled.div`
     right: 10px;
     font-weight: 500;
     color: transparent;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
   };
 
   ${({ theme }) => css`
     @media (max-width: ${theme.settings.responsive.maxWidth}){
       p {
         color: #fff;
-      }
+        font-size: ${theme.font.size.extraLight};
+      };
 
       width: 100%;
       height: 100%;
