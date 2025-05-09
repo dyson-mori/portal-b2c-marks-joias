@@ -7,6 +7,7 @@ import { CartContext } from '@context/shopping';
 import { ShoppingCart, Logo } from '@assets';
 
 import { Container, Icon, Nav, LinkStyle } from './styles';
+import SideMenu from './navigation';
 
 interface HeaderProps {
   hide: boolean;
@@ -23,6 +24,8 @@ export default function Header({ hide, param, header }: HeaderProps) {
 
   return (
     <Container>
+      <SideMenu navigation={header} />
+
       <Icon href='/'>
         <Logo className='logo' width={30} height={30} />
       </Icon>

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import Link from "next/link";
 
 export const Container = styled.header`
-  position: fixed;
+  position: sticky;
   top: 0;
 
   display: flex;
@@ -16,15 +16,12 @@ export const Container = styled.header`
     box-shadow: ${theme.settings.box.simple};
     background-color: ${theme.colors.white};
 
-    @media (max-width: ${theme.settings.responsive.maxWidth}){
-      padding: ${theme.settings.responsive.paddingHeader};
-    };
-
-    @media (max-width: 1090px){
-      padding: 0 20px;
+    @media (max-width: 500px) {
+      padding: 0;
+      justify-content: space-between;
     };
   `};
-  
+
   z-index: 1;
 `;
 
@@ -74,6 +71,10 @@ export const Nav = styled.nav`
       padding: 0 20px;
     };
   `};
+
+  @media (max-width: 500px){
+    display: none;
+  };
 `;
 
 export const LinkStyle = styled(Link) <{ param: string }>`
@@ -97,4 +98,18 @@ export const LinkStyle = styled(Link) <{ param: string }>`
       padding: 10px 15px;
     };
   `};
+`;
+
+export const Drawer = styled.nav`
+  display: none;
+  position: absolute;
+
+  width: 45%;
+  height: 100vh;
+
+  background-color: #f3f3f3;
+
+  @media (max-width: 500px){
+    display: flex;
+  };
 `;

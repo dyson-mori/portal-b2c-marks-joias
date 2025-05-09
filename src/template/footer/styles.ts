@@ -16,6 +16,12 @@ export const Container = styled.footer`
       color: #fff;
       font-size: ${theme.font.size.normal};
     };
+
+    @media (max-width: 500px){
+      p {
+        font-size: ${theme.font.size.light};
+      }
+    };
   `};
 
   background: rgb(250,11,91);
