@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
+import { Product } from "@prisma/client";
+
 import { stripe } from "@services/stripe";
 import { prisma } from "@services/prisma";
 import { formats } from "@helpers/format";
@@ -35,17 +37,26 @@ export async function GET(request: NextRequest) {
 
 // criar a parte a quantidade já que o stripe não existe um lugar para colocar a quantidade
 
+type Props = Product & {
+  images: string[];
+  price: number;
+};
+
 export async function POST(request: NextRequest) {
-  const { name, description, category_id, images, price, quantity } = await request.json();
+  const { title, description, code, images, price, quantity } = await request.json() as Props;
 
   const category = await prisma.category.findFirst({
     where: {
-      id: category_id,
+      code: code!,
     }
   });
 
+  if (!category) {
+    return NextResponse.json(null, { status: 400, statusText: 'category not found!' });
+  };
+
   const product = await stripe.products.create({
-    name,
+    name: title,
     description,
     images,
     metadata: {
