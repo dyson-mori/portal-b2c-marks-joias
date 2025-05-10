@@ -1,12 +1,16 @@
 "use client"
 
 import React, { Suspense, useState } from 'react';
+// import { useRouter } from 'next/navigation';
+
 import { DotLottiePlayer } from '@dotlottie/react-player';
 
-import { Product, Splash } from '@components';
+import { Button, Product, Splash } from '@components';
 import { CategoryProps, ProductProps } from "@global/interfaces";
 
-import { Container, SectionProducts, ProductEmpty } from './styles';
+import { Container, SectionProducts, ProductEmpty, Banner, SubCategories } from './styles';
+import Image from 'next/image';
+import { useWindowDimensions } from '@hooks';
 
 type Props = {
   products: ProductProps[];
@@ -14,6 +18,10 @@ type Props = {
 };
 
 export default function Products({ products }: Props) {
+  // const route = useRouter();
+
+  const { width, height } = useWindowDimensions();
+
   const [label] = useState('');
   const lottie_styles = {
     display: 'flex',
@@ -28,6 +36,17 @@ export default function Products({ products }: Props) {
   return (
     <Suspense fallback={<Splash />}>
       <Container>
+
+        <Banner>
+          <Image src="https://i.pinimg.com/736x/94/13/a6/9413a6d244d080b6e63e6996b10bc7a9.jpg" width={width - 100} height={height / 2} alt='banner' />
+        </Banner>
+
+        <SubCategories>
+          <Button $variant='select'>Anel</Button>
+          {/* <button>Anel</button>
+          <button>Argola</button> */}
+        </SubCategories>
+
         {products.filter(e => e.name.toLowerCase().includes(label.toLowerCase())).length === 0 && (
           <ProductEmpty>
             <DotLottiePlayer style={lottie_styles} src="/lottie/marks-empty-card.lottie" autoplay />

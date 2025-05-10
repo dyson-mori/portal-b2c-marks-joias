@@ -6,15 +6,16 @@ import { Container } from "./styles";
 
 type CategoryProps = {
   categories: Category[];
+  onSelectCategory(title: string): void;
 };
 
-export default function Categories({ categories }: CategoryProps) {
+export default function Categories({ categories, onSelectCategory }: CategoryProps) {
   return (
     <Container>
       <h3>Selecione uma Categoria</h3>
       <div className='categories'>
         {categories.map(el => (
-          <button key={el.title}>
+          <button key={el.title} onClick={() => onSelectCategory(el.title)}>
             {el.photo ? (
               <Image src={el.photo} width={150} height={150} alt={el.title} />
             ) : (

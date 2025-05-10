@@ -20,25 +20,36 @@ function formatCode(code: number, last_product: number) {
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
   const limit = url.searchParams.get("limit");
+  const category_title = url.searchParams.get("target");
 
   const product = await stripe.products.list({
     expand: ['data.default_price'],
-    limit: limit ? Number(limit) : 16
+    limit: limit ? Number(limit) : 16,
   });
 
-  const data = product.data.map(row => {
-    const price = row.default_price as Stripe.Price;
-    return {
-      id: row.id,
-      name: row.name,
-      images: row.images,
-      description: row.description,
-      price: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      }).format(price.unit_amount! / 100)
+  const category = await prisma.category.findFirst({
+    where: {
+      title: category_title ?? undefined
     }
-  })
+  });
+
+  const data = product.data
+    .filter(el =>
+      category_title ? el.metadata.category === String(category?.code) : el
+    )
+    .map(row => {
+      const price = row.default_price as Stripe.Price;
+      return {
+        id: row.id,
+        name: row.name,
+        images: row.images,
+        description: row.description,
+        price: new Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        }).format(price.unit_amount! / 100)
+      }
+    })
 
   if (!product) {
     return NextResponse.json(product, { status: 400, statusText: 'database does not return data' });
@@ -146,3 +157,55 @@ export async function POST(request: NextRequest) {
 
 //   return NextResponse.json(`Product [${id}] has been deleted`);
 // };
+
+/*
+
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "prod_SHUUoL4MccksQe",
+      ...
+      "metadata": {
+        "category": "7",
+        "quantity": "10"
+      },
+    },
+    {
+      "id": "prod_SHTZaFynGCegRv",
+      ...
+      "metadata": {
+        "category": "5",
+        "quantity": "10"
+      },
+    },
+    {
+      "id": "prod_SHSaU60d8vf8oN",
+      ...
+      "metadata": {
+        "category": "5",
+        "quantity": "10"
+      },
+    },
+    {
+      "id": "prod_SHSBgRSVXWmckt",
+      ...
+      "metadata": {
+        "category": "7",
+        "quantity": "10"
+      },
+    },
+    {
+      "id": "prod_SGMafJCEW6Bp6W",
+      ...
+      "metadata": {
+        "category": "12",
+        "quantity": "10"
+      },
+    }
+  ],
+  "has_more": false,
+  "url": "/v1/products"
+}
+
+*/

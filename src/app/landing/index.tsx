@@ -9,6 +9,7 @@ import { useWindowDimensions } from '@hooks';
 import { Landing } from '@components';
 
 import { Container, Banner } from './styles';
+import { useRouter } from 'next/navigation';
 
 type LandingPageProps = {
   products: ProductProps[];
@@ -16,6 +17,7 @@ type LandingPageProps = {
 };
 
 export default function LandingPage({ products, categories }: LandingPageProps) {
+  const route = useRouter();
   const { width } = useWindowDimensions();
 
   const info = [
@@ -37,11 +39,15 @@ export default function LandingPage({ products, categories }: LandingPageProps) 
     },
   ];
 
+  function onSelectCategotyTitle(title: string) {
+    route.push(`/products?category=${title}`)
+  };
+
   return (
     <Container>
       <Landing.Banner />
       <Landing.Info info={info} />
-      <Landing.Categories categories={categories} />
+      <Landing.Categories categories={categories} onSelectCategory={onSelectCategotyTitle} />
 
       <Banner>
         ✨

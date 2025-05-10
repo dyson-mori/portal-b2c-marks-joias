@@ -8,7 +8,7 @@ import App from './app';
 type Props = {
   params: Promise<{ id: string }>
   searchParams: Promise<{ [key: string]: string | undefined }>
-}
+};
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const { id } = await searchParams;

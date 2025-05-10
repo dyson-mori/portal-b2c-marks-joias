@@ -9,7 +9,14 @@ export const metadata: Metadata = {
   description: 'Escolha a joia que combina com você.',
 };
 
-export default async function Products() {
+type Props = {
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ [key: string]: string | undefined }>
+};
+
+export default async function Products({ params, searchParams }: Props) {
+  console.log({ params, searchParams });
+
   const products = await api.products.list();
   const categories = await api.category.list();
 
