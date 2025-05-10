@@ -45,7 +45,7 @@ export const Footer = styled.footer`
   #title {
     ${({ theme }) => css`
       color: ${theme.colors.white};
-      font-size: ${theme.font.size.normal};
+      font-size: ${theme.font.size.light};
       font-weight: ${theme.font.weight[500]};
     `};
 
@@ -56,7 +56,7 @@ export const Footer = styled.footer`
   #price {
     ${({ theme }) => css`
       color: ${theme.colors.white};
-      font-size: ${theme.font.size.normal};
+      font-size: ${theme.font.size.light};
       font-weight: ${theme.font.weight[500]};
     `};
 
@@ -71,7 +71,7 @@ export const Footer = styled.footer`
       padding: 5px;
 
       #title {
-        font-size: ${theme.font.size.light};
+        font-size: ${theme.font.size.extraLight};
         margin-bottom: 0px;
 
         max-width: 100%;
@@ -82,7 +82,7 @@ export const Footer = styled.footer`
 
       #price {
         text-align: start;
-        font-size: ${theme.font.size.light};
+        font-size: ${theme.font.size.extraLight};
       };
     };
   `};

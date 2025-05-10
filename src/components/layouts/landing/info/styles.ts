@@ -7,20 +7,17 @@ export const Container = styled.section`
   padding: 15px 50px;
 
   @media (max-width: 500px){
-    columns: 2;
+    flex-direction: column;
+    align-items: center;
     gap: 0rem;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    padding: 10px;
   };
 
   div {
     display: flex;
     margin: 5px;
-    width: 40%;
     align-items: center;
     flex-direction: column;
+    padding: 10px;
   };
 
   div > p {
