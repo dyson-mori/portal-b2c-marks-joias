@@ -10,7 +10,7 @@ export const Container = styled.section`
     ${({ theme }) => css`
       color: ${theme.colors.primary};
       font-family: ${theme.font.family.montserrat_alternates};
-      font-size: ${theme.font.size.semiBold};
+      font-size: ${theme.font.size.bold};
     `};
   };
 

@@ -7,28 +7,31 @@ export const Container = styled.section`
   padding: 15px 50px;
 
   @media (max-width: 500px){
-    flex-direction: column;
+    columns: 2;
     gap: 0rem;
-    justify-content: start;
-    padding: 15px 10px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    padding: 10px;
   };
 
   div {
     display: flex;
+    margin: 5px;
+    width: 40%;
     align-items: center;
-    padding: 10px;
+    flex-direction: column;
   };
 
-  div > span {
-    width: 1px;
-    height: 80%;
-    background-color: #ddd;
-    margin: 10px;
-  };
+  div > p {
+    margin-top: 5px;
+    text-align: center;
+    font-size: 90%;
+    font-weight: 500;
+  }
 
   ${({ theme }) => css`
     div > p {
-      font-weight: ${theme.font.weight[500]};
       color: ${theme.colors.dark_charcoal};
     };
   `};

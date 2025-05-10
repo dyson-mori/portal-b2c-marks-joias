@@ -32,7 +32,7 @@ export default function Header({ hide, param, header }: HeaderProps) {
       <Nav>
         {header.map((item, index) => item.public && (
           <LinkStyle
-            param={String(param === item.param)}
+            $selected={param === item.param}
             key={index}
             href={item.param}
           >{item.title}</LinkStyle>

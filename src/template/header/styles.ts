@@ -41,7 +41,7 @@ export const Icon = styled(Link)`
       top: 5px;
       left: 5px;
       color: ${theme.colors.primary};
-      font-size: ${theme.font.size.extraLight};
+      font-size: 60%;
       font-weight: ${theme.font.weight[700]};
     };
 
@@ -84,21 +84,21 @@ export const Nav = styled.nav`
   };
 `;
 
-export const LinkStyle = styled(Link) <{ param: string }>`
+export const LinkStyle = styled(Link) <{ $selected: boolean }>`
   position: relative;
 
   padding: 15px;
 
   text-decoration: none;
 
-  ${({ theme, param }) => css`
-    font-size: ${theme.font.size.normal};
+  ${({ theme, $selected }) => css`
+    font-size: 90%;
     font-weight: ${theme.font.weight[400]};
     color: ${theme.colors.dark_charcoal};
     
-    ${param === 'true' && css`
+    ${$selected && css`
       color: ${theme.colors.primary};
-      font-weight: ${theme.font.weight[500]};
+      font-weight: ${theme.font.weight[600]};
     `};
 
     @media (max-width: ${theme.settings.responsive.maxWidth}){

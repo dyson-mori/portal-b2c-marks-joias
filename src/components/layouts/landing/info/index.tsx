@@ -15,7 +15,6 @@ export default function Info({ info }: InfoProps) {
       {info.map(el => (
         <div key={el.label}>
           {el.icon}
-          <span />
           <p>{el.label}</p>
         </div>
       ))}

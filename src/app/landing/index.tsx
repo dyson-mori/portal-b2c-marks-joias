@@ -33,17 +33,12 @@ export default function LandingPage({ products, categories }: LandingPageProps) 
     },
     {
       icon: <Delivery width={24} height={24} fill='#FA0B5B' />,
-      label: 'Entregadores Locais Qualificados'
+      label: 'Entregadores Qualificados'
     },
   ];
 
   return (
     <Container>
-      {/* <Hero>
-        <img src="https://i.pinimg.com/736x/33/7f/5a/337f5a2525696df44203c46071b81193.jpg" alt="Background" className="bg" />
-        <img src="https://i.pinimg.com/736x/33/7f/5a/337f5a2525696df44203c46071b81193.jpg" alt="Carro" className="car" />
-      </Hero> */}
-
       <Landing.Banner />
       <Landing.Info info={info} />
       <Landing.Categories categories={categories} />
