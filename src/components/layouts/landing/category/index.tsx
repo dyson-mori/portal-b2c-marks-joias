@@ -19,7 +19,7 @@ export default function Categories({ categories, onSelectCategory }: CategoryPro
             {el.photo ? (
               <Image src={el.photo} width={150} height={150} alt={el.title} />
             ) : (
-                <img src="https://i.pinimg.com/736x/da/76/56/da76569e2d9535bb27678f95cbf220b2.jpg" alt="Argolas" />
+                <Image src="https://i.pinimg.com/736x/da/76/56/da76569e2d9535bb27678f95cbf220b2.jpg" width={150} height={150} alt="Argolas" />
             )}
             <p>{el.title}</p>
           </button>

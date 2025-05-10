@@ -1,38 +1,56 @@
-// console.log(process.env.VITE_SERGIO_ENVIRONMENT_VARIABLE);
 import { NextRequest, NextResponse } from "next/server";
 
 import { prisma } from "@services/prisma";
-import { SubCategory } from "@prisma/client";
 
-export async function GET() {
-  const aside = await prisma.category.findMany({
-    include: {
-      sub: true,
+export async function GET(request: NextRequest) {
+  const url = new URL(request.url);
+  const title = url.searchParams.get("category") as string;
+
+  const category = await prisma.category.findFirst({
+    where: {
+      title
+    },
+    select: {
+      sub: {
+        select: {
+          title: true
+        }
+      }
     }
   });
 
-  if (!aside) {
-    throw new Error('Aside Server Error')
+  if (!category) {
+    return NextResponse.json([], { status: 200, statusText: 'sub category not found!' });
   };
 
-  return NextResponse.json(aside);
+  return NextResponse.json(category.sub, { status: 200, statusText: 'sub category received successfully' });
 };
 
 export async function POST(request: NextRequest) {
-  const { title, category_id } = await request.json() as SubCategory;
+  const { title, code } = await request.json();
 
-  const category = await prisma.subCategory.create({
-    data: {
-      title,
-      category_id,
-    },
+  const category = await prisma.category.findFirst({
+    where: {
+      code: code!,
+    }
   });
 
   if (!category) {
-    throw new Error('Category Server Error')
+    return NextResponse.json(undefined, { status: 400, statusText: 'category not found!' });
   };
 
-  return NextResponse.json(true);
+  const create = await prisma.subCategory.create({
+    data: {
+      title,
+      category_id: category.id,
+    },
+  });
+
+  if (!create) {
+    return NextResponse.json(undefined, { status: 400, statusText: 'sub category not found!' });
+  };
+
+  return NextResponse.json(true, { status: 200, statusText: 'sub category created successfully' });
 };
 
 // export async function PUT(request: NextRequest) {

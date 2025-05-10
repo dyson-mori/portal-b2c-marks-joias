@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.main`
   display: flex;
@@ -24,34 +24,34 @@ export const Banner = styled.section`
   img {
     object-fit: cover;
     height: 100%;
-  }
+  };
 `;
 
 export const SubCategories = styled.section`
   display: flex;
 
-  margin: 10px 0;
+  padding: 10px 0;
 
-  /* ${({ theme }) => css`
-    button {
-      font-family: ${theme.font.family.montserrat_alternates};
-      font-size: ${theme.font.size.light};
-      color: ${theme.colors.philippine_gray};
-      box-shadow: ${theme.settings.box.simple};
-      background-color: ${theme.colors.background};
-    }
-  `};
+  width: 100%;
 
   button {
-    border: 0;
-    margin-right: 10px;
+    margin: 0 5px;
+  };
 
-    width: 100px;
-    height: 45px;
-    letter-spacing: 1.5px;
-    font-weight: 600;
-    cursor: pointer;
-  } */
+  button:first-child {
+    margin: 0 5px 0 0;
+  };
+
+  button:last-child {
+    margin: 0 0 0 5px;
+  };
+
+  @media (max-width: 710px){
+    width: 100%;
+    padding: 5px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  };
 `;
 
 export const SectionProducts = styled.section`

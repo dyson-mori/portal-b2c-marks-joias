@@ -15,6 +15,7 @@ export const Container = styled.button<{ $variant: Variant }>`
   min-height: 40px;
 
   width: 100%;
+  white-space: nowrap;
 
   cursor: pointer;
 
@@ -37,16 +38,17 @@ export const Container = styled.button<{ $variant: Variant }>`
     `};
 
     ${$variant === 'select' && css`
-      background-color: ${theme.colors.white};
-      color: ${theme.colors.dark_charcoal};
       font-weight: 600;
-      box-shadow: ${theme.settings.box.border};
+      color: ${theme.colors.granite_gray};
+      background-color: ${theme.colors.white};
+      box-shadow: ${theme.settings.box.simple};
     `};
       
     ${$variant === 'selected' && css`
-      background-color: ${theme.colors.primary};
-      color: ${theme.colors.white};
       font-weight: 600;
+      color: ${theme.colors.white};
+      background-color: ${theme.colors.primary};
+      box-shadow: ${theme.settings.box.simple};
     `};
 
     ${$variant === 'loading' && css`

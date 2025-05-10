@@ -14,11 +14,12 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | undefined }>
 };
 
-export default async function Products({ params, searchParams }: Props) {
-  console.log({ params, searchParams });
+export default async function Products({ searchParams }: Props) {
+  const searchParam = await searchParams;
+  const search = searchParam.category ? `/products?limit=${16}&category=${searchParam.category}` : undefined
 
-  const products = await api.products.list();
-  const categories = await api.category.list();
+  const products = await api.products.list(search);
+  const sub = await api.sub.list(searchParam.category);
 
-  return <ProductsScreen products={products} categories={categories} />;
+  return <ProductsScreen products={products} sub={sub} />;
 };

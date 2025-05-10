@@ -58,7 +58,7 @@ const fetcher = async ({
 
 export const api = {
   products: {
-    list: (limit?: number) => fetcher({ method: 'GET', url: limit ? `/products?limit=${limit}` : '/products' }),
+    list: (param?: string) => fetcher({ method: 'GET', url: param ?? '/products' }),
     find: (code: number) => fetcher({ method: 'GET', url: `/product?code=${code}` })
   },
   product: {
@@ -73,5 +73,8 @@ export const api = {
   },
   category: {
     list: () => fetcher({ method: 'GET', url: '/category' }),
+  },
+  sub: {
+    list: (search?: string) => fetcher({ method: 'GET', url: `/sub?category=${search}` }),
   }
 };
