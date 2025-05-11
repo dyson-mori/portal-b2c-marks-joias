@@ -61,10 +61,9 @@ export async function POST(request: NextRequest) {
           description: item.description,
           images: [item.images[0]], // opcional
         },
-        unit_amount: Number(item.unit_amount) * 100, // em centavos
+        unit_amount: Number(item.unit_amount), // em centavos
       },
-      quantity: 1,
-      // quantity: item.quantity,
+      quantity: item.quantity,
     })),
     shipping_address_collection: {
       allowed_countries: ['BR'], // ou ['US', 'BR'], etc.

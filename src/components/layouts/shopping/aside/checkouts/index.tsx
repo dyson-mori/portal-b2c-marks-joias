@@ -1,6 +1,7 @@
 import { DotLottiePlayer } from "@dotlottie/react-player";
 
 import { ProductProps } from "@global/interfaces";
+import { formats } from "@helpers/format";
 
 import { Container, Lottie, Information } from "./styles";
 
@@ -29,7 +30,7 @@ export default function CheckOut({ storage }: CheckOutProps) {
       {storage.map((e, index) => (
         <Information key={index.toString()}>
           <p>{e.name}</p>
-          <h4>{e.price}</h4>
+          <h4>R$ {formats.formatDecimal(String(e.price))}</h4>
         </Information>
       ))}
     </Container>

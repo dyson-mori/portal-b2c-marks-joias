@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 export const ContainerDesktop = styled.section`
   display: flex;
-  width: 100%;
 
   img {
     width: 100%;

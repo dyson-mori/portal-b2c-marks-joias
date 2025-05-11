@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.section`
-  width: 80%;
   padding: 0 40px;
 
   ${({ theme }) => css`

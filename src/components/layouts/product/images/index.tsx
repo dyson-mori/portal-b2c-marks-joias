@@ -9,21 +9,20 @@ import { ContainerDesktop, ContainerMobile, Button, Options } from './styles';
 
 type Props = {
   data: ProductProps;
+  width: number;
 };
 
-export default function Images({ data }: Props) {
+export default function Images({ data, width }: Props) {
   return (
     <Fragment>
-      <DesktopImage data={data} />
+      <DesktopImage data={data} width={width} />
       <ContainerMobile>
         {data.images.map((item, index) => (
           <Image
             key={index}
             priority
-            width={300}
-            height={300}
-            // width={width - 20}
-            // height={width - 20}
+            width={width - 20}
+            height={width - 20}
             src={item}
             alt={item}
             style={{
@@ -37,7 +36,7 @@ export default function Images({ data }: Props) {
   )
 }
 
-function DesktopImage({ data }: Props) {
+function DesktopImage({ data, width }: Props) {
   const [select, setSelect] = useState(0);
 
   const OptionsComponent = () => {
@@ -61,7 +60,7 @@ function DesktopImage({ data }: Props) {
   };
 
   return (
-    <ContainerDesktop>
+    <ContainerDesktop style={{ width }}>
       <OptionsComponent />
 
       <Image
@@ -71,11 +70,7 @@ function DesktopImage({ data }: Props) {
         src={data.images[select]}
         alt={data.name}
         loading="eager"
-        style={{
-          objectFit: 'cover',
-          // borderRadius: 3,
-          // opacity: .1
-        }}
+        style={{ objectFit: 'cover' }}
       />
     </ContainerDesktop>
   )

@@ -5,7 +5,6 @@ import { Product } from "@prisma/client";
 
 import { stripe } from "@services/stripe";
 import { prisma } from "@services/prisma";
-import { formats } from "@helpers/format";
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
@@ -21,11 +20,15 @@ export async function GET(request: NextRequest) {
     id: product.id,
     name: product.name,
     description: product.description,
-    unit_amount: formats.formatDecimal(String(price.unit_amount)),
-    price: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price.unit_amount! / 100),
+    // unit_amount: formats.formatDecimal(String(price.unit_amount)),
+    // price: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price.unit_amount! / 100),
+    unit_amount: price.unit_amount,
+    price: price.unit_amount,
     defaultPriceId: price.id,
-    quantity: product.metadata.quantity,
-    images: product.images,
+    // melhorar isso, não deixar o maximo de produto exposto para o cliente no storage
+    quantity: 1,
+    maxQuantity: product.metadata.quantity,
+    images: product.images
   };
 
   if (!product) {

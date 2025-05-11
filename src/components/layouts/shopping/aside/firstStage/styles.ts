@@ -37,13 +37,13 @@ export const Methods = styled.button<{ $selected: boolean }>`
 
     p {
       color: ${theme.colors.dark_charcoal};
-      font-size: ${theme.font.size.normal};
+      font-size: ${theme.font.size.light};
       font-weight: ${theme.font.weight[500]};
     };
 
     #discount {
       text-align: center;
-      font-size: ${theme.font.size.normal};
+      font-size: ${theme.font.size.light};
     };
 
     ${disabled && css`
@@ -77,7 +77,7 @@ export const Result = styled.div`
 
   ${({ theme }) => css`
     #price {
-      font-size: ${theme.font.size.medium};
+      font-size: ${theme.font.size.normal};
       font-weight: ${theme.font.weight[600]};
     };
   `};

@@ -4,6 +4,7 @@ export const schema = yup.object().shape({
   /* step 1 */
   method: yup.string().required(),
   price: yup.number().required(),
+  quantity: yup.number().required(),
 
   /* step 2 */
   // full_name: yup.string().min(6, 'Too short'),

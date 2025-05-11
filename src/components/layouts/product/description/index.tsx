@@ -6,19 +6,21 @@ import { ProductProps } from '@global/interfaces';
 import { Container, Delivery as DeliveryStyled } from './styles';
 
 import { Devolution } from '@assets';
+import { formats } from '@helpers/format';
 
 type Props = {
+  width: number;
   data: ProductProps;
   storage: ProductProps[];
   handleBuy(): void;
   onAddToCart(): void;
 };
 
-export default function Description({ data, storage, handleBuy, onAddToCart }: Props) {
+export default function Description({ data, width, storage, handleBuy, onAddToCart }: Props) {
   const label = storage.find(e => e.id === data.id) ? 'Remover do Carrinho' : 'Adicionar ao Carrinho';
 
   return (
-    <Container>
+    <Container style={{ width }}>
       <h1>{data.name}</h1>
 
       <div style={{ height: 10 }} />
@@ -29,7 +31,7 @@ export default function Description({ data, storage, handleBuy, onAddToCart }: P
         <p>Disponível em estoque</p>
       </DeliveryStyled>
 
-      <h2>{data.price}</h2>
+      <h2>{formats.formatDecimal(String(data.price))}</h2>
       <p>6x sem juros de R$ 50,20</p>
 
       {/* <DeliveryStyled>

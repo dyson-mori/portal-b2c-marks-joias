@@ -14,9 +14,11 @@ type Props = {
   control: Control<{
     method: string;
     price: number;
+    quantity: number;
   }, object, {
     method: string;
     price: number;
+    quantity: number;
   }>;
   methodsPayments: {
     id: string;
@@ -61,7 +63,7 @@ export default function Body({ storage, control, methodsPayments, sumPrices }: P
 
       <Result>
         <p>Total a Pagar</p>
-        <p id='price'>{formats.money(sumPrices)}</p>
+        <p id='price'>R$ {formats.formatDecimal(String(sumPrices))}</p>
       </Result>
     </Container>
   )

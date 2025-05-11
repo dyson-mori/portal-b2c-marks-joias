@@ -32,7 +32,7 @@ export const Information = styled.div`
 
   ${({ theme }) => css`
     h4 {
-      font-size: ${theme.font.size.medium};
+      font-size: ${theme.font.size.light};
       font-weight: ${theme.font.weight[600]};
     };
 
@@ -41,6 +41,7 @@ export const Information = styled.div`
       white-space: nowrap;
       overflow: hidden; /* "overflow" value must be different from "visible" */
       text-overflow: ellipsis;
+      font-size: ${theme.font.size.light};
     };
 
     @media (max-width: ${theme.settings.responsive.maxWidth}){

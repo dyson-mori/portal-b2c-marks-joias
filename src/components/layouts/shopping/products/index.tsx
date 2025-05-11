@@ -3,26 +3,41 @@ import Image from 'next/image';
 
 import { DotLottiePlayer } from '@dotlottie/react-player';
 
-import { Trash } from '@assets';
+import { AddCircle, MinusCircle, Trash } from '@assets';
 import { ProductProps } from '@global/interfaces';
 
-import { Container, CartEmpty, Product, Delete } from './styles';
+import { Container, CartEmpty, Product, Delete, AddQuantity } from './styles';
+import { formats } from '@helpers/format';
 
 interface Props {
   storage: ProductProps[];
-  setStorage: (storage: ProductProps) => void;
+  setEditStorage: (storage: ProductProps) => void;
+  setRemoveStorage: (storage: ProductProps) => void;
 };
 
-export default function SavedProducts({ storage, setStorage }: Props) {
+export default function SavedProducts({ storage, setEditStorage, setRemoveStorage }: Props) {
   const lottie_styles: CSSProperties = {
     display: 'flex',
     maxWidth: "300px"
   };
 
-  // const test: CSSProperties = {
-  //   justifyItems: 'center',
-  //   gridTemplateColumns: `repeat(auto-fill, minmax(calc(100% / ${storage.length >= 3 ? 3 : 1}), 1fr))`
-  // };
+  const handleQuantity = (action: 'add' | 'remove', product: ProductProps) => {
+    if (action === 'add' && product.quantity < product.maxQuantity) {
+      return setEditStorage({
+        ...product,
+        price: product.price + product.unit_amount!,
+        quantity: product.quantity + 1
+      })
+    };
+
+    if (action === 'remove' && product.quantity > 1) {
+      return setEditStorage({
+        ...product,
+        price: product.price - product.unit_amount!,
+        quantity: product.quantity - 1
+      })
+    }
+  };
 
   if (storage.length === 0) {
     return (
@@ -33,24 +48,38 @@ export default function SavedProducts({ storage, setStorage }: Props) {
         </CartEmpty>
       </Container>
     )
-  }
+  };
 
   return (
     <Container>
       {storage.map((item, index) => (
         <Product key={index.toString()}>
-          <Delete type='button' onClick={() => setStorage(item)}>
-            <Trash width={20} height={20} stroke='red' strokeWidth={2} />
-          </Delete>
           <Image
             priority
             src={item.images[0]}
-            width={300}
-            height={300}
+            width={100}
+            height={100}
             alt={item.name}
             style={{ objectFit: 'cover' }}
           />
-          <p>{index + 1}/{storage.length}</p>
+          <div className='name'>
+            <h4>{item.name}</h4>
+          </div>
+          <div className='price'>
+            <p>R$ {formats.formatDecimal(String(item.price))}</p>
+          </div>
+          <AddQuantity>
+            <button onClick={() => handleQuantity('remove', item)}>
+              <MinusCircle width={30} height={30} strokeWidth={1} />
+            </button>
+            <p>{item.quantity}</p>
+            <button onClick={() => handleQuantity('add', item)}>
+              <AddCircle width={30} height={30} strokeWidth={1} />
+            </button>
+          </AddQuantity>
+          <Delete type='button' onClick={() => setRemoveStorage(item)}>
+            <Trash width={20} height={20} stroke='red' strokeWidth={2} />
+          </Delete>
         </Product>
       ))}
     </Container>

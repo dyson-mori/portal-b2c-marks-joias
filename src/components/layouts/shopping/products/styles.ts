@@ -2,42 +2,17 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.section`
   display: flex;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  justify-content: center;
 
   width: 100%;
-
-  padding: 0 2.5px;
-  margin-right: 5px;
 
   ${({ theme }) => css`
     box-shadow: ${theme.settings.box.simple};
     background-color: ${theme.colors.white};
 
-    @media (max-width: ${theme.settings.responsive.maxWidth}){
-      margin-bottom: 10px;
-      margin-right: 0px;
-
-      padding: 0;
-      background-color: transparent;
-      box-shadow: 0 0 0 0 transparent;
-
-      display: flex;
-
-      overflow-x: scroll;
-      overflow-y: hidden;
-
-      scroll-snap-type: x mandatory;
-      aspect-ratio: 1 / 1;
-
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-
-      img {
-        width: 100%;
-        height: 100%;
-      };
-    };
+    /* @media (max-width: ${theme.settings.responsive.maxWidth}){ }; */
   `};
 `;
 
@@ -51,45 +26,69 @@ export const CartEmpty = styled.div`
 export const Product = styled.div`
   position: relative;
   display: flex;
-  margin: 5px;
 
-  p {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-weight: 500;
-    color: transparent;
-    letter-spacing: 1px;
+  padding: 5px 10px;
+
+  width: 100%;
+  align-items: center;
+
+  .name {
+    width: 100%;
+    padding: 0 20px;
   };
 
+  .price {
+    width: 20%;
+    margin: 0 25px;
+  };
+
+  img {
+    aspect-ratio: 1/1;
+  }
+
   ${({ theme }) => css`
-    @media (max-width: ${theme.settings.responsive.maxWidth}){
-      p {
-        color: #fff;
-        font-size: ${theme.font.size.extraLight};
-      };
-
-      width: 100%;
-      height: 100%;
-
-      scroll-snap-align: start;
-
-      aspect-ratio: 1 / 1;
-
-      img {
-        width: 100%;
-        height: 100%;
-      };
+    h4 {
+      font-size: ${theme.font.size.light};
+      text-wrap: nowrap;
     };
+
+    p {
+      font-size: ${theme.font.size.light};
+    };
+
+    /* @media (max-width: ${theme.settings.responsive.maxWidth}){ }; */
   `};
 `;
 
-export const Delete = styled.button`
-  position: absolute;
+export const AddQuantity = styled.div`
+  display: flex;
 
-  top: 0;
-  right: 0;
+  ${({ theme }) => css`
+    svg {
+      stroke: ${theme.colors.primary};
+    }
+    p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 25px;
+      font-size: ${theme.font.size.light};
+    };
+  `};
+
+  button {
+    border: 0px;
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  };
+`;
+
+export const Delete = styled.button`
   border: 0;
+
+  margin: 15px;
 
   width: 50px;
   height: 50px;

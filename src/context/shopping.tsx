@@ -6,6 +6,8 @@ import { ProductProps } from '@global/interfaces';
 interface CartProps {
   storage: ProductProps[];
   setStorage: (product: ProductProps) => void;
+  setEditStorage: (product: ProductProps) => void;
+  setRemoveStorage: (product: ProductProps) => void;
 }
 
 export const CartContext = createContext({} as CartProps);
@@ -43,9 +45,25 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     localStorage.setItem('@marks:cart', JSON.stringify(updatedCart));
   };
 
+  const setEditStorage = (updatedProduct: ProductProps) => {
+    const updated = state.map((product) =>
+      product.id === updatedProduct.id ? updatedProduct : product
+    );
+    setState(updated);
+    localStorage.setItem('@marks:cart', JSON.stringify(updated));
+  };
+
+  const setRemoveStorage = (removeProduct: ProductProps) => {
+    const updated = state.filter((product) => product.id !== removeProduct.id);
+    setState(updated);
+    localStorage.setItem('@marks:cart', JSON.stringify(updated));
+  };
+
   const value = {
     storage: state,
     setStorage,
+    setEditStorage,
+    setRemoveStorage
   };
 
   if (!isClient) return null; // ou um <Loading /> para evitar problemas de renderização SSR

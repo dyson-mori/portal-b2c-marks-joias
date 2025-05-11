@@ -7,7 +7,9 @@ export type ProductProps = {
   description: string;
   price: number;
   defaultPriceId?: string;
-  unit_amount?: string;
+  unit_amount?: number;
+  quantity: number;
+  maxQuantity: number;
 };
 
 export interface CategoryProps extends Category {

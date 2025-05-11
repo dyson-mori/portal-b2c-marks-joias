@@ -16,6 +16,8 @@ import { ReactComponent as Trash } from './trash.svg';
 import { ReactComponent as Location } from './location.svg';
 import { ReactComponent as Box } from './box.svg';
 import { ReactComponent as Clock } from './clock.svg';
+import { ReactComponent as AddCircle } from './add-circle.svg';
+import { ReactComponent as MinusCircle } from './minus-circle.svg';
 
 export {
   Logo,
@@ -35,5 +37,7 @@ export {
   Trash,
   Location,
   Box,
-  Clock
+  Clock,
+  AddCircle,
+  MinusCircle
 }

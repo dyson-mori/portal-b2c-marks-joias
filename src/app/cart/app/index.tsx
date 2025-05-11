@@ -18,13 +18,13 @@ import { Container } from './styles';
 export default function ShoppingCard() {
   const route = useRouter();
 
-  const { storage, setStorage } = useContext(CartContext);
+  const { storage, setRemoveStorage, setEditStorage } = useContext(CartContext);
 
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const totalCentavos = storage
-    .map(v => Math.round(Number(v.unit_amount) * 100))
+    .map(v => Math.round(Number(v.price) * 100))
     .reduce((acc, val) => acc + val, 0);
 
   const sumPrices = totalCentavos / 100;
@@ -33,6 +33,7 @@ export default function ShoppingCard() {
     resolver: yupResolver(schema),
     defaultValues: {
       price: sumPrices,
+      quantity: 1
     }
   });
 
@@ -43,7 +44,6 @@ export default function ShoppingCard() {
 
     if (data.method === "clyp6mut5000ay4iw0rcg2vve") {
       const result = await api.gateway.create({ ...data, products: storage });
-      console.log(result);
 
       if (result) {
         route.push(result);
@@ -58,7 +58,7 @@ export default function ShoppingCard() {
   return (
     <Suspense fallback={<Splash />}>
       <Container>
-        <Shopping.SavedProducts storage={storage} setStorage={setStorage} />
+        <Shopping.SavedProducts storage={storage} setEditStorage={setEditStorage} setRemoveStorage={setRemoveStorage} />
 
         <Shopping.Form disabled={storage.length === 0} currentStep={currentStep} onSubmit={handleSubmit(processForm)} loadingButton={loading}>
           <Shopping.Header currentStep={currentStep} method={method!} steps={steps} setStep={prev} />
