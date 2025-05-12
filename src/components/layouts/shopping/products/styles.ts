@@ -31,20 +31,23 @@ export const Product = styled.div`
   align-items: center;
 
   .name {
-    width: 45%;
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
     padding: 0 20px;
   };
 
   .price {
-    display: flex;
-    justify-content: center;
-    width: 70%;
+    p {
+      white-space: nowrap;
+    };
   };
 
   .quantity {
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 50%;
   }
 
   img {
@@ -54,7 +57,7 @@ export const Product = styled.div`
   ${({ theme }) => css`
     a {
       display: inline-block;
-      font-weight: 500;
+      font-weight: 600;
       color: ${theme.colors.dark_charcoal};
       font-size: ${theme.font.size.light};
       white-space: nowrap;
@@ -66,6 +69,7 @@ export const Product = styled.div`
     };
 
     p {
+      font-weight: 500;
       font-size: ${theme.font.size.light};
     };
 

@@ -6,10 +6,11 @@ import { Box, Clock, Delivery, Location } from '@assets';
 
 import { ProductProps } from '@global/interfaces';
 import { useWindowDimensions } from '@hooks';
-import { Landing } from '@components';
+import { Button, Landing, Modal } from '@components';
 
 import { Container, Banner } from './styles';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 type LandingPageProps = {
   products: ProductProps[];
@@ -19,6 +20,8 @@ type LandingPageProps = {
 export default function LandingPage({ products, categories }: LandingPageProps) {
   const route = useRouter();
   const { width } = useWindowDimensions();
+
+  const [open, setOpen] = useState(true);
 
   const info = [
     {
@@ -60,6 +63,13 @@ export default function LandingPage({ products, categories }: LandingPageProps) 
       <Landing.Sales products={products} width={width} />
       <Landing.About width={width} />
       <Landing.Feedback />
+
+      <Modal isOpen={open} onClose={console.log} >
+        <p>Mark&apos;s Jóias</p>
+        <p>Esse projeto está em progresso!</p>
+        <div style={{ height: 20 }} />
+        <Button onClick={() => setOpen(false)}>Entendi</Button>
+      </Modal>
     </Container>
   );
 }
