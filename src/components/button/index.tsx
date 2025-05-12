@@ -17,7 +17,7 @@ const loading_css = (
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ $variant = 'primary', children, ...rest }, ref) => (
-    <Container ref={ref} $variant={$variant} disabled={$variant === 'loading'} {...rest}>
+    <Container ref={ref} $variant={$variant} {...rest}>
       {$variant === 'loading' ? loading_css : children}
     </Container>
   )

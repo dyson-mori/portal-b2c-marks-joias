@@ -31,14 +31,21 @@ export const Product = styled.div`
   align-items: center;
 
   .name {
-    width: 100%;
+    width: 45%;
     padding: 0 20px;
   };
 
   .price {
-    width: 20%;
-    margin: 0 25px;
+    display: flex;
+    justify-content: center;
+    width: 70%;
   };
+
+  .quantity {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 
   img {
     aspect-ratio: 1/1;
@@ -46,10 +53,16 @@ export const Product = styled.div`
 
   ${({ theme }) => css`
     a {
-      text-wrap: nowrap;
+      display: inline-block;
       font-weight: 500;
       color: ${theme.colors.dark_charcoal};
       font-size: ${theme.font.size.light};
+      white-space: nowrap;
+      text-wrap: nowrap;
+      width: 100%;
+      overflow: hidden; /* "overflow" value must be different from "visible" */
+      text-overflow: ellipsis;
+      text-decoration: none;
     };
 
     p {

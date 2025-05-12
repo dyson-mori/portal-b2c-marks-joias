@@ -11,7 +11,8 @@ export const Container = styled.form`
   padding: 30px 10px 10px 10px;
   margin-left: 5px;
 
-  max-width: calc(100% / 3.5);
+  max-width: calc(100% / 3.8);
+  min-width: calc(100% / 3.8);
 
   ${({ theme }) => css`
     box-shadow: ${theme.settings.box.simple};

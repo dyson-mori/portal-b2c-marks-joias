@@ -47,24 +47,26 @@ export async function POST(request: NextRequest) {
   const successUrl = `${process.env.NEXT_PUBLIC_MARKS_URL}/success?session_id={CHECKOUT_SESSION_ID}`;
   const cancelUrl = `${process.env.NEXT_PUBLIC_MARKS_URL}/cart`;
 
+  const array = products.map(item => ({
+    quantity: item.quantity,
+    price_data: {
+      currency: 'brl',
+      product_data: {
+        name: item.name,
+        description: item.description,
+        images: [item.images[0]], // opcional
+      },
+      unit_amount: Number(item.unit_amount), // em centavos
+    },
+  }));
+
   const checkoutSession = await stripe.checkout.sessions.create({
     success_url: successUrl.replace('/api', ''),
     cancel_url: cancelUrl.replace('/api', ''),
     payment_method_types: ['card'],
     mode: 'payment',
     customer_email: email,
-    line_items: products.map(item => ({
-      price_data: {
-        currency: 'brl',
-        product_data: {
-          name: item.name,
-          description: item.description,
-          images: [item.images[0]], // opcional
-        },
-        unit_amount: Number(item.unit_amount), // em centavos
-      },
-      quantity: item.quantity,
-    })),
+    line_items: array,
     shipping_address_collection: {
       allowed_countries: ['BR'], // ou ['US', 'BR'], etc.
     },

@@ -5,15 +5,17 @@ import React, { Suspense, useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { CartContext } from '@context/shopping';
 
 import { api } from '@services/api';
+import { Cards, Pix } from '@assets';
+import { formats } from '@helpers/format';
 import { Shopping, Splash } from '@components';
 
 import { schema, schemaProps, steps, methodsPayments } from './schema';
-import { Container } from './styles';
+import { Container, Content, MethodPayment, Methods, Result } from './styles';
 
 export default function ShoppingCard() {
   const route = useRouter();
@@ -28,11 +30,12 @@ export default function ShoppingCard() {
 
   const sumPrices = totalCentavos / 100;
 
-  const { control, handleSubmit, watch } = useForm<schemaProps>({
+  const { control, handleSubmit, watch, setValue } = useForm<schemaProps>({
     resolver: yupResolver(schema),
     defaultValues: {
       price: sumPrices,
-      quantity: 1
+      quantity: 1,
+      method: null
     }
   });
 
@@ -50,14 +53,55 @@ export default function ShoppingCard() {
     };
   };
 
+  const Icons = ({ id }: { id: string }) => {
+    if (id === 'clyp6mut5000ay4iw0rcg2vve')
+      return <Cards width={25} height={25} strokeWidth={1.5} stroke="#dedede" />
+
+    return <Pix width={25} height={25} fill="#dedede" />;
+  };
+
   return (
     <Suspense fallback={<Splash />}>
       <Container>
         <Shopping.SavedProducts storage={storage} setEditStorage={setEditStorage} setRemoveStorage={setRemoveStorage} />
 
-        <Shopping.Form disabled={storage.length === 0} currentStep={0} onSubmit={handleSubmit(processForm)} loadingButton={loading}>
+        <Shopping.Form disabled={storage.length === 0 || !method} currentStep={0} onSubmit={handleSubmit(processForm)} loadingButton={loading}>
           <Shopping.Header currentStep={0} method={method!} steps={steps} />
-          <Shopping.FirstStage storage={storage} control={control} methodsPayments={methodsPayments} sumPrices={sumPrices} />
+
+          <Content>
+            <MethodPayment>
+              {methodsPayments.map((meth, i) => (
+                <Controller
+                  key={i}
+                  name='method'
+                  control={control}
+                  render={({ field: { value, onChange } }) => (
+                    <Methods
+                      key={i}
+                      type='button'
+                      disabled={storage?.length === 0}
+                      onClick={() => {
+                        onChange(meth.id);
+                        setValue('method', meth.id)
+                      }}
+                      $selected={meth.id === value}
+                    >
+                      <Icons id={meth.id} />
+                      <p>{meth.title}</p>
+                    </Methods>
+                  )}
+                />
+              ))}
+            </MethodPayment>
+
+            <Shopping.Checkouts storage={storage} />
+
+            <Result>
+              <p>Total a Pagar</p>
+              <p id='price'>{formats.money(sumPrices)}</p>
+            </Result>
+          </Content>
+
         </Shopping.Form>
       </Container>
     </Suspense>

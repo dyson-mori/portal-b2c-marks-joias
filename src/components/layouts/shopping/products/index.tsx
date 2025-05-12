@@ -67,17 +67,19 @@ export default function SavedProducts({ storage, setEditStorage, setRemoveStorag
             <Link href={`product?id=${item.id}`}>{item.name}</Link>
           </div>
           <div className='price'>
-            <p>{formats.money(item.price)}</p>
+            <p>{formats.money(item.unit_amount!)}</p>
           </div>
-          <AddQuantity>
-            <button onClick={() => handleQuantity('remove', item)}>
-              <MinusCircle width={30} height={30} strokeWidth={1} />
-            </button>
-            <p>{item.quantity}</p>
-            <button onClick={() => handleQuantity('add', item)}>
-              <AddCircle width={30} height={30} strokeWidth={1} />
-            </button>
-          </AddQuantity>
+          <div className='quantity'>
+            <AddQuantity>
+              <button onClick={() => handleQuantity('remove', item)}>
+                <MinusCircle width={30} height={30} strokeWidth={1} />
+              </button>
+              <p>{item.quantity}</p>
+              <button onClick={() => handleQuantity('add', item)}>
+                <AddCircle width={30} height={30} strokeWidth={1} />
+              </button>
+            </AddQuantity>
+          </div>
           <Delete type='button' onClick={() => setRemoveStorage(item)}>
             <Trash width={20} height={20} stroke='red' strokeWidth={2} />
           </Delete>

@@ -97,10 +97,6 @@ model Gateway {
 
   client_id String?
 
-  // address_id String
-  // address    Address   @relation(fields: [address_id], references: [id])
-  // product    Product[]
-
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 

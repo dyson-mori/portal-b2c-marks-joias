@@ -42,3 +42,13 @@ export const ProductList = styled.div`
     };
   };
 `;
+
+export const ProductEmpty = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+  height: 60vh;
+`;

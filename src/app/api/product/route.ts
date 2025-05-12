@@ -64,6 +64,7 @@ export async function POST(request: NextRequest) {
     images,
     metadata: {
       category: category!.code,
+      // mudar isso, salvar a quantidade no meu banco de dados
       quantity
     },
     default_price_data: {

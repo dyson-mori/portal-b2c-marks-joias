@@ -31,7 +31,7 @@ export default function Description({ data, width, storage, handleBuy, onAddToCa
         <p>Disponível em estoque</p>
       </DeliveryStyled>
 
-      <h2>{formats.formatDecimal(String(data.price))}</h2>
+      <h2>{formats.money(data.price)}</h2>
       <p>6x sem juros de R$ 50,20</p>
 
       {/* <DeliveryStyled>
