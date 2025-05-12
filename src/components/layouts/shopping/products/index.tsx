@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { DotLottiePlayer } from '@dotlottie/react-player';
 
@@ -63,10 +64,10 @@ export default function SavedProducts({ storage, setEditStorage, setRemoveStorag
             style={{ objectFit: 'cover' }}
           />
           <div className='name'>
-            <h4>{item.name}</h4>
+            <Link href={`product?id=${item.id}`}>{item.name}</Link>
           </div>
           <div className='price'>
-            <p>R$ {formats.formatDecimal(String(item.price))}</p>
+            <p>{formats.money(item.price)}</p>
           </div>
           <AddQuantity>
             <button onClick={() => handleQuantity('remove', item)}>

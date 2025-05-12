@@ -20,7 +20,6 @@ export default function ShoppingCard() {
 
   const { storage, setRemoveStorage, setEditStorage } = useContext(CartContext);
 
-  const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const totalCentavos = storage
@@ -51,22 +50,14 @@ export default function ShoppingCard() {
     };
   };
 
-  async function prev(n: number) {
-    return setCurrentStep(n);
-  };
-
   return (
     <Suspense fallback={<Splash />}>
       <Container>
         <Shopping.SavedProducts storage={storage} setEditStorage={setEditStorage} setRemoveStorage={setRemoveStorage} />
 
-        <Shopping.Form disabled={storage.length === 0} currentStep={currentStep} onSubmit={handleSubmit(processForm)} loadingButton={loading}>
-          <Shopping.Header currentStep={currentStep} method={method!} steps={steps} setStep={prev} />
-
-          {currentStep === 0 &&
-            <Shopping.FirstStage storage={storage} control={control} methodsPayments={methodsPayments} sumPrices={sumPrices} />
-          }
-
+        <Shopping.Form disabled={storage.length === 0} currentStep={0} onSubmit={handleSubmit(processForm)} loadingButton={loading}>
+          <Shopping.Header currentStep={0} method={method!} steps={steps} />
+          <Shopping.FirstStage storage={storage} control={control} methodsPayments={methodsPayments} sumPrices={sumPrices} />
         </Shopping.Form>
       </Container>
     </Suspense>

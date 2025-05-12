@@ -13,7 +13,7 @@ export const Container = styled.div`
   ${({ theme }) => css`
     @media (max-width: ${theme.settings.responsive.maxWidth}) {
       min-height: 150px;
-    }
+    };
   `};
 `;
 
@@ -28,7 +28,6 @@ export const Information = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 5px;
-  border: 0 1px 0 0 #000;
 
   ${({ theme }) => css`
     h4 {
@@ -37,7 +36,7 @@ export const Information = styled.div`
     };
 
     p {
-      max-width: 70%;
+      max-width: 60%;
       white-space: nowrap;
       overflow: hidden; /* "overflow" value must be different from "visible" */
       text-overflow: ellipsis;

@@ -10,35 +10,49 @@ export const Container = styled.div`
   height: 100%;
 `;
 
-export const Methods = styled.button<{ $selected: boolean }>`
-  border: 0;
-  cursor: pointer;
-
+export const MethodPayment = styled.div`
   display: flex;
 
   align-items: center;
+  justify-content: space-evenly;
 
-  width: 95%;
-  min-height: 60px;
+  width: 100%;
+`;
 
-  padding: 5px;
+export const Methods = styled.button<{ $selected: boolean }>`
+  border: 0;
+  cursor: pointer;
+  
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 40%;
+  padding: 35px;
   margin: 5px;
 
   transition: .5s;
+
+  p {
+    position: absolute;
+    bottom: 10px;
+    /* transition: .5s; */
+  };
 
   svg {
     margin: 0 10px;
   };
 
   ${({ theme, disabled, $selected }) => css`
-    box-shadow: ${theme.settings.box.default};
     border-radius: ${theme.settings.radius.small};
     background-color: ${theme.colors.white};
 
     p {
-      color: ${theme.colors.dark_charcoal};
+      color: ${theme.colors.philippine_gray};
       font-size: ${theme.font.size.light};
-      font-weight: ${theme.font.weight[500]};
+      font-weight: 400;
     };
 
     #discount {
@@ -53,12 +67,22 @@ export const Methods = styled.button<{ $selected: boolean }>`
     
     ${!disabled && css`
       &:hover {
-        box-shadow: ${theme.settings.box.defaultHoverPrimary};
+        background-color: ${theme.colors.success}1a;
       };
     `};
 
     ${$selected && css`
-      border: 1px ${theme.colors.primary};  
+      background-color: ${theme.colors.success}1a;
+
+      svg {
+        stroke: ${theme.colors.success};
+        stroke-width: 2;
+      };
+
+      p {
+        color: ${theme.colors.success};
+        font-weight: 600;
+      }
     `};
   `};
 `;

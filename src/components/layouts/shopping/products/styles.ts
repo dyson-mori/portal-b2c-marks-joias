@@ -11,8 +11,6 @@ export const Container = styled.section`
   ${({ theme }) => css`
     box-shadow: ${theme.settings.box.simple};
     background-color: ${theme.colors.white};
-
-    /* @media (max-width: ${theme.settings.responsive.maxWidth}){ }; */
   `};
 `;
 
@@ -47,9 +45,11 @@ export const Product = styled.div`
   }
 
   ${({ theme }) => css`
-    h4 {
-      font-size: ${theme.font.size.light};
+    a {
       text-wrap: nowrap;
+      font-weight: 500;
+      color: ${theme.colors.dark_charcoal};
+      font-size: ${theme.font.size.light};
     };
 
     p {
@@ -88,9 +88,7 @@ export const AddQuantity = styled.div`
 export const Delete = styled.button`
   border: 0;
 
-  margin: 15px;
-
-  width: 50px;
+  min-width: 50px;
   height: 50px;
   background-color: transparent;
   z-index: 5;
