@@ -11,6 +11,22 @@ export const Container = styled.section`
   ${({ theme }) => css`
     box-shadow: ${theme.settings.box.simple};
     background-color: ${theme.colors.white};
+
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      margin-bottom: 5px;
+      flex-direction: row;
+      justify-content: start;
+      background-color: transparent;
+      box-shadow: none;
+
+      overflow-x: scroll;
+
+      scroll-snap-type: x mandatory;
+
+      aspect-ratio: 1 / 1;
+
+      scrollbar-width: none;
+    }
   `};
 `;
 
@@ -32,9 +48,6 @@ export const Product = styled.div`
 
   .name {
     display: flex;
-    justify-content: center;
-
-    width: 100%;
     padding: 0 20px;
   };
 
@@ -62,18 +75,56 @@ export const Product = styled.div`
       font-size: ${theme.font.size.light};
       white-space: nowrap;
       text-wrap: nowrap;
-      width: 100%;
+      width: calc(100vw / 3.5);
       overflow: hidden; /* "overflow" value must be different from "visible" */
       text-overflow: ellipsis;
       text-decoration: none;
     };
 
     p {
-      font-weight: 500;
+      font-weight: 400;
       font-size: ${theme.font.size.light};
     };
 
-    /* @media (max-width: ${theme.settings.responsive.maxWidth}){ }; */
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      height: 100%;
+      padding: 0px;
+      margin: 2px;
+      aspect-ratio: 1/1;
+      scroll-snap-align: start;
+
+      img {
+        width: 100%;
+        height: 100%;
+      };
+
+      .name {
+        position: absolute;
+
+        width: 100%;
+        justify-content: center;
+
+        bottom: 60px;
+
+        a {
+          width: calc(100vw / 1.2);
+          color: #fff;
+          font-weight: 400;
+        };
+      };
+
+      .price {
+        display: none;
+      };
+
+      .quantity {
+        position: absolute;
+
+        width: 100%;
+
+        bottom: 10px;
+      };
+    };
   `};
 `;
 
@@ -120,4 +171,19 @@ export const Delete = styled.button`
       stroke: #fff;
     }
   };
+
+  ${({ theme }) => css`
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      position: absolute;
+
+      top: 15px;
+      right: 15px;
+
+      svg {
+        width: 30px;
+        height: 30px;
+        stroke-width: 1.5;
+      };
+    };
+  `};
 `;
