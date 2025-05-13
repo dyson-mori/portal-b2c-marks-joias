@@ -5,19 +5,19 @@ import React, { Suspense, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { ProductProps } from '@global/interfaces';
-import { CartContext } from '@context/shopping';
+import { ShoppingContext } from '@context/shopping';
 
+import { useWindowDimensions } from '@hooks';
 import { ProductComponent, Splash } from '@components';
 
 import { Container, Content } from './styles';
-import { useWindowDimensions } from '@hooks';
 
 type Props = {
   product: ProductProps;
 };
 
 export default function ProductScreen({ product }: Props) {
-  const { storage, setStorage } = useContext(CartContext);
+  const { storage, setStorage } = useContext(ShoppingContext);
   const { width } = useWindowDimensions();
 
   const route = useRouter();
@@ -25,8 +25,9 @@ export default function ProductScreen({ product }: Props) {
 
   const handleBuyNow = () => {
     const foundProduct = storage.find(data => data.id === product.id);
+
     if (!foundProduct) setStorage(product);
-    return route.push('/cart');
+    return route.push('/shopping');
   };
 
   function onAddToCart() {
@@ -41,7 +42,13 @@ export default function ProductScreen({ product }: Props) {
         </LabelTag> */}
         <Content>
           <ProductComponent.Images data={product} width={width_section} />
-          <ProductComponent.Description data={product} width={width_section} storage={storage} handleBuy={handleBuyNow} onAddToCart={onAddToCart} />
+          <ProductComponent.Description
+            data={product}
+            storage={storage}
+            width={width_section}
+            handleBuy={handleBuyNow}
+            onAddToCart={onAddToCart}
+          />
         </Content>
       </Container>
     </Suspense>

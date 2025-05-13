@@ -7,6 +7,6 @@ export const metadata: Metadata = {
   description: 'Quase lá',
 };
 
-export default async function CardPage() {
+export default async function ShoppingPage() {
   return <App />;
 };

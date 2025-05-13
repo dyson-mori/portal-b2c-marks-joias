@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button } from '@components';
-import { ProductProps } from '@global/interfaces';
+import { ProductProps, StorageProps } from '@global/interfaces';
 
 import { Container, Delivery as DeliveryStyled } from './styles';
 
@@ -11,13 +11,13 @@ import { formats } from '@helpers/format';
 type Props = {
   width: number;
   data: ProductProps;
-  storage: ProductProps[];
+  storage: StorageProps[];
   handleBuy(): void;
   onAddToCart(): void;
 };
 
 export default function Description({ data, width, storage, handleBuy, onAddToCart }: Props) {
-  const label = storage.find(e => e.id === data.id) ? 'Remover do Carrinho' : 'Adicionar ao Carrinho';
+  const label = storage.find(item => item.id === data.id) ? 'Remover do Carrinho' : 'Adicionar ao Carrinho';
 
   return (
     <Container style={{ width }}>

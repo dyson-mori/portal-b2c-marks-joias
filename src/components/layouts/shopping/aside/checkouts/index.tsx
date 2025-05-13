@@ -1,6 +1,6 @@
 import { DotLottiePlayer } from "@dotlottie/react-player";
 
-import { ProductProps } from "@global/interfaces";
+import { StorageProps } from "@global/interfaces";
 import { formats } from "@helpers/format";
 
 import { Container, Lottie, Information } from "./styles";
@@ -11,7 +11,7 @@ const lottie_styles = {
 };
 
 type CheckOutProps = {
-  storage: ProductProps[];
+  storage: StorageProps[];
 };
 
 export default function CheckOut({ storage }: CheckOutProps) {

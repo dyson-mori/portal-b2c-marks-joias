@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { Header as HeaderPrisma } from '@prisma/client';
 
-import { CartContext } from '@context/shopping';
+import { ShoppingContext } from '@context/shopping';
 
 import { ShoppingCart, Logo } from '@assets';
 
@@ -16,7 +16,7 @@ interface HeaderProps {
 };
 
 export default function Header({ hide, param, header }: HeaderProps) {
-  const { storage } = useContext(CartContext);
+  const { storage } = useContext(ShoppingContext);
 
   if (hide) {
     return null;
@@ -38,8 +38,8 @@ export default function Header({ hide, param, header }: HeaderProps) {
           >{item.title}</LinkStyle>
         ))}
       </Nav>
-      <Icon href='/cart'>
-        <ShoppingCart className='shopping-cart' width={30} height={30} strokeWidth={param === '/cart' ? 2.5 : 1.5} />
+      <Icon href='/shopping'>
+        <ShoppingCart className='shopping-cart' width={30} height={30} strokeWidth={param === '/shopping' ? 2.5 : 1.5} />
         <p>{storage.length}</p>
       </Icon>
     </Container>

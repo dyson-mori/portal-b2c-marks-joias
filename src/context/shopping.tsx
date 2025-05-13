@@ -1,19 +1,19 @@
 'use client';
 
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
-import { ProductProps } from '@global/interfaces';
+import { ProductProps, StorageProps } from '@global/interfaces';
 
 interface CartProps {
-  storage: ProductProps[];
+  storage: StorageProps[];
   setStorage: (product: ProductProps) => void;
-  setEditStorage: (product: ProductProps) => void;
-  setRemoveStorage: (product: ProductProps) => void;
+  setEditStorage: (product: StorageProps) => void;
+  setRemoveStorage: (product: StorageProps) => void;
 }
 
-export const CartContext = createContext({} as CartProps);
+export const ShoppingContext = createContext({} as CartProps);
 
 const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [state, setState] = useState<ProductProps[]>([]);
+  const [state, setState] = useState<StorageProps[]>([]);
   const [isClient, setIsClient] = useState(false);
 
   // Garante que o código só rode no cliente
@@ -32,20 +32,30 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const setStorage = (product: ProductProps) => {
     const productExists = state.find((item) => item.id === product.id);
 
-    let updatedCart;
+    let updatedCart: StorageProps[];
+
     if (productExists) {
       // Remove produto se já existe
       updatedCart = state.filter((item) => item.id !== product.id);
     } else {
       // Adiciona produto
-      updatedCart = [...state, product];
+      updatedCart = [...state, {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.images[0],
+        price_id: product.defaultPriceId as string,
+        quantity: 1,
+        unit_amount: product.unit_amount,
+        maxQuantity: product.maxQuantity,
+      }];
     }
 
     setState(updatedCart);
     localStorage.setItem('@marks:cart', JSON.stringify(updatedCart));
   };
 
-  const setEditStorage = (updatedProduct: ProductProps) => {
+  const setEditStorage = (updatedProduct: StorageProps) => {
     const updated = state.map((product) =>
       product.id === updatedProduct.id ? updatedProduct : product
     );
@@ -53,7 +63,7 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     localStorage.setItem('@marks:cart', JSON.stringify(updated));
   };
 
-  const setRemoveStorage = (removeProduct: ProductProps) => {
+  const setRemoveStorage = (removeProduct: StorageProps) => {
     const updated = state.filter((product) => product.id !== removeProduct.id);
     setState(updated);
     localStorage.setItem('@marks:cart', JSON.stringify(updated));
@@ -69,9 +79,9 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   if (!isClient) return null; // ou um <Loading /> para evitar problemas de renderização SSR
 
   return (
-    <CartContext.Provider value={value}>
+    <ShoppingContext.Provider value={value}>
       {children}
-    </CartContext.Provider>
+    </ShoppingContext.Provider>
   );
 };
 

@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
-import { CartContext } from '@context/shopping';
+import { ShoppingContext } from '@context/shopping';
 
 import { api } from '@services/api';
 import { Cards, Pix } from '@assets';
@@ -20,12 +20,12 @@ import { Container, Content, MethodPayment, Methods, Result } from './styles';
 export default function ShoppingCard() {
   const route = useRouter();
 
-  const { storage, setRemoveStorage, setEditStorage } = useContext(CartContext);
+  const { storage, setRemoveStorage, setEditStorage } = useContext(ShoppingContext);
 
   const [loading, setLoading] = useState(false);
 
   const totalCentavos = storage
-    .map(v => Math.round(Number(v.price) * 100))
+    .map(v => Math.round(v.price * 100))
     .reduce((acc, val) => acc + val, 0);
 
   const sumPrices = totalCentavos / 100;

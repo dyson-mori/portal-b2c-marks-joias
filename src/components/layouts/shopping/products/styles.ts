@@ -20,6 +20,7 @@ export const Container = styled.section`
       box-shadow: none;
 
       overflow-x: scroll;
+      overflow-y: hidden;
 
       scroll-snap-type: x mandatory;
 
@@ -64,6 +65,8 @@ export const Product = styled.div`
   }
 
   img {
+    width: 100px;
+    height: 100px;
     aspect-ratio: 1/1;
   }
 

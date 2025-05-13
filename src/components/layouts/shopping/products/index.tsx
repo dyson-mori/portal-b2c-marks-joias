@@ -3,17 +3,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { DotLottiePlayer } from '@dotlottie/react-player';
+import { StorageProps } from '@global/interfaces';
 
 import { AddCircle, MinusCircle, Trash } from '@assets';
-import { ProductProps } from '@global/interfaces';
 
 import { Container, CartEmpty, Product, Delete, AddQuantity } from './styles';
 import { formats } from '@helpers/format';
 
 interface Props {
-  storage: ProductProps[];
-  setEditStorage: (storage: ProductProps) => void;
-  setRemoveStorage: (storage: ProductProps) => void;
+  storage: StorageProps[];
+  setEditStorage: (storage: StorageProps) => void;
+  setRemoveStorage: (storage: StorageProps) => void;
 };
 
 export default function SavedProducts({ storage, setEditStorage, setRemoveStorage }: Props) {
@@ -22,7 +22,7 @@ export default function SavedProducts({ storage, setEditStorage, setRemoveStorag
     maxWidth: "300px"
   };
 
-  const handleQuantity = (action: 'add' | 'remove', product: ProductProps) => {
+  const handleQuantity = (action: 'add' | 'remove', product: StorageProps) => {
     if (action === 'add' && product.quantity < product.maxQuantity) {
       return setEditStorage({
         ...product,
@@ -57,9 +57,9 @@ export default function SavedProducts({ storage, setEditStorage, setRemoveStorag
         <Product key={index.toString()}>
           <Image
             priority
-            src={item.images[0]}
-            width={100}
-            height={100}
+            src={item.image}
+            width={400}
+            height={400}
             alt={item.name}
             style={{ objectFit: 'cover' }}
           />
@@ -67,7 +67,7 @@ export default function SavedProducts({ storage, setEditStorage, setRemoveStorag
             <Link href={`product?id=${item.id}`}>{item.name}</Link>
           </div>
           <div className='price'>
-            <p>{formats.money(item.unit_amount!)}</p>
+            <p>{formats.money(item.unit_amount)}</p>
           </div>
           <div className='quantity'>
             <AddQuantity>
