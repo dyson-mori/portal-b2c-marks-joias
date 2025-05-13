@@ -11,10 +11,9 @@ export async function GET() {
       title: 'asc'
     },
     select: {
-      code: true,
+      id: true,
       title: true,
-      sub: true,
-      photo: true,
+      thumbnail: true,
       show_on_landing: true
     }
   });

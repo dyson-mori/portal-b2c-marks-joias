@@ -23,8 +23,8 @@ model Product {
 
   title       String
   description String
-  price       Int
-  unit_amount Int
+  price       Int // review this
+  unit_amount Int // review this
   search      String // facilitate search
   thumbnail   String
   files       String @default("[]")

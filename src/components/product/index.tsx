@@ -1,16 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { ProductProps } from "@global/interfaces";
-
+import { Product as PrismaProduct } from '@prisma/client';
 import { Container, Footer } from './styles';
 
 type Props = {
-  product: ProductProps;
+  product: PrismaProduct;
   href: string;
 };
 
-const Product: React.FC<Props> = ({ product, href }) => (
+export const Product: React.FC<Props> = ({ product, href }) => (
   <Container href={href}>
     <Image
       src={product.thumbnail}
@@ -28,5 +27,3 @@ const Product: React.FC<Props> = ({ product, href }) => (
     </Footer>
   </Container>
 )
-
-export { Product };

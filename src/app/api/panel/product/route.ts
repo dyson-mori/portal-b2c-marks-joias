@@ -13,19 +13,13 @@ function formatCode(code: number, last_product: number) {
   return Number(`${code}00000`) + last_product
 };
 
-// criar a parte a quantidade já que o stripe não existe um lugar para colocar a quantidade
-type Props = Product & {
-  images: string[];
-  price: number;
-};
-
 export async function POST(request: NextRequest) {
-  const { title, description, code, images, price, quantity } = await request.json() as Props;
+  const { category_id, title, description, files, price, unit_amount, search } = await request.json() as Product;
 
   const product_amount = await prisma.product.count();
   const category = await prisma.category.findFirst({
     where: {
-      code: code!,
+      id: category_id!,
     }
   });
 
@@ -36,30 +30,34 @@ export async function POST(request: NextRequest) {
   const product_stripe = await stripe.products.create({
     name: title,
     description,
-    images: [images[0]],
+    images: [files[0]],
     default_price_data: {
       currency: 'brl',
-      unit_amount: price,
+      unit_amount: unit_amount,
     },
   });
 
   const product = await prisma.product.create({
     data: {
+      id: formatCode(category!.id, product_amount),
+      category_id: category.id,
+
+      stripe_price_id: product_stripe.default_price as string,
+      stripe_product_id: product_stripe.id,
+
       title,
       description,
       price: Number(price),
-      files: JSON.stringify(images),
-      category_id: category.id,
-      quantity,
-      code: formatCode(category!.code, product_amount),
-      stripe_price_id: product_stripe.default_price as string,
-      stripe_product_id: product_stripe.id
+      files: JSON.stringify(files),
+      thumbnail: files[0],
+      unit_amount,
+      search
     }
   });
 
   if (!product) {
-    return NextResponse.json(product, { status: 400, statusText: 'database does not return data' });
+    return NextResponse.json(product, { status: 400, statusText: 'unable to create this product!' });
   };
 
-  return NextResponse.json(product, { status: 201, statusText: 'products received successfully' });
+  return NextResponse.json(product, { status: 201, statusText: 'successfully created product!' });
 };

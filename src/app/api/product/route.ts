@@ -3,24 +3,23 @@ import { prisma } from "@services/prisma";
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
-  const code = url.searchParams.get("code");
+  const product_id = url.searchParams.get("product_id");
 
   const product = await prisma.product.findFirst({
     where: {
-      code: Number(code)
+      id: Number(product_id)
     },
     select: {
+      id: true,
       title: true,
+      description: true,
       price: true,
       files: true,
-      description: true,
-      code: true
     }
   });
 
   const format = {
     ...product,
-    price: Number(product!.price),
     files: JSON.parse(product!.files)
   }
 

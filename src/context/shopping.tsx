@@ -16,7 +16,6 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, setState] = useState<StorageProps[]>([]);
   const [isClient, setIsClient] = useState(false);
 
-  // Garante que o código só rode no cliente
   useEffect(() => {
     setIsClient(true);
     const storedCart = localStorage.getItem('@marks:cart');
@@ -30,24 +29,24 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   const setStorage = (product: ProductProps) => {
-    console.log(product);
-
-    const productExists = state.find((item) => item.code === product.code);
+    const productExists = state.find((item) => item.id === product.id);
 
     let updatedCart: StorageProps[];
 
     if (productExists) {
-      // Remove produto se já existe
-      updatedCart = state.filter((item) => item.code !== product.code);
+      updatedCart = state.filter((item) => item.id !== product.id);
     } else {
-      // Adiciona produto
       updatedCart = [...state, {
-        code: product.code,
+        id: product.id,
+
+        product_id: product.stripe_product_id,
+        price_id: product.stripe_price_id,
+
+        thumbnail: product.files[0],
         title: product.title,
         price: product.price,
-        thumbnail: product.files[0],
-        price_id: product.defaultPriceId as string,
         quantity: 1,
+
         unit_amount: product.price,
         maxQuantity: 10,
         description: product.description,
@@ -60,14 +59,14 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const setEditStorage = (updatedProduct: StorageProps) => {
     const updated = state.map((product) =>
-      product.code === updatedProduct.code ? updatedProduct : product
+      product.id === updatedProduct.id ? updatedProduct : product
     );
     setState(updated);
     localStorage.setItem('@marks:cart', JSON.stringify(updated));
   };
 
   const setRemoveStorage = (removeProduct: StorageProps) => {
-    const updated = state.filter((product) => product.code !== removeProduct.code);
+    const updated = state.filter((product) => product.id !== removeProduct.id);
     setState(updated);
     localStorage.setItem('@marks:cart', JSON.stringify(updated));
   };

@@ -1,26 +1,12 @@
-import { Category, SubCategory } from "@prisma/client";
+import { Category, Product } from "@prisma/client";
 
-export type ProductProps = {
-  defaultPriceId: string;
-  // code: string;
-  // title: string;
-  // files: string[];
-  // description: string;
-  // price: number;
-  // defaultPriceId?: string;
-  // unit_amount: number;
-  // quantity: number;
-  // maxQuantity: number;
-  title: string;
-  code: number;
-  price: number;
-  thumbnail: string;
-  description: string;
+export type ProductProps = Product & {
   files: string[]; // improve this
 };
 
 export type StorageProps = {
-  code: number;
+  id: number;
+  product_id: string;
   price_id: string;
   title: string;
   price: number;
@@ -32,5 +18,5 @@ export type StorageProps = {
 };
 
 export interface CategoryProps extends Category {
-  sub: SubCategory[];
+  sub: [];
 };

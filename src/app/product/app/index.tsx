@@ -5,6 +5,7 @@ import React, { Suspense, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { ProductProps } from '@global/interfaces';
+
 import { ShoppingContext } from '@context/shopping';
 
 import { useWindowDimensions } from '@hooks';
@@ -24,7 +25,7 @@ export default function ProductScreen({ product }: Props) {
   const width_section = width <= 500 ? width - 20 : width / 2 - 100;
 
   const handleBuyNow = () => {
-    const foundProduct = storage.find(data => data.code === product.code);
+    const foundProduct = storage.find(data => data.id === product.id);
 
     if (!foundProduct) setStorage(product);
     return route.push('/shopping');
