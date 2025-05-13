@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  // previewFeatures = ["pgBouncer"]
 }
 
 datasource db {
@@ -16,22 +15,22 @@ datasource db {
 }
 
 model Product {
-  id          String @id @default(uuid())
-  category_id String
+  id          Int @id @unique
+  category_id Int // will be use like -> Code Number <-
 
   stripe_product_id String
   stripe_price_id   String
 
-  code        Int
   title       String
   description String
-  price       Decimal
-  quantity    Int
+  price       Int
+  unit_amount Int
+  search      String // facilitate search
+  thumbnail   String
+  files       String @default("[]")
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-
-  files String @default("[]")
 
   categories Category @relation(fields: [category_id], references: [id])
 
@@ -39,7 +38,7 @@ model Product {
 }
 
 model Header {
-  id String @id @default(cuid()) @map("code")
+  id String @id @default(cuid())
 
   title  String
   param  String
@@ -52,15 +51,14 @@ model Header {
 }
 
 model Category {
-  id String @id @default(cuid())
+  id Int @id @unique
 
-  title String
-  code  Int
-  photo String?
+  title     String
+  thumbnail String
 
   show_on_landing Boolean? @default(false)
 
-  sub     SubCategory[]
+  // sub     SubCategory[]
   product Product[]
 
   created_at DateTime @default(now())
@@ -69,19 +67,19 @@ model Category {
   @@map("categories")
 }
 
-model SubCategory {
-  id          String @id @default(cuid())
-  category_id String
+// model SubCategory {
+//   id          String @id @default(cuid())
+//   category_id String
 
-  title String @unique
+//   title String @unique
 
-  category Category @relation(fields: [category_id], references: [id], onDelete: Cascade)
+//   category Category @relation(fields: [category_id], references: [id], onDelete: Cascade)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+//   created_at DateTime @default(now())
+//   updated_at DateTime @updatedAt
 
-  @@map("sub")
-}
+//   @@map("sub")
+// }
 
 model Gateway {
   code_id String @id @default(uuid())
