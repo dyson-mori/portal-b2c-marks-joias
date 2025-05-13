@@ -11,9 +11,9 @@ type Props = {
 };
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const { id } = await searchParams;
+  const { code } = await searchParams;
 
-  const product = await api.product.find(id!);
+  const product = await api.product.find(code!);
 
   return {
     title: "Mark's Jóias | " + product.name,
@@ -26,8 +26,8 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 };
 
 export default async function Product({ searchParams }: Props) {
-  const { id } = await searchParams;
-  const product = await api.product.find(id!);
+  const { code } = await searchParams;
+  const product = await api.product.find(code!);
 
   return <App product={product} />;
 };

@@ -24,7 +24,7 @@ export default function ProductScreen({ product }: Props) {
   const width_section = width <= 500 ? width - 20 : width / 2 - 100;
 
   const handleBuyNow = () => {
-    const foundProduct = storage.find(data => data.id === product.id);
+    const foundProduct = storage.find(data => data.code === product.code);
 
     if (!foundProduct) setStorage(product);
     return route.push('/shopping');

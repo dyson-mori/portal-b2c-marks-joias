@@ -37,11 +37,11 @@ export default function Sales({ products, width }: ProductsProps) {
         <ProductList>
           {products.map((el, index) => (
             <Image
-              key={el.name + index}
-              src={`${el.images[0]}`}
+              key={el.title + index}
+              src={el.thumbnail}
               width={test.width}
               height={test.width}
-              alt={el.name}
+              alt={el.title}
             />
           ))}
         </ProductList>

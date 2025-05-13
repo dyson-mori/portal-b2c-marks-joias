@@ -30,24 +30,27 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   const setStorage = (product: ProductProps) => {
-    const productExists = state.find((item) => item.id === product.id);
+    console.log(product);
+
+    const productExists = state.find((item) => item.code === product.code);
 
     let updatedCart: StorageProps[];
 
     if (productExists) {
       // Remove produto se já existe
-      updatedCart = state.filter((item) => item.id !== product.id);
+      updatedCart = state.filter((item) => item.code !== product.code);
     } else {
       // Adiciona produto
       updatedCart = [...state, {
-        id: product.id,
-        name: product.name,
+        code: product.code,
+        title: product.title,
         price: product.price,
-        image: product.images[0],
+        thumbnail: product.files[0],
         price_id: product.defaultPriceId as string,
         quantity: 1,
-        unit_amount: product.unit_amount,
-        maxQuantity: product.maxQuantity,
+        unit_amount: product.price,
+        maxQuantity: 10,
+        description: product.description,
       }];
     }
 
@@ -57,14 +60,14 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const setEditStorage = (updatedProduct: StorageProps) => {
     const updated = state.map((product) =>
-      product.id === updatedProduct.id ? updatedProduct : product
+      product.code === updatedProduct.code ? updatedProduct : product
     );
     setState(updated);
     localStorage.setItem('@marks:cart', JSON.stringify(updated));
   };
 
   const setRemoveStorage = (removeProduct: StorageProps) => {
-    const updated = state.filter((product) => product.id !== removeProduct.id);
+    const updated = state.filter((product) => product.code !== removeProduct.code);
     setState(updated);
     localStorage.setItem('@marks:cart', JSON.stringify(updated));
   };

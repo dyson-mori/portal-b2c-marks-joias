@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
 import { stripe } from "@services/stripe";
-import { ProductProps } from "@global/interfaces";
+import { StorageProps } from "@global/interfaces";
 
 type Gateway = {
   address: string;
@@ -17,7 +17,7 @@ type Gateway = {
   email: string;
   phone: string;
   price: 268.8
-  products: ProductProps[];
+  products: StorageProps[];
 };
 
 export async function GET(request: NextRequest) {
@@ -52,9 +52,9 @@ export async function POST(request: NextRequest) {
     price_data: {
       currency: 'brl',
       product_data: {
-        name: item.name,
+        name: item.title,
         description: item.description,
-        images: [item.images[0]], // opcional
+        images: [item.thumbnail], // opcional
       },
       unit_amount: Number(item.unit_amount), // em centavos
     },

@@ -19,7 +19,10 @@ model Product {
   id          String @id @default(uuid())
   category_id String
 
-  code        Int?
+  stripe_product_id String
+  stripe_price_id   String
+
+  code        Int
   title       String
   description String
   price       Decimal
@@ -28,23 +31,11 @@ model Product {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  files Files[]
+  files String @default("[]")
 
   categories Category @relation(fields: [category_id], references: [id])
 
   @@map("products")
-}
-
-model Files {
-  code String @id
-
-  product_id String
-
-  url String
-
-  product Product @relation(fields: [product_id], references: [id], onDelete: Cascade)
-
-  @@index([product_id])
 }
 
 model Header {

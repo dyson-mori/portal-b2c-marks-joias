@@ -29,7 +29,7 @@ export default function CheckOut({ storage }: CheckOutProps) {
     <Container>
       {storage.map((e, index) => (
         <Information key={index.toString()}>
-          <p>{e.name}</p>
+          <p>{e.title}</p>
           <h4>{formats.money(e.price)}</h4>
         </Information>
       ))}

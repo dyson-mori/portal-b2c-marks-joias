@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'jouomoizalhobjxhlmkc.supabase.co',
         port: ''
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: ''
       }
     ]
   },

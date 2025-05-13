@@ -57,14 +57,14 @@ export default function SavedProducts({ storage, setEditStorage, setRemoveStorag
         <Product key={index.toString()}>
           <Image
             priority
-            src={item.image}
+            src={item.thumbnail}
             width={400}
             height={400}
-            alt={item.name}
+            alt={item.title}
             style={{ objectFit: 'cover' }}
           />
           <div className='name'>
-            <Link href={`product?id=${item.id}`}>{item.name}</Link>
+            <Link href={`product?code=${item.code}`}>{item.title}</Link>
           </div>
           <div className='price'>
             <p>{formats.money(item.unit_amount)}</p>

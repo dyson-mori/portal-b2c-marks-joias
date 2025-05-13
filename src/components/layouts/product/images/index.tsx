@@ -17,7 +17,7 @@ export default function Images({ data, width }: Props) {
     <Fragment>
       <DesktopImage data={data} width={width} />
       <ContainerMobile>
-        {data.images.map((item, index) => (
+        {data.files.map((item, index) => (
           <Image
             key={index}
             priority
@@ -42,7 +42,7 @@ function DesktopImage({ data, width }: Props) {
   const OptionsComponent = () => {
     return (
       <Options>
-        {data.images.map((item, index) => (
+        {data.files.map((item, index) => (
           <Button key={index.toString()} onClick={() => setSelect(index)}>
             <Image
               priority
@@ -67,8 +67,8 @@ function DesktopImage({ data, width }: Props) {
         priority
         width={500}
         height={500}
-        src={data.images[select]}
-        alt={data.name}
+        src={data.files[select]}
+        alt={data.title}
         loading="eager"
         style={{ objectFit: 'cover' }}
       />

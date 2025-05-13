@@ -13,17 +13,17 @@ type Props = {
 const Product: React.FC<Props> = ({ product, href }) => (
   <Container href={href}>
     <Image
-      src={product.images[0]}
+      src={product.thumbnail}
       width={300}
       height={300}
-      alt={product.name}
+      alt={product.title}
       priority
       style={{
         objectFit: 'cover',
       }}
     />
     <Footer>
-      <p id='title'>{product.name}</p>
+      <p id='title'>{product.title}</p>
       <p id='price'>{product.price}</p>
     </Footer>
   </Container>

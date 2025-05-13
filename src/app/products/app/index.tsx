@@ -36,7 +36,8 @@ export default function Products({ products, sub }: Props) {
       <Container>
 
         <Banner>
-          <Image src="https://jouomoizalhobjxhlmkc.supabase.co/storage/v1/object/sign/marks-joias-files/loja-logo.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5X2I2ZGIwMjQ4LTkyYzgtNDZkOS05NmE5LWUzNzJlZjUzMGNkZiJ9.eyJ1cmwiOiJtYXJrcy1qb2lhcy1maWxlcy9sb2phLWxvZ28uanBnIiwiaWF0IjoxNzQ3MDY5Mzk2LCJleHAiOjE3Nzg2MDUzOTZ9.RMS42AG1IvUfTWD7JpLmPXYoVg4r2tRzOJ9q4Q7S_T4" width={width} height={height / 2} alt='banner' />
+          <Image src="https://res.cloudinary.com/doo9pfft1/image/upload/v1747150929/IMG_7085_etrci0.jpg" width={width} height={height / 2} alt='banner' />
+          {/* <Image src="https://jouomoizalhobjxhlmkc.supabase.co/storage/v1/object/sign/marks-joias-files/loja-logo.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5X2I2ZGIwMjQ4LTkyYzgtNDZkOS05NmE5LWUzNzJlZjUzMGNkZiJ9.eyJ1cmwiOiJtYXJrcy1qb2lhcy1maWxlcy9sb2phLWxvZ28uanBnIiwiaWF0IjoxNzQ3MDY5Mzk2LCJleHAiOjE3Nzg2MDUzOTZ9.RMS42AG1IvUfTWD7JpLmPXYoVg4r2tRzOJ9q4Q7S_T4" width={width} height={height / 2} alt='banner' /> */}
         </Banner>
 
         {sub.length !== 0 && (
@@ -47,7 +48,7 @@ export default function Products({ products, sub }: Props) {
           </SubCategories>
         )}
 
-        {products.filter(e => e.name.toLowerCase().includes(label.toLowerCase())).length === 0 && (
+        {products.filter(e => e.title.toLowerCase().includes(label.toLowerCase())).length === 0 && (
           <ProductEmpty>
             <DotLottiePlayer style={lottie_styles} src="/lottie/marks-empty-card.lottie" autoplay />
             <p>Product Not Found</p>
@@ -55,17 +56,17 @@ export default function Products({ products, sub }: Props) {
         )}
 
         {
-          products.filter(e => e.name.toLowerCase().includes(label.toLowerCase())).length !== 0 && (
+          products.filter(e => e.title.toLowerCase().includes(label.toLowerCase())).length !== 0 && (
             <SectionProducts>
               {
-                products.filter(pro => pro.name.toLowerCase().includes(label.toLowerCase())
+                products.filter(pro => pro.title.toLowerCase().includes(label.toLowerCase())
                   // products.filter(pro =>
                   //   label.length > 0
                   //     ? pro.name.toLowerCase().includes(label.toLowerCase())
                   //     : selects.every(eve => pro.categories.some(cat => cat.id === eve.id))
                 )
                   .map((item, index) =>
-                    <Product key={index.toString()} product={item} href={`/product?id=${item.id}`} />
+                    <Product key={index.toString()} product={item} href={`/product?code=${item.code}`} />
                   )}
             </SectionProducts>
           )}
