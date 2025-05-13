@@ -64,7 +64,7 @@ export default function SavedProducts({ storage, setEditStorage, setRemoveStorag
             style={{ objectFit: 'cover' }}
           />
           <div className='name'>
-            <Link href={`product?code=${item.code}`}>{item.title}</Link>
+            <Link href={`product?product_id=${item.id}`}>{item.title}</Link>
           </div>
           <div className='price'>
             <p>{formats.money(item.unit_amount)}</p>

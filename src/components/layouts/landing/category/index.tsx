@@ -16,8 +16,8 @@ export default function Categories({ categories, onSelectCategory }: CategoryPro
       <div className='categories'>
         {categories.map(el => (
           <button key={el.title} onClick={() => onSelectCategory(el.title)}>
-            {el.photo ? (
-              <Image src={el.photo} width={150} height={150} alt={el.title} />
+            {el.thumbnail ? (
+              <Image src={el.thumbnail} width={150} height={150} alt={el.title} />
             ) : (
                 <Image src="https://i.pinimg.com/736x/da/76/56/da76569e2d9535bb27678f95cbf220b2.jpg" width={150} height={150} alt="Argolas" />
             )}

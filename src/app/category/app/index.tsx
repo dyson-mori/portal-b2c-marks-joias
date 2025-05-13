@@ -1,11 +1,10 @@
 "use client"
 
-import { CategoryProps } from "@global/interfaces";
-
+import { Category } from "@prisma/client";
 import { Container } from "./styles";
 
 type CategoryAppProps = {
-  categories: CategoryProps[]
+  categories: Category[]
 };
 
 export default function CategoryApp({ categories }: CategoryAppProps) {

@@ -15,12 +15,12 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   const url = new URL(request.url);
-  const code = url.searchParams.get("code") as string;
+  const id = url.searchParams.get("id") as string;
   const body = await request.json() as Category;
 
   const find_category = await prisma.category.findFirst({
     where: {
-      code: Number(code)
+      id: Number(id)
     },
   });
 
@@ -40,11 +40,11 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   const url = new URL(request.url);
-  const id = url.searchParams.get("id") as string;
+  const id = url.searchParams.get("id");
 
   const category = await prisma.category.delete({
     where: {
-      id
+      id: Number(id)
     },
   });
 
