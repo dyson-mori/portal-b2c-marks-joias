@@ -19,7 +19,6 @@ export default async function Products({ searchParams }: Props) {
   const search = searchParam.category ? `/products?limit=${16}&category=${searchParam.category}` : undefined
 
   const products = await api.products.list(search);
-  const sub = await api.sub.list(searchParam.category);
 
-  return <ProductsScreen products={products} sub={sub} />;
+  return <ProductsScreen products={products} />;
 };

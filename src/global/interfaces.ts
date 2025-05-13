@@ -1,4 +1,4 @@
-import { Category, Product } from "@prisma/client";
+import { Product } from "@prisma/client";
 
 export type ProductProps = Product & {
   files: string[]; // improve this
@@ -15,8 +15,4 @@ export type StorageProps = {
   quantity: number;
   unit_amount: number;
   description: string;
-};
-
-export interface CategoryProps extends Category {
-  sub: [];
 };

@@ -74,9 +74,6 @@ export const api = {
   category: {
     list: () => fetcher({ method: 'GET', url: '/category' }),
   },
-  sub: {
-    list: (search?: string) => fetcher({ method: 'GET', url: `/sub?category=${search}` }),
-  },
   shopping: {
     search: (products_id: string) => fetcher({ method: 'GET', url: `/shopping?${products_id}` }),
   }
