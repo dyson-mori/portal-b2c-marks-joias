@@ -4,15 +4,10 @@ import { Category } from "@prisma/client";
 import { prisma } from "@services/prisma";
 
 export async function POST(request: NextRequest) {
-  const { id, title, thumbnail, show_on_landing } = await request.json() as Category;
+  const body = await request.json() as Category[];
 
-  const data = await prisma.category.create({
-    data: {
-      id,
-      title,
-      thumbnail,
-      show_on_landing
-    }
+  const data = await prisma.category.createMany({
+    data: body
   });
 
   return NextResponse.json(data, { status: 201, statusText: 'successfully created product!' });
