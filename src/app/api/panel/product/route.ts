@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { Product } from "@prisma/client";
 
-import { stripe } from "@services/stripe";
+// import { stripe } from "@services/stripe";
 import { prisma } from "@services/prisma";
 
 function formatCode(code: number, last_product: number) {
