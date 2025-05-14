@@ -1,14 +1,21 @@
-# Imagem base
+# node version
 FROM node:18
 
-# Diretório de trabalho dentro do container
-WORKDIR /app
+WORKDIR /usr/src/app
 
-# Copia arquivos
-COPY package*.json ./
-RUN npm install
+COPY package.json .
+COPY yarn.lock .
+COPY prisma ./prisma
+
+RUN yarn install
 
 COPY . .
 
-# Comando para iniciar a aplicação
-CMD ["npm", "start"]
+RUN yarn build
+
+RUN rm -rf app/
+
+# Prune off the dev dependencies after build step
+RUN yarn install --production
+
+CMD [ "yarn", "start" ]

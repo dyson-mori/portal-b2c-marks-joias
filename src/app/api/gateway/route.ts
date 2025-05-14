@@ -51,12 +51,12 @@ export async function POST(request: NextRequest) {
     quantity: item.quantity,
     price_data: {
       currency: 'brl',
+      unit_amount: Number(item.unit_amount), // em centavos
       product_data: {
         name: item.title,
         description: item.description,
         images: [item.thumbnail], // opcional
       },
-      unit_amount: Number(item.unit_amount), // em centavos
     },
   }));
 
@@ -74,3 +74,5 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json(checkoutSession.url, { status: 201, statusText: 'gateway created successfully' });
 };
+
+// {{ url }}/success?session_id=cs_test_b1v5JbJlB4l43xVpE49XxaHW8HzEb1N06s1LkB1OOvpo6r7zfb8aYWl4Uj

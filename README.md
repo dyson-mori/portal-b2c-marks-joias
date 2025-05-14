@@ -5,9 +5,6 @@
 ## Prisma
   npx prisma migrate dev <br />
 
-## TO DO
-  Fazer um modal para que o cliente descreva o produto e uma IA retornará os produtos de acordo com a descrição
-
 ## note <br />
   - remover o "export const dynamic = 'force-dynamic';"# portal-b2c-marks-joias
 
@@ -27,3 +24,8 @@
 ## Success Payment Links <br />
   - http://localhost:3000/success?session_id=cs_test_b1ViffhKeVPpgC1ntCuZur8jNxeYnlIixLqO47sSCLFiVDjo0LA8nW9iS6
   - https://portal-b2c-marks-joias-cyan.vercel.app/success?session_id=cs_test_b1ViffhKeVPpgC1ntCuZur8jNxeYnlIixLqO47sSCLFiVDjo0LA8nW9iS6
+
+## TO DO
+  [✔] - create a modal to alert that it is a test.
+  [✖] - Create a modal for the customer to describe the product and an AI will return the products according to the description.
+  [✖] - Add the webhook so that when the user makes the payment, remove the quantity of the product.

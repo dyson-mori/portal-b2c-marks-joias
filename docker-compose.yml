@@ -1,16 +1,26 @@
 version: '3.9'
 
 services:
-  # web:
-  #   build: ./web
-  #   container_name: web
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - database
+  web:
+    command: sh -c "yarn install && npx prisma db push && yarn start"
+    container_name: web
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_MARKS_URL=http://localhost:3000/api
+      - NEXT_DIRECT_URL=postgresql://postgres:password@postgres:5432/database
+      - NEXT_DATABASE_URL=postgresql://postgres:password@postgres:5432/database
+      - NEXT_STRIPE_SECRET_KEY=sk_test_51RL3RlPtYwbC5Aut7MAIOeCUFGXH0rwb3oS8P36X5O5hkntGb9u4Aeq1qbtz3qFdBt0XPkvHtSEs5u9qRLqP3ruN00JrveUb9N
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    networks:
+      - app-network
 
   postgres:
-    image: postgres:latest
+    image: postgres
     container_name: database
     environment:
       POSTGRES_PASSWORD: password
@@ -20,6 +30,9 @@ services:
       - '5432:5432'
     volumes:
       - ./sql/setup.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+
   # nginx:
   #   build: ./nginx
   #   container_name: nginx
@@ -30,3 +43,6 @@ services:
 
 volumes:
   postgres:
+
+networks:
+  app-network:
