@@ -11,7 +11,7 @@ services:
       - NEXT_PUBLIC_MARKS_URL=http://localhost:3000/api
       - NEXT_DIRECT_URL=postgresql://postgres:password@postgres:5432/database
       - NEXT_DATABASE_URL=postgresql://postgres:password@postgres:5432/database
-      - NEXT_STRIPE_SECRET_KEY=sk_test_51RL3RlPtYwbC5Aut7MAIOeCUFGXH0rwb3oS8P36X5O5hkntGb9u4Aeq1qbtz3qFdBt0XPkvHtSEs5u9qRLqP3ruN00JrveUb9N
+      - NEXT_STRIPE_SECRET_KEY=
     depends_on:
       - postgres
     volumes:
