@@ -8,10 +8,10 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_MARKS_URL=http://localhost:3000/api
-      - NEXT_DIRECT_URL=postgresql://postgres:password@postgres:5432/database
-      - NEXT_DATABASE_URL=postgresql://postgres:password@postgres:5432/database
-      - NEXT_STRIPE_SECRET_KEY=
+      - NEXT_PUBLIC_MARKS_URL=""
+      - NEXT_DIRECT_URL=""
+      - NEXT_DATABASE_URL=""
+      - NEXT_STRIPE_SECRET_KEY=""
     depends_on:
       - postgres
     volumes:
