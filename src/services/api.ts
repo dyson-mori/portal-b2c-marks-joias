@@ -62,7 +62,7 @@ export const api = {
     find: (product_id: number) => fetcher({ method: 'GET', url: `/product?product_id=${product_id}` })
   },
   product: {
-    find: (code: string) => fetcher({ method: 'GET', url: `/product?code=${code}` })
+    find: (product_id: string) => fetcher({ method: 'GET', url: `/product?product_id=${product_id}` })
   },
   gateway: {
     find: (session_id: string) => fetcher({ method: 'GET', url: `/gateway?session_id=${session_id}` }),
