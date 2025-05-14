@@ -42,7 +42,7 @@ export default function LandingPage({ products, categories }: LandingPageProps) 
     },
   ];
 
-  function onSelectCategotyTitle(title: string) {
+  function onSelectCategoryTitle(title: string) {
     route.push(`/products?category=${title}`)
   };
 
@@ -50,7 +50,7 @@ export default function LandingPage({ products, categories }: LandingPageProps) 
     <Container>
       <Landing.Banner />
       <Landing.Info info={info} />
-      <Landing.Categories categories={categories} onSelectCategory={onSelectCategotyTitle} />
+      <Landing.Categories categories={categories} onSelectCategory={onSelectCategoryTitle} />
 
       <Banner>
         ✨
