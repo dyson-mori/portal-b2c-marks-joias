@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { Preference } from "mercadopago";
 import { paid_market_api } from "@services/mercado-pago";
 
+import { ProductProps } from "@global/interfaces";
+import { formats } from "@helpers/format";
+
 export async function OPTIONS() {
   return NextResponse.json({}, {
     status: 200,
@@ -11,42 +14,58 @@ export async function OPTIONS() {
       'Access-Control-Allow-Headers': 'Content-Type',
     },
   });
-}
+};
+
+type PaidMarketBodyProps = {
+  external_reference_id: string;
+  email: string;
+  test_id: string;
+  products: ProductProps[];
+};
 
 export async function POST(req: NextRequest) {
-  const { testeId, userEmail } = await req.json();
+  const { test_id, external_reference_id, email, products } = await req.json() as PaidMarketBodyProps;
 
-  // console.log({ testeId, userEmail });
+  // console.log({
+  //   test_id,
+  //   external_reference_id,
+  //   email,
+  //   products: products.map(product => ({
+  //     id: String(product.id),
+  //     title: product.title,
+  //     description: product.description,
+  //     quantity: product.quantity,
+  //     unit_price: Number(formats.formatDecimal(String(product.price))),
+  //     currency_id: 'BRL',
+  //     category_id: String(product.category_id),
+  //   }))
+  // });
 
   try {
     const preference = new Preference(paid_market_api);
 
     const createdPreference = await preference.create({
       body: {
-        external_reference: testeId, // IMPORTANTE: Isso aumenta a pontuação da sua integração com o Mercado Pago - É o id da compra no nosso sistema
-        metadata: {
-          testeId, // O Mercado Pago converte para snake_case, ou seja, testeId vai virar teste_id
-          // userEmail: userEmail,
-          // plan: '123'
-          //etc
-        },
-        ...(userEmail && {
-          payer: {
-            email: userEmail,
-          },
-        }),
+        // external_reference: external_reference_id, // IMPORTANTE: Isso aumenta a pontuação da sua integração com o Mercado Pago - É o id da compra no nosso sistema
+        // metadata: {
+        //   userTestId: test_id, // O Mercado Pago converte para snake_case, ou seja, testeId vai virar teste_id
+        //   userEmail: email,
+        //   // plan: '123'
+        //   // etc
+        // },
+        // ...(email && {
+        //   payer: {
+        //     email: email,
+        //   },
+        // }),
 
-        items: [
-          {
-            id: "id-do-seu-produto",
-            description: "Descrição do produto",
-            title: "Nome do produto",
-            quantity: 1,
-            unit_price: 9.99,
-            currency_id: "BRL",
-            category_id: "category", // Recomendado inserir, mesmo que não tenha categoria - Aumenta a pontuação da sua integração com o Mercado Pago
-          },
-        ],
+        items: products.map(product => ({
+          id: String(product.id),
+          title: product.title,
+          description: product.description,
+          quantity: product.quantity,
+          unit_price: Number(formats.formatDecimal(String(product.unit_amount))),
+        })),
         payment_methods: {
           // Descomente para desativar métodos de pagamento
           //   excluded_payment_methods: [
@@ -57,14 +76,14 @@ export async function POST(req: NextRequest) {
           //       id: "pec",
           //     },
           //   ],
-          //   excluded_payment_types: [
-          //     {
-          //       id: "debit_card",
-          //     },
-          //     {
-          //       id: "credit_card",
-          //     },
-          //   ],
+          // excluded_payment_types: [
+          //   {
+          //     id: "debit_card",
+          //   },
+          //   {
+          //     id: "credit_card",
+          //   },
+          // ],
           installments: 12, // Número máximo de parcelas permitidas - calculo feito automaticamente
         },
         auto_return: "approved",
@@ -80,10 +99,7 @@ export async function POST(req: NextRequest) {
       throw new Error("No preferenceID");
     }
 
-    return NextResponse.json({
-      preferenceId: createdPreference.id,
-      initPoint: createdPreference.init_point,
-    }, {
+    return NextResponse.json({ preferenceId: createdPreference.id, initPoint: createdPreference.init_point }, {
       headers: {
         'Access-Control-Allow-Origin': '*', // ou use seu domínio ngrok
       },

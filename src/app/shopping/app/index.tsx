@@ -47,8 +47,10 @@ export default function ShoppingCard() {
     setLoading(true);
 
     const result = await api.paid_market.create({
-      testeId: "123",
-      userEmail: "ssergiojunioleal@gmail.com",
+      test_id: "123",
+      email: "ssergiojunioleal@gmail.com",
+      external_reference_id: '321',
+      products: storage
     });
 
     return route.push(result.initPoint);

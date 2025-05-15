@@ -37,21 +37,21 @@ export default function About({ width }: { width: number }) {
           style={{ objectFit: 'cover' }}
           width={width / 4}
           height={width / 4}
-          src="https://jouomoizalhobjxhlmkc.supabase.co/storage/v1/object/sign/marks-joias-files/IMG_7057.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5X2I2ZGIwMjQ4LTkyYzgtNDZkOS05NmE5LWUzNzJlZjUzMGNkZiJ9.eyJ1cmwiOiJtYXJrcy1qb2lhcy1maWxlcy9JTUdfNzA1Ny5qcGciLCJpYXQiOjE3NDY4MDgzNzIsImV4cCI6MTc3ODM0NDM3Mn0.mKiL-JWrKLi8RIG-GQ7H3VOIG6moiGfR8lNqcvIB_uA"
+          src="https://res.cloudinary.com/doo9pfft1/image/upload/v1747331634/left_v4zslf.jpg"
           alt='photo'
         />
         <Image
           style={{ objectFit: 'cover' }}
           width={width / 2.33}
           height={width / 4}
-          src="https://jouomoizalhobjxhlmkc.supabase.co/storage/v1/object/sign/marks-joias-files/loja-logo.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5X2I2ZGIwMjQ4LTkyYzgtNDZkOS05NmE5LWUzNzJlZjUzMGNkZiJ9.eyJ1cmwiOiJtYXJrcy1qb2lhcy1maWxlcy9sb2phLWxvZ28uanBnIiwiaWF0IjoxNzQ2ODA4MjY0LCJleHAiOjE3NzgzNDQyNjR9.nU9z9Bpzm0pkvLlfqsczymtk4240VHqHrHWl9uXMaaQ"
+          src="https://res.cloudinary.com/doo9pfft1/image/upload/v1747331486/inside-store_ealsn7.jpg"
           alt='photo'
         />
         <Image
           style={{ objectFit: 'cover' }}
           width={width / 4}
           height={width / 4}
-          src="https://jouomoizalhobjxhlmkc.supabase.co/storage/v1/object/sign/marks-joias-files/IMG_7058.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5X2I2ZGIwMjQ4LTkyYzgtNDZkOS05NmE5LWUzNzJlZjUzMGNkZiJ9.eyJ1cmwiOiJtYXJrcy1qb2lhcy1maWxlcy9JTUdfNzA1OC5qcGciLCJpYXQiOjE3NDY4MDgzMTEsImV4cCI6MTc3ODM0NDMxMX0.Ukm6wgst12LANcXjVOQb3XocBs0gq03hsiMoZE2w4xA"
+          src="https://res.cloudinary.com/doo9pfft1/image/upload/v1747331634/left_v4zslf.jpg"
           alt='photo'
         />
       </Images>
