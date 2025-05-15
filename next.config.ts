@@ -8,21 +8,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'i.pinimg.com',
-        port: ''
-      },
-      {
-        protocol: 'https',
-        hostname: 'files.stripe.com',
-        port: ''
-      },
-      {
-        protocol: 'https',
-        hostname: 'jouomoizalhobjxhlmkc.supabase.co',
-        port: ''
-      },
-      {
-        protocol: 'https',
         hostname: 'res.cloudinary.com',
         port: ''
       }

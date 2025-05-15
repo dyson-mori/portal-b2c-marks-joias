@@ -66,7 +66,6 @@ export const api = {
   },
   gateway: {
     find: (session_id: string) => fetcher({ method: 'GET', url: `/gateway?session_id=${session_id}` }),
-    create: (body: object) => fetcher({ method: 'POST', url: '/gateway', body })
   },
   header: {
     list: () => fetcher({ method: 'GET', url: '/header' })
@@ -76,5 +75,8 @@ export const api = {
   },
   shopping: {
     search: (products_id: string) => fetcher({ method: 'GET', url: `/shopping?${products_id}` }),
+  },
+  paid_market: {
+    create: (body: object) => fetcher({ method: 'POST', url: '/mercado-pago/create-checkout', body })
   }
 };

@@ -11,7 +11,9 @@ services:
       - NEXT_PUBLIC_MARKS_URL=""
       - NEXT_DIRECT_URL=""
       - NEXT_DATABASE_URL=""
-      - NEXT_STRIPE_SECRET_KEY=""
+      - MERCADO_PAGO_ACCESS_TOKEN=""
+      - MERCADO_PAGO_WEBHOOK_SECRET=""
+      - NEXT_PUBLIC_MERCADO_PAGO_PUBLIC_KEY=""
     depends_on:
       - postgres
     volumes:
