@@ -38,3 +38,10 @@ export const Label = styled.section`
     };
   `};
 `;
+
+export const SuccessLottie = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;

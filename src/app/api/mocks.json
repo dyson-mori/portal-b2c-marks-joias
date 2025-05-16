@@ -1,0 +1,102 @@
+{
+  "header": [
+    {
+      "title": "Início",
+      "param": "/",
+      "public": true
+    },
+    {
+      "title": "Produtos",
+      "param": "/products",
+      "public": true
+    }
+  ],
+  "products": [
+    {
+      "id": 110000,
+      "category_id": 11,
+      "title": "Choker Dourada com Pedras Pretas Facetadas",
+      "description": "Choker elegante folheada a ouro, composta por pedras pretas facetadas que refletem a luz com sofisticação. Um acessório moderno e delicado, perfeito para valorizar o pescoço com estilo. Ideal para compor looks versáteis — do casual ao refinado.",
+      "price": 17990,
+      "unit_amount": 17990,
+      "search": "Choker elos 12 pedras 4.3g",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747240125/110254_n1tgsf.jpg",
+      "files": [
+        "https: //res.cloudinary.com/doo9pfft1/image/upload/v1747240125/110254_n1tgsf.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747240126/110254_01_zwwont.jpg"
+      ],
+      "quantity": 10
+    },
+    {
+      "id": 120001,
+      "category_id": 12,
+      "title": "Gargantilha Pavão Real Multicolor",
+      "description": "O Gargantilha Pavão Real Multicolor é uma peça vibrante e cheia de personalidade. Com um pingente em formato de pavão, cravejado com zircônias coloridas que remetem à beleza das penas dessa ave majestosa, ele transmite elegância e originalidade. O corpo do pavão é detalhado com microzircônias transparentes, enquanto as asas em pedras multicoloridas trazem um charme alegre e sofisticado. Ideal para quem ama joias únicas e marcantes!",
+      "search": "Gargantilha espirito santo pedraria",
+      "price": 31000,
+      "unit_amount": 31000,
+      "quantity": 10,
+      "files": [
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416129/120753_vzgnde.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416125/120753_01_fppejy.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416127/120753_02_kkifzg.jpg"
+      ]
+    }
+  ],
+  "category": [
+    {
+      "id": 1,
+      "title": "anel",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185200/rings_zc5jlg.webp",
+      "show_on_landing": true
+    },
+    {
+      "id": 2,
+      "title": "argolas",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185434/ear-rings.jpg",
+      "show_on_landing": true
+    },
+    {
+      "id": 3,
+      "title": "brincos",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185568/e77c1293baf275f8db7653f7b3d41620_lkikls.jpg",
+      "show_on_landing": true
+    },
+    {
+      "id": 4,
+      "title": "conjunto",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185606/c48fbe4cf496f846bc0226e717cb435c_qsjem3.jpg",
+      "show_on_landing": true
+    },
+    {
+      "id": 5,
+      "title": "corrente",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185637/e11a1b01dee4a68e847dd724ea589a5d_cwqxce.jpg",
+      "show_on_landing": true
+    },
+    {
+      "id": 6,
+      "title": "pingente",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185692/749171f2a69cfad074c10ec4e1ef9b32.jpg_f5w5kp.webp",
+      "show_on_landing": true
+    },
+    {
+      "id": 7,
+      "title": "pulseira",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185800/a778cd6df8193014dfca12bf9c8b6483_icqmau.jpg",
+      "show_on_landing": true
+    },
+    {
+      "id": 8,
+      "title": "tornozeleira",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185822/70c5c461a77c3f4f01c58c20be9a0d38_mo35gs.jpg",
+      "show_on_landing": true
+    },
+    {
+      "id": 9,
+      "title": "trio",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185854/3ae2990ef940fa2174cce4942b21ccf5_kxj9wb.jpg",
+      "show_on_landing": true
+    }
+  ]
+}

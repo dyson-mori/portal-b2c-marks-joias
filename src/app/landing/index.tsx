@@ -11,6 +11,7 @@ import { Button, Landing, Modal } from '@components';
 import { Container, Banner } from './styles';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Link from 'next/link';
 
 type LandingPageProps = {
   products: ProductProps[];
@@ -54,9 +55,7 @@ export default function LandingPage({ products, categories }: LandingPageProps) 
 
       <Banner>
         ✨
-        <p>
-          Caso você deseja ter uma renda extra, <strong>fazemos Consignados</strong>, para saber mais ligue-nos 31 9 7556 4133
-        </p>
+        <p>Trabalhe com nossos <Link href='/consigned'>Consignados</Link> e aumente sua renda com peças que vendem sozinhas!</p>
         ✨
       </Banner>
 

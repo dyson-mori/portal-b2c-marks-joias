@@ -2,8 +2,10 @@ import React from 'react';
 import Image from 'next/image';
 
 import { Product as PrismaProduct } from '@prisma/client';
-import { Container, Footer } from './styles';
+
 import { formats } from '@helpers/format';
+
+import { Container, Footer } from './styles';
 
 type Props = {
   product: PrismaProduct;

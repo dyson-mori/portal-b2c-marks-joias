@@ -5,6 +5,7 @@ import { DotLottiePlayer } from '@dotlottie/react-player';
 import { ProductProps } from '@global/interfaces';
 
 import { Container, ProductEmpty, ProductList } from "./styles";
+import { Product } from '../../../product';
 
 type ProductsProps = {
   width: number;
@@ -12,15 +13,10 @@ type ProductsProps = {
 };
 
 export default function Sales({ products, width }: ProductsProps) {
-  const test = {
-    width: width <= 500 ? (width / 2) - 20 : (width / 4) - 30
-  };
-
   const lottie_styles = {
     display: 'flex',
     maxWidth: "300px"
   };
-
 
   return (
     <Container>
@@ -36,12 +32,10 @@ export default function Sales({ products, width }: ProductsProps) {
       {products.length > 0 && (
         <ProductList>
           {products.map((el, index) => (
-            <Image
-              key={el.title + index}
-              src={el.thumbnail}
-              width={test.width}
-              height={test.width}
-              alt={el.title}
+            <Product
+              key={index.toString()}
+              href={`product/product_id=${el.id}`}
+              product={el}
             />
           ))}
         </ProductList>

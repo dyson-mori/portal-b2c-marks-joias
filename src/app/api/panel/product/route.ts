@@ -51,3 +51,23 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json(product, { status: 201, statusText: 'successfully created product!' });
 };
+
+export async function PUT(request: NextRequest) {
+  const url = new URL(request.url);
+  const product_id = url.searchParams.get("product_id");
+
+  const body = await request.json() as Product;
+
+  const product = await prisma.product.update({
+    where: {
+      id: Number(product_id)
+    },
+    data: body
+  });
+
+  if (!product) {
+    return NextResponse.json(product, { status: 400, statusText: 'unable to update this product!' });
+  };
+
+  return NextResponse.json(product, { status: 201, statusText: 'successfully updated product!' });
+};

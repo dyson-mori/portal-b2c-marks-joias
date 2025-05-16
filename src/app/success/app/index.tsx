@@ -1,8 +1,11 @@
 "use client"
 
-import Image from "next/image";
+import { CSSProperties, useEffect, useState } from "react";
 
-import { Container, Images, Label } from "./styles";
+import Image from "next/image";
+import { DotLottiePlayer } from '@dotlottie/react-player';
+
+import { Container, Images, Label, SuccessLottie } from "./styles";
 
 type Props = {
   data: {
@@ -24,10 +27,30 @@ type Props = {
   }
 };
 
+const lottie_styles: CSSProperties = {
+  display: 'flex',
+  maxWidth: "300px"
+};
+
 export default function SuccessApp({ data }: Props) {
+  const [lottie, setLottie] = useState<1 | -1 | undefined>(1);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLottie(-1); // muda para reverso após 5s
+    }, 2000);
+
+    return () => clearTimeout(timeout); // limpeza do timeout
+  }, []);
+
   return (
     <Container>
-      <Images>
+
+      <SuccessLottie>
+        <DotLottiePlayer style={lottie_styles} src="/lottie/success.lottie" autoplay loop={lottie === 1} direction={lottie} />
+      </SuccessLottie>
+
+      {/* <Images>
         {data.items.map((row, index) => (
           <Image
             priority
@@ -40,11 +63,10 @@ export default function SuccessApp({ data }: Props) {
           />
         ))}
       </Images>
-
       <Label>
         <h3>Obrigado pela Compra</h3>
         <p>Você receberá uma mensagem no whatsapp com mais detalhes sobre a sua compra</p>
-      </Label>
+      </Label> */}
     </Container>
   )
 }

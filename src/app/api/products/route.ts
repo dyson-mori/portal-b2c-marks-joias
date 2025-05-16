@@ -5,7 +5,7 @@ import { prisma } from "@services/prisma";
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
   // const limit = url.searchParams.get("limit");
-  const category_title = url.searchParams.get("target");
+  const category_title = url.searchParams.get("category");
 
   const category = await prisma.category.findFirst({
     where: {

@@ -10,8 +10,6 @@ export const Container = styled(Link)`
 
   margin-bottom: 6px;
 
-  aspect-ratio: 1 / 1;
-
   img {
     width: 100%;
     height: 100%;
@@ -31,11 +29,12 @@ export const Container = styled(Link)`
 export const Footer = styled.footer`
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 00;
 
   display: flex;
+  flex-direction: column;
 
-  justify-content: space-between;
+  /* justify-content: space-between; */
 
   width: 100%;
   padding: 10px;
@@ -46,28 +45,23 @@ export const Footer = styled.footer`
     ${({ theme }) => css`
       color: ${theme.colors.white};
       font-size: ${theme.font.size.light};
-      font-weight: ${theme.font.weight[500]};
     `};
 
-    width: 100%;
-    font-style: italic;
+    margin-bottom: 5px;
+    font-weight: 500;
   };
 
   #price {
     ${({ theme }) => css`
       color: ${theme.colors.white};
       font-size: ${theme.font.size.light};
-      font-weight: ${theme.font.weight[500]};
     `};
 
-    width: 120px;
-    text-align: end;
-    font-style: italic;
+    font-weight: 600;
   };
 
   ${({ theme }) => css`
     @media (max-width: ${theme.settings.responsive.maxWidth}) {
-      flex-direction: column;
       padding: 5px;
 
       #title {

@@ -24,6 +24,11 @@ export const Banner = styled.div`
     `};
   };
 
+  p > a {
+    color: #fff;
+    font-weight: 700;
+  };
+
   @media (max-width: 500px){
     flex-direction: column;
     align-items: center;
