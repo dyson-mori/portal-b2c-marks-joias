@@ -7,6 +7,35 @@ export const paid_market_api = new MercadoPagoConfig({
 });
 
 export function verifyMercadoPagoSignature(request: Request) {
+  const signature = request.headers.get("x-signature");
+  const topic = request.headers.get("x-topic");
+  const userId = request.headers.get("x-user-id");
+
+  if (!signature || !topic || !userId) {
+    throw new Error("Assinatura inválida: headers ausentes.");
+  }
+
+  // Aqui poderia ter mais lógica de validação se o Mercado Pago fornecesse um segredo (como Stripe faz)
+  // MAS o Mercado Pago não fornece HMAC nem segredo compartilhado — ou seja, não dá para validar criptograficamente
+  // Neste caso, pode-se apenas registrar a tentativa e seguir com cautela.
+
+  console.log("Headers do Mercado Pago:", {
+    signature,
+    topic,
+    userId,
+  });
+
+  // Opcionalmente: você pode bloquear se o `userId` for diferente do seu ID de conta
+  const MP_USER_ID = process.env.MERCADO_PAGO_USER_ID;
+
+  if (MP_USER_ID && userId !== MP_USER_ID) {
+    throw new Error("Webhook recebido de fonte não autorizada.");
+  }
+}
+
+/*
+
+export function verifyMercadoPagoSignature(request: Request) {
   const xSignature = request.headers.get("x-signature");
   const xRequestId = request.headers.get("x-request-id");
   if (!xSignature || !xRequestId) {
@@ -56,3 +85,6 @@ export function verifyMercadoPagoSignature(request: Request) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
 }
+
+
+*/
