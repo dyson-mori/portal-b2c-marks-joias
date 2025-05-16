@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import { Product as PrismaProduct } from '@prisma/client';
 import { Container, Footer } from './styles';
+import { formats } from '@helpers/format';
 
 type Props = {
   product: PrismaProduct;
@@ -23,7 +24,7 @@ export const Product: React.FC<Props> = ({ product, href }) => (
     />
     <Footer>
       <p id='title'>{product.title}</p>
-      <p id='price'>{product.price}</p>
+      <p id='price'>{formats.money(product.price)}</p>
     </Footer>
   </Container>
 )

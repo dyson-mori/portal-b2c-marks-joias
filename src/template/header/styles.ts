@@ -22,7 +22,7 @@ export const Container = styled.header`
     };
   `};
 
-  z-index: 2;
+  z-index: 3;
 `;
 
 export const Icon = styled(Link)`
