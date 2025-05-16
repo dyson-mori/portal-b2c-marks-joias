@@ -31,7 +31,6 @@ export async function POST(req: NextRequest) {
           client_email: email,
         },
         payer: {
-          email,
           name,
           first_name,
           last_name
