@@ -17,7 +17,7 @@ export async function OPTIONS() {
 };
 
 export async function POST(req: NextRequest) {
-  const { client_id, name, email, external_reference_id, products, first_name, last_name } = await req.json() as PaidMarketProps;
+  const { client_id, name, external_reference_id, products, first_name, last_name } = await req.json() as PaidMarketProps;
 
   try {
     const preference = new Preference(paid_market_api);
@@ -28,10 +28,10 @@ export async function POST(req: NextRequest) {
         notification_url: `${process.env.NEXT_PUBLIC_MARKS_URL}/mercado-pago/webhook`,
         metadata: {
           client_id: client_id,
-          client_email: email,
+          // client_email: email,
         },
         payer: {
-          email,
+          // email,
           name,
           first_name,
           last_name,
@@ -58,14 +58,14 @@ export async function POST(req: NextRequest) {
           //       id: "pec",
           //     },
           //   ],
-          // excluded_payment_types: [
-          //   {
-          //     id: "debit_card",
-          //   },
-          //   {
-          //     id: "credit_card",
-          //   },
-          // ],
+          excluded_payment_types: [
+            {
+              id: "debit_card",
+            },
+            {
+              id: "credit_card",
+            },
+          ],
           installments: 12, // Número máximo de parcelas permitidas - calculo feito automaticamente
         },
         auto_return: "approved",
