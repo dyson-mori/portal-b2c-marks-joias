@@ -19,5 +19,5 @@ export async function GET(request: NextRequest) {
 
   // console.log('route success payment -> ', paymentData.additional_info?.items);
 
-  return NextResponse.json(paymentData.additional_info, { status: 200 });
+  return NextResponse.json(paymentData.additional_info?.items, { status: 200 });
 };
