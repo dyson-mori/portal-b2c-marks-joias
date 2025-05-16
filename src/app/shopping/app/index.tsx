@@ -46,6 +46,8 @@ export default function ShoppingCard() {
   const processForm: SubmitHandler<schemaProps> = async data => {
     setLoading(true);
 
+    console.log({ data });
+
     const result = await api.paid_market.create({
       test_id: "123",
       email: "ssergiojunioleal@gmail.com",

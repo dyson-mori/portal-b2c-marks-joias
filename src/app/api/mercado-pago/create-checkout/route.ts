@@ -26,20 +26,12 @@ type PaidMarketBodyProps = {
 export async function POST(req: NextRequest) {
   const { test_id, external_reference_id, email, products } = await req.json() as PaidMarketBodyProps;
 
-  // console.log({
-  //   test_id,
-  //   external_reference_id,
-  //   email,
-  //   products: products.map(product => ({
-  //     id: String(product.id),
-  //     title: product.title,
-  //     description: product.description,
-  //     quantity: product.quantity,
-  //     unit_price: Number(formats.formatDecimal(String(product.price))),
-  //     currency_id: 'BRL',
-  //     category_id: String(product.category_id),
-  //   }))
-  // });
+  console.log({
+    test_id,
+    external_reference_id,
+    email,
+    products: products.length
+  });
 
   try {
     const preference = new Preference(paid_market_api);

@@ -5,7 +5,7 @@ import { handleMercadoPagoPayment } from "@services/mercado-pago/handle-payment"
 
 export async function POST(request: NextRequest) {
   try {
-    // verifyMercadoPagoSignature(request);
+    verifyMercadoPagoSignature(request);
 
     const body = await request.json();
 

@@ -1,6 +1,6 @@
 import { MercadoPagoConfig } from "mercadopago";
-import { NextResponse } from "next/server";
-import crypto from "crypto";
+// import { NextResponse } from "next/server";
+// import crypto from "crypto";
 
 export const paid_market_api = new MercadoPagoConfig({
   accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN as string,
