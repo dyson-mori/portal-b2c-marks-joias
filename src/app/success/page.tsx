@@ -35,5 +35,3 @@ export default async function Success({ searchParams }: Props) {
 
   return <App data={products} />;
 };
-
-// https://portal-b2c-marks-joias-cyan.vercel.app/?status=sucesso&collection_id=111355260729&collection_status=approved&payment_id=111355260729&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=31053116485&preference_id=2437907601-4e2aa743-5341-4c28-8fa3-983a3bfd337a&site_id=MLB&processing_mode=aggregator&merchant_account_id=null

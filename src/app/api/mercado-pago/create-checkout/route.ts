@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
           title: product.title,
           description: product.description,
           quantity: product.quantity,
+          picture_url: product.thumbnail,
           unit_price: Number(formats.formatDecimal(String(product.unit_amount))),
         })),
         payment_methods: {

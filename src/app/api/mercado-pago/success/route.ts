@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
   const payment = new Payment(paid_market_api);
   const paymentData = await payment.get({ id: paymentId! });
 
-  console.log('route success payment -> ', paymentData);
+  // console.log('route success payment -> ', paymentData.additional_info?.items);
 
-  return NextResponse.json({ received: true }, { status: 200 });
+  return NextResponse.json(paymentData.additional_info, { status: 200 });
 };
