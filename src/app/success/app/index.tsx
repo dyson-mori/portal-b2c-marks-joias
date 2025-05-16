@@ -1,8 +1,8 @@
 "use client"
 
-import Image from "next/image";
+// import Image from "next/image";
 
-import { Container, Images, Label } from "./styles";
+import { Container, Label } from "./styles";
 
 type Props = {
   data: {
@@ -14,9 +14,10 @@ type Props = {
 };
 
 export default function SuccessApp({ data }: Props) {
+  console.log(data);
   return (
     <Container>
-      <Images>
+      {/* <Images>
         {data.products.map((row, index) => (
           <Image
             priority
@@ -27,7 +28,7 @@ export default function SuccessApp({ data }: Props) {
             alt={row.image}
           />
         ))}
-      </Images>
+      </Images> */}
 
       <Label>
         <h3>Obrigado pela Compra</h3>

@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       case "payment":
         const payment = new Payment(paid_market_api);
         const paymentData = await payment.get({ id: data.id });
-        console.log({ paymentData });
+        console.log('mercado/webhook -> ', paymentData);
 
         if (
           paymentData.status === "approved" || // Pagamento por cartão OU

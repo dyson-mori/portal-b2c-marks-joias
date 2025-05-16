@@ -6,17 +6,34 @@ import App from './app';
 
 export const metadata: Metadata = {
   title: "Mark's Jóias | Obrigado pela Preferência",
-  description: 'Obrigado pela Compra',
+  description: 'Obrigado pela Compra.',
 };
 
 type Props = {
   params: Promise<{ id: string }>
-  searchParams: Promise<{ [key: string]: string }>
+  searchParams: Promise<{
+    collection_id: string; // "111355260729"
+    collection_status: string; // "approved"
+    external_reference: string; // "null"
+    merchant_account_id: string; // "null"
+    merchant_order_id: string; // "31053116485"
+    payment_id: string; // "111355260729"
+    payment_type: string; // "credit_card"
+    preference_id: string; // "2437907601-4e2aa743-5341-4c28-8fa3-983a3bfd337a"
+    processing_mode: string; // "aggregator"
+    site_id: string; // "MLB"
+    status: string; // "approved"
+  }>
 };
 
 export default async function Success({ searchParams }: Props) {
-  const { session_id } = await searchParams;
-  const products = await api.gateway.find(session_id);
+  const { collection_id, collection_status, payment_id, status, external_reference, payment_type, merchant_order_id, preference_id, site_id, merchant_account_id, processing_mode } = await searchParams;
+
+  const products = await api.paid_market.success(
+    `?status=sucesso&collection_id=${collection_id}&collection_status=${collection_status}&payment_id=${payment_id}&status=${status}&external_reference=${external_reference}&payment_type=${payment_type}&merchant_order_id=${merchant_order_id}&preference_id=${preference_id}&site_id=${site_id}&processing_mode=${processing_mode}&merchant_account_id=${merchant_account_id}`
+  );
 
   return <App data={products} />;
 };
+
+// https://portal-b2c-marks-joias-cyan.vercel.app/?status=sucesso&collection_id=111355260729&collection_status=approved&payment_id=111355260729&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=31053116485&preference_id=2437907601-4e2aa743-5341-4c28-8fa3-983a3bfd337a&site_id=MLB&processing_mode=aggregator&merchant_account_id=null

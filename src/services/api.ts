@@ -1,5 +1,7 @@
 // "use server";
 
+import { PaidMarketProps } from "@global/interfaces";
+
 // import { revalidatePath } from "next/cache";
 // import { cookies } from "next/headers";
 
@@ -64,9 +66,6 @@ export const api = {
   product: {
     find: (product_id: string) => fetcher({ method: 'GET', url: `/product?product_id=${product_id}` })
   },
-  gateway: {
-    find: (session_id: string) => fetcher({ method: 'GET', url: `/gateway?session_id=${session_id}` }),
-  },
   header: {
     list: () => fetcher({ method: 'GET', url: '/header' })
   },
@@ -77,6 +76,7 @@ export const api = {
     search: (products_id: string) => fetcher({ method: 'GET', url: `/shopping?${products_id}` }),
   },
   paid_market: {
-    create: (body: object) => fetcher({ method: 'POST', url: '/mercado-pago/create-checkout', body })
+    success: (gateway: string) => fetcher({ method: 'GET', url: `/mercado-pago/success${gateway}` }),
+    create: (body: PaidMarketProps) => fetcher({ method: 'POST', url: '/mercado-pago/create-checkout', body })
   }
 };

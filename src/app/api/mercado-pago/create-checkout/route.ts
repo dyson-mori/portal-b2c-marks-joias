@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Preference } from "mercadopago";
 import { paid_market_api } from "@services/mercado-pago";
 
-import { ProductProps } from "@global/interfaces";
+import { PaidMarketProps } from "@global/interfaces";
 import { formats } from "@helpers/format";
 
 export async function OPTIONS() {
@@ -16,41 +16,31 @@ export async function OPTIONS() {
   });
 };
 
-type PaidMarketBodyProps = {
-  external_reference_id: string;
-  email: string;
-  test_id: string;
-  products: ProductProps[];
-};
-
 export async function POST(req: NextRequest) {
-  const { test_id, external_reference_id, email, products } = await req.json() as PaidMarketBodyProps;
-
-  console.log({
-    test_id,
-    external_reference_id,
-    email,
-    products: products.length
-  });
+  const { client_id, name, email, external_reference_id, products, first_name, last_name } = await req.json() as PaidMarketProps;
 
   try {
     const preference = new Preference(paid_market_api);
 
     const createdPreference = await preference.create({
       body: {
-        // external_reference: external_reference_id, // IMPORTANTE: Isso aumenta a pontuação da sua integração com o Mercado Pago - É o id da compra no nosso sistema
+        external_reference: external_reference_id, // IMPORTANTE: Isso aumenta a pontuação da sua integração com o Mercado Pago - É o id da compra no nosso sistema
+        notification_url: `${process.env.NEXT_PUBLIC_MARKS_URL}/mercado-pago/webhook`,
         metadata: {
-          userTestId: test_id, // O Mercado Pago converte para snake_case, ou seja, testeId vai virar teste_id
-          userEmail: email,
-          // plan: '123'
-          // etc
+          client_id: client_id,
+          client_email: email,
         },
-        // ...(email && {
-        //   payer: {
-        //     email: email,
-        //   },
-        // }),
-
+        payer: {
+          email,
+          name,
+          first_name,
+          last_name,
+        } as {
+          email: string,
+          name: string,
+          first_name: string,
+          last_name: string,
+        },
         items: products.map(product => ({
           id: String(product.id),
           title: product.title,
@@ -80,8 +70,8 @@ export async function POST(req: NextRequest) {
         },
         auto_return: "approved",
         back_urls: {
-          success: `${req.headers.get("origin")}/?status=sucesso`,
-          failure: `${req.headers.get("origin")}/?status=falha`,
+          success: `${req.headers.get("origin")}/success`,
+          failure: `${req.headers.get("origin")}/shopping`,
           pending: `${req.headers.get("origin")}/api/mercado-pago/pending`, // Criamos uma rota para lidar com pagamentos pendentes
         },
       },

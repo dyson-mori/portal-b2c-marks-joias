@@ -43,15 +43,16 @@ export default function ShoppingCard() {
 
   const { method } = watch();
 
-  const processForm: SubmitHandler<schemaProps> = async data => {
+  const processForm: SubmitHandler<schemaProps> = async () => {
     setLoading(true);
 
-    console.log({ data });
-
     const result = await api.paid_market.create({
-      test_id: "123",
+      client_id: `client-id-${Math.floor(Math.random() * 5)}`,
       email: "ssergiojunioleal@gmail.com",
-      external_reference_id: '321',
+      external_reference_id: `pedido-${Math.floor(Math.random() * 10)}`,
+      name: 'Sergio Junio Leal',
+      first_name: 'Sergio',
+      last_name: 'Leal',
       products: storage
     });
 

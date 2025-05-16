@@ -16,3 +16,13 @@ export type StorageProps = {
   unit_amount: number;
   description: string;
 };
+
+export type PaidMarketProps = {
+  external_reference_id: string;
+  email: string;
+  name: string;
+  client_id: string;
+  products: StorageProps[];
+  first_name: string;
+  last_name: string;
+};
