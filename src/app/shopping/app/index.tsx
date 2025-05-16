@@ -48,7 +48,7 @@ export default function ShoppingCard() {
 
     const result = await api.paid_market.create({
       client_id: `client-id-${Math.floor(Math.random() * 5)}`,
-      email: "ssergiojunioleal@gmail.com",
+      email: "supp.programming@gmail.com",
       external_reference_id: `pedido-${Math.floor(Math.random() * 10)}`,
       name: 'Sergio Junio Leal',
       first_name: 'Sergio',

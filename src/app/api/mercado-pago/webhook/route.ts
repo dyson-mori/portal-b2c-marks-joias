@@ -17,12 +17,10 @@ export async function POST(request: NextRequest) {
         const paymentData = await payment.get({ id: data.id });
         console.log('mercado/webhook -> ', paymentData);
 
-        if (
-          paymentData.status === "approved" || // Pagamento por cartão OU
-          paymentData.date_approved !== null // Pagamento por Pix
-        ) {
+        if (paymentData.status === "approved" || paymentData.date_approved !== null) {
           await handleMercadoPagoPayment(paymentData);
-        }
+        };
+
         break;
       // case "subscription_preapproval": Eventos de assinatura
       //   console.log("Subscription preapproval event");

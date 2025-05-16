@@ -17,7 +17,7 @@ export async function OPTIONS() {
 };
 
 export async function POST(req: NextRequest) {
-  const { client_id, name, external_reference_id, products, first_name, last_name } = await req.json() as PaidMarketProps;
+  const { client_id, name, email, external_reference_id, products, first_name, last_name } = await req.json() as PaidMarketProps;
 
   try {
     const preference = new Preference(paid_market_api);
@@ -28,18 +28,18 @@ export async function POST(req: NextRequest) {
         notification_url: `${process.env.NEXT_PUBLIC_MARKS_URL}/mercado-pago/webhook`,
         metadata: {
           client_id: client_id,
-          // client_email: email,
+          client_email: email,
         },
         payer: {
-          // email,
+          email,
           name,
           first_name,
-          last_name,
+          last_name
         } as {
-          email: string,
-          name: string,
-          first_name: string,
-          last_name: string,
+          email: string;
+          name: string;
+          first_name: string;
+          last_name: string;
         },
         items: products.map(product => ({
           id: String(product.id),
@@ -49,23 +49,6 @@ export async function POST(req: NextRequest) {
           unit_price: Number(formats.formatDecimal(String(product.unit_amount))),
         })),
         payment_methods: {
-          // Descomente para desativar métodos de pagamento
-          //   excluded_payment_methods: [
-          //     {
-          //       id: "bolbradesco",
-          //     },
-          //     {
-          //       id: "pec",
-          //     },
-          //   ],
-          excluded_payment_types: [
-            {
-              id: "debit_card",
-            },
-            {
-              id: "credit_card",
-            },
-          ],
           installments: 12, // Número máximo de parcelas permitidas - calculo feito automaticamente
         },
         auto_return: "approved",
