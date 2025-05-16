@@ -1,11 +1,13 @@
 "use client"
 
-import React, { Suspense, useContext, useState } from 'react';
+import React, { Suspense, useContext, useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+
+import { initMercadoPago } from '@mercadopago/sdk-react';
 
 import { ShoppingContext } from '@context/shopping';
 
@@ -44,13 +46,16 @@ export default function ShoppingCard() {
   const processForm: SubmitHandler<schemaProps> = async data => {
     setLoading(true);
 
-    if (data.method === "clyp6mut5000ay4iw0rcg2vve") {
-      const result = await api.gateway.create({ ...data, products: storage });
+    console.log({ data });
 
-      if (result) {
-        route.push(result);
-      };
-    };
+    const result = await api.paid_market.create({
+      test_id: "123",
+      email: "ssergiojunioleal@gmail.com",
+      external_reference_id: '321',
+      products: storage
+    });
+
+    return route.push(result.initPoint);
   };
 
   const Icons = ({ id }: { id: string }) => {
@@ -59,6 +64,10 @@ export default function ShoppingCard() {
 
     return <Pix width={25} height={25} fill="#dedede" />;
   };
+
+  useEffect(() => {
+    initMercadoPago(process.env.NEXT_PUBLIC_MERCADO_PAGO_PUBLIC_KEY!);
+  }, []);
 
   return (
     <Suspense fallback={<Splash />}>

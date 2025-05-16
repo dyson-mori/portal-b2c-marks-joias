@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { Product } from "@prisma/client";
 
-// import { stripe } from "@services/stripe";
 import { prisma } from "@services/prisma";
 
 function formatCode(code: number, last_product: number) {
@@ -14,7 +13,7 @@ function formatCode(code: number, last_product: number) {
 };
 
 export async function POST(request: NextRequest) {
-  const { category_id, title, description, files, price, unit_amount, search, stripe_price_id, stripe_product_id, quantity } = await request.json() as Product;
+  const { category_id, title, description, files, price, unit_amount, search, quantity } = await request.json() as Product;
 
   const product_amount = await prisma.product.count();
   const category = await prisma.category.findFirst({
@@ -27,26 +26,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(null, { status: 400, statusText: 'category not found!' });
   };
 
-  // const product_stripe = await stripe.products.create({
-  //   name: title,
-  //   description,
-  //   images: [files[0]],
-  //   default_price_data: {
-  //     currency: 'brl',
-  //     unit_amount: unit_amount,
-  //   },
-  // });
-
   const product = await prisma.product.create({
     data: {
       id: formatCode(category!.id, product_amount),
       category_id: category.id,
 
-      stripe_price_id,
-      stripe_product_id,
-
-      // stripe_price_id: product_stripe.default_price as string,
-      // stripe_product_id: product_stripe.id,
+      stripe_price_id: '', // remove
+      stripe_product_id: '', // remove
 
       title,
       description,
