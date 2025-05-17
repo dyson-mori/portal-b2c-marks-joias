@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { Header as HeaderPrisma } from '@prisma/client';
 
@@ -6,8 +6,9 @@ import { ShoppingContext } from '@context/shopping';
 
 import { ShoppingCart, Logo } from '@assets';
 
-import { Container, Icon, Nav, LinkStyle } from './styles';
 import SideMenu from './navigation';
+
+import { Container, Icon, Nav, LinkStyle } from './styles';
 
 interface HeaderProps {
   hide: boolean;
@@ -16,14 +17,29 @@ interface HeaderProps {
 };
 
 export default function Header({ hide, param, header }: HeaderProps) {
+  const isLanding = param === '/';
+
   const { storage } = useContext(ShoppingContext);
+
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (!isLanding) return;
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > window.innerHeight / 2);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isLanding]);
 
   if (hide) {
     return null;
   };
 
   return (
-    <Container>
+    <Container $scrolled={scrolled} $isLanding={isLanding}>
       <SideMenu navigation={header} />
 
       <Icon href='/'>

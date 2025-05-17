@@ -12,7 +12,7 @@ export default function Footer({ hide }: { hide: boolean }) {
   return (
     <Container>
       <Logo width={100} height={100} />
-      <p>Copyright © 2002 - 2025 todos os direitos reservados.</p>
+      <p>Copyright © 1990 - 2025 todos os direitos reservados.</p>
     </Container>
   );
 }

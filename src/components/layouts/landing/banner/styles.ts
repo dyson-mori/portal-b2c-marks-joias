@@ -8,11 +8,9 @@ const fadeIn = keyframes`
 
 export const BannerWrapper = styled.div`
   width: 100%;
-  height: 70vh;
-  background: #fff;
+  height: 85vh;
   /* background: rgb(250,11,91); */
   /* background: linear-gradient(90deg, rgba(250,11,91,1) 0%, rgba(57,95,245,1) 100%, rgba(0,212,255,1) 100%); */
-  color: white;
   display: flex;
   align-items: center;
   justify-content: center;

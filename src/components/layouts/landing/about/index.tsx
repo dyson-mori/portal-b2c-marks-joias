@@ -38,25 +38,17 @@ export default function About({ width }: { width: number }) {
           width={width / 4}
           height={width / 4}
           src="https://res.cloudinary.com/doo9pfft1/image/upload/v1747331634/left_v4zslf.jpg"
-          alt='photo'
+          alt='photo-1'
         />
         <Image
+          id='middle'
           style={{ objectFit: 'cover' }}
-          width={width / 2.33}
+          width={width / 2}
           height={width / 4}
           src="https://res.cloudinary.com/doo9pfft1/image/upload/v1747331486/inside-store_ealsn7.jpg"
-          alt='photo'
-        />
-        <Image
-          style={{ objectFit: 'cover' }}
-          width={width / 4}
-          height={width / 4}
-          src="https://res.cloudinary.com/doo9pfft1/image/upload/v1747331634/left_v4zslf.jpg"
-          alt='photo'
+          alt='photo-2'
         />
       </Images>
     </Container>
   )
 }
-
-// <img src="https://i.pinimg.com/736x/8d/05/f8/8d05f8f80f985ba3239998ec2cd694bf.jpg" alt='photo' />

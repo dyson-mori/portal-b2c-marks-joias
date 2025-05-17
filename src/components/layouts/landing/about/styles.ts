@@ -90,7 +90,8 @@ export const Images = styled.div`
   width: 100%;
   justify-content: space-between;
 
-  img {
-    object-fit: cover;
+  #middle {
+    width: 100%;
+    margin-left: 10px;
   };
 `;

@@ -14,7 +14,7 @@ export const Container = styled.footer`
   ${({ theme }) => css`
     p {
       color: #fff;
-      font-size: ${theme.font.size.normal};
+      font-size: ${theme.font.size.light};
     };
 
     @media (max-width: 500px){

@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import { DotLottiePlayer } from '@dotlottie/react-player';
 
 import { ProductProps } from '@global/interfaces';
@@ -8,11 +6,10 @@ import { Container, ProductEmpty, ProductList } from "./styles";
 import { Product } from '../../../product';
 
 type ProductsProps = {
-  width: number;
   products: ProductProps[];
 };
 
-export default function Sales({ products, width }: ProductsProps) {
+export default function Sales({ products }: ProductsProps) {
   const lottie_styles = {
     display: 'flex',
     maxWidth: "300px"
@@ -34,7 +31,7 @@ export default function Sales({ products, width }: ProductsProps) {
           {products.map((el, index) => (
             <Product
               key={index.toString()}
-              href={`product/product_id=${el.id}`}
+              href={`/product?product_id=${el.id}`}
               product={el}
             />
           ))}
