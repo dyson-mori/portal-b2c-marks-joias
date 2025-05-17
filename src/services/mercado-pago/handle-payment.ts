@@ -8,13 +8,15 @@ export async function handleMercadoPagoPayment(paymentData: PaymentResponse) {
   const { email, client_id } = metadata;
 
   if (!email || !client_id) {
-    console.warn("Metadados incompletos ->", metadata);
-    return;
+    return { status: 500 };
+    // return { status: 'incomplete metadata' };
   };
 
-  console.warn("Metadados Completos ->", metadata);
+  /*
+    Faz alguma ação aqui - manda email pro usuario, libera acesso, erc.
 
-  // Faz alguma ação aqui - manda email pro usuario, libera acesso, erc.
+    send a message to the customer and the store informing them about the purchase
+  */
 
-  return { status: 'ok' };
+  return { status: 201 };
 }
