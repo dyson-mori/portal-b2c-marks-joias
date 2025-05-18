@@ -78,5 +78,8 @@ export const api = {
   paid_market: {
     success: (gateway: string) => fetcher({ method: 'GET', url: `/mercado-pago/success${gateway}` }),
     create: (body: PaidMarketProps) => fetcher({ method: 'POST', url: '/mercado-pago/create-checkout', body })
+  },
+  tracking: {
+    search: (order_id: string) => fetcher({ method: 'POST', url: `/tracking?order_id=${order_id}` }),
   }
 };

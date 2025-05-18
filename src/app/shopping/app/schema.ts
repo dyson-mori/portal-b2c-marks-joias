@@ -16,13 +16,13 @@ export const schema = yup.object().shape({
     })
     .required(),
   email: yup.string().required(),
-  cpf: yup
-    .string()
-    .test('cpf', (value) => {
-      const digits = value?.replaceAll('.', '').replace('-', '');
-      return digits!.length === 11
-    })
-    .required(),
+  // cpf: yup
+  //   .string()
+  //   .test('cpf', (value) => {
+  //     const digits = value?.replaceAll('.', '').replace('-', '');
+  //     return digits!.length === 11
+  //   })
+  //   .required(),
   // address: yup.string(),
   description: yup.string().required(),
   cep: yup

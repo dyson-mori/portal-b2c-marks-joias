@@ -17,7 +17,7 @@ export async function OPTIONS() {
 };
 
 export async function POST(req: NextRequest) {
-  const { full_name, email, cep, phone, cpf, client_id, external_reference_id, products } = await req.json() as PaidMarketProps;
+  const { full_name, email, cep, phone, client_id, external_reference_id, products } = await req.json() as PaidMarketProps;
 
   const splitting = full_name.split(' ');
   const ddd = phone.slice(0, 2);
@@ -39,6 +39,8 @@ export async function POST(req: NextRequest) {
         payer: {
           name: full_name,
           email,
+          first_name: splitting[0],
+          last_name: splitting[splitting.length - 1],
           phone: {
             number: ddd,
             area_code: phoneNumber
@@ -48,12 +50,10 @@ export async function POST(req: NextRequest) {
             street_name: '',
             street_number: ''
           },
-          identification: {
-            type: 'CPF',
-            identification: Number(cpf)
-          },
-          first_name: splitting[0],
-          last_name: splitting[splitting.length - 1],
+          // identification: {
+          //   type: 'CPF',
+          //   identification: Number(cpf)
+          // }
         } as object,
         items: products.map(product => ({
           id: String(product.id),

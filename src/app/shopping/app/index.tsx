@@ -2,7 +2,7 @@
 
 import React, { Suspense, useContext, useEffect, useState } from 'react';
 
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -11,15 +11,16 @@ import { initMercadoPago } from '@mercadopago/sdk-react';
 
 import { ShoppingContext } from '@context/shopping';
 
-import { Inbox, Routing, User, Home, Mobile, Identity } from '@assets';
+import { api } from '@services/api';
 import { formats } from '@helpers/format';
 import { Input, Shopping, Splash } from '@components';
+import { Inbox, Routing, User, Home, Mobile } from '@assets';
 
 import { schema, schemaProps, steps } from './schema';
 import { Container, Content } from './styles';
 
 export default function ShoppingCard() {
-  // const route = useRouter();
+  const route = useRouter();
 
   const { storage, setRemoveStorage, setEditStorage } = useContext(ShoppingContext);
 
@@ -36,29 +37,28 @@ export default function ShoppingCard() {
     defaultValues: {
       price: sumPrices,
       quantity: 1,
-      method: null,
+      method: 'cartão',
     },
     mode: 'onChange'
   });
 
   const { method } = watch();
 
-  const processForm: SubmitHandler<schemaProps> = async () => {
+  const processForm: SubmitHandler<schemaProps> = async data => {
     setLoading(true);
 
-    // const result = await api.paid_market.create({
-    //   email: data.email,
-    //   full_name: data.full_name,
-    //   cep: data.cep,
-    //   description: data.description,
-    //   phone: data.phone,
-    //   cpf: data.cpf,
-    //   client_id: `client-id-${Math.floor(Math.random() * 5)}`,
-    //   external_reference_id: `pedido-${Math.floor(Math.random() * 10)}`,
-    //   products: storage
-    // });
+    const result = await api.paid_market.create({
+      email: data.email,
+      full_name: data.full_name,
+      cep: data.cep,
+      description: data.description,
+      phone: data.phone,
+      client_id: `client-id-${Math.floor(Math.random() * 5)}`,
+      external_reference_id: `pedido-${Math.floor(Math.random() * 10)}`,
+      products: storage
+    });
 
-    // return route.push(result.initPoint);
+    return route.push(result.initPoint);
   };
 
   // const Icons = ({ id }: { id: string }) => {
@@ -160,7 +160,7 @@ export default function ShoppingCard() {
               }}
             />
 
-            <div className='space' />
+            {/* <div className='space' />
 
             <Controller
               name='cpf'
@@ -175,7 +175,7 @@ export default function ShoppingCard() {
                   </Input.Root>
                 )
               }}
-            />
+            /> */}
 
             {/* <MethodPayment>
               {methodsPayments.map((meth, i) => (

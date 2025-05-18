@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Box, CubeScan, Delivery, Verify } from "@assets";
 import { Container, Content, Input, Step, Progress, StepLabel, Steps, Pulse, Poppup } from "./styles";
+import { api } from "@services/api";
 
 interface StepProps {
   pulse: "active" | "deactivate" | "completed";
@@ -22,13 +23,19 @@ const getStepState = (status: number, activeIndex: number, completedIndex: numbe
 });
 
 export default function OrderSteps() {
+  // cmau83bgb0005ucso7h450qxz
+
   const [status, setStatus] = useState(0);
 
-  const handleInput = (evt: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleInput = async (evt: React.KeyboardEvent<HTMLInputElement>) => {
     const { value } = evt.target as unknown as { value: string };
 
     if (evt.key === "Enter") {
-      setStatus(Number(value)); // Simulação do status sendo alterado
+      console.log(value);
+
+      const data = await api.tracking.search(value);
+
+      setStatus(data.status); // Simulação do status sendo alterado
     };
   };
 
@@ -69,7 +76,7 @@ export default function OrderSteps() {
 
   return (
     <Container>
-      <Input placeholder="Código do Pedido" type="number" max={8} min={0} onKeyDown={handleInput} />
+      <Input placeholder="Código do Pedido" max={8} min={0} onKeyDown={handleInput} />
       <Content>
         <Steps>
           {steps.map((step, idx) => (

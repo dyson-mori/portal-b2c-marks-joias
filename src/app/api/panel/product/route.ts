@@ -13,9 +13,14 @@ function formatCode(code: number, last_product: number) {
 };
 
 export async function POST(request: NextRequest) {
-  const { category_id, title, description, files, price, unit_amount, search, quantity } = await request.json() as Product;
+  const { category_id, title, description, files, price, search, quantity } = await request.json() as Product;
 
-  const product_amount = await prisma.product.count();
+  const product_amount = await prisma.product.count({
+    where: {
+      id: category_id!,
+    }
+  });
+
   const category = await prisma.category.findFirst({
     where: {
       id: category_id!,
@@ -31,15 +36,12 @@ export async function POST(request: NextRequest) {
       id: formatCode(category!.id, product_amount),
       category_id: category.id,
 
-      stripe_price_id: '', // remove
-      stripe_product_id: '', // remove
-
       title,
       description,
       price: Number(price),
+      unit_amount: price,
       files: JSON.stringify(files),
       thumbnail: files[0],
-      unit_amount,
       search,
       quantity
     }
@@ -70,4 +72,21 @@ export async function PUT(request: NextRequest) {
   };
 
   return NextResponse.json(product, { status: 201, statusText: 'successfully updated product!' });
+};
+
+export async function DELETE(request: NextRequest) {
+  const url = new URL(request.url);
+  const id = url.searchParams.get("product_id") as string;
+
+  const deleted = await prisma.product.delete({
+    where: {
+      id: Number(id)
+    },
+  });
+
+  if (!deleted) {
+    return NextResponse.json([], { status: 400, statusText: 'header not received' });
+  };
+
+  return NextResponse.json(true, { status: 200, statusText: 'header updated successfully' });
 };

@@ -15,6 +15,7 @@ export async function GET(request: NextRequest) {
       description: true,
       price: true,
       files: true,
+      quantity: true
     }
   });
 

@@ -9,38 +9,106 @@
       "title": "Produtos",
       "param": "/products",
       "public": true
+    },
+    {
+      "title": "Consignado",
+      "param": "/consigned",
+      "public": true
+    },
+    {
+      "title": "Rastreamento",
+      "param": "/tracking",
+      "public": true
     }
   ],
   "products": [
     {
-      "id": 110000,
+      "id": 120005,
+      "category_id": 12,
+      "title": "Gargantilha Pavão Real Multicolor",
+      "description": "A Gargantilha Pavão Real Multicolor é uma peça vibrante e cheia de personalidade. Com um pingente em formato de pavão, cravejado com zircônias coloridas que remetem à beleza das penas dessa ave majestosa, ele transmite elegância e originalidade. O corpo do pavão é detalhado com microzircônias transparentes, enquanto as asas em pedras multicoloridas trazem um charme alegre e sofisticado. Ideal para quem ama joias únicas e marcantes!",
+      "price": 31000,
+      "unit_amount": 31000,
+      "search": "Gargantilha espirito santo pedraria",
+      "files": [
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416129/120753_vzgnde.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416125/120753_01_fppejy.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416127/120753_02_kkifzg.jpg"
+      ],
+      "quantity": 10
+    },
+    {
+      "id": 120004,
+      "category_id": 12,
+      "title": "Gargantilha Coração Vazado com Zircônias Coloridas",
+      "description": "A Gargantilha Coração Vazado com Zircônias Coloridas é a combinação perfeita entre romantismo e modernidade. Seu design leve e elegante destaca um coração vazado adornado com zircônias multicoloridas, que trazem brilho e vivacidade à peça. Com acabamento dourado e tamanho delicado, é ideal para quem deseja expressar amor, alegria e estilo em um único acessório. Perfeito para presentear ou complementar seu visual com charme e personalidade.",
+      "price": 19890,
+      "unit_amount": 19890,
+      "search": "Gargantilha coracao pedraria colorida",
+      "files": [
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747403814/120755_ziope7.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747403814/120755_01_rveris.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747403814/120755_02_cs4aeh.jpg"
+      ],
+      "quantity": 10
+    },
+    {
+      "id": 110003,
       "category_id": 11,
       "title": "Choker Dourada com Pedras Pretas Facetadas",
       "description": "Choker elegante folheada a ouro, composta por pedras pretas facetadas que refletem a luz com sofisticação. Um acessório moderno e delicado, perfeito para valorizar o pescoço com estilo. Ideal para compor looks versáteis — do casual ao refinado.",
       "price": 17990,
       "unit_amount": 17990,
       "search": "Choker elos 12 pedras 4.3g",
-      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747240125/110254_n1tgsf.jpg",
       "files": [
-        "https: //res.cloudinary.com/doo9pfft1/image/upload/v1747240125/110254_n1tgsf.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747240125/110254_n1tgsf.jpg",
         "https://res.cloudinary.com/doo9pfft1/image/upload/v1747240126/110254_01_zwwont.jpg"
       ],
       "quantity": 10
     },
     {
-      "id": 120001,
+      "id": 120002,
       "category_id": 12,
-      "title": "Gargantilha Pavão Real Multicolor",
-      "description": "O Gargantilha Pavão Real Multicolor é uma peça vibrante e cheia de personalidade. Com um pingente em formato de pavão, cravejado com zircônias coloridas que remetem à beleza das penas dessa ave majestosa, ele transmite elegância e originalidade. O corpo do pavão é detalhado com microzircônias transparentes, enquanto as asas em pedras multicoloridas trazem um charme alegre e sofisticado. Ideal para quem ama joias únicas e marcantes!",
-      "search": "Gargantilha espirito santo pedraria",
-      "price": 31000,
-      "unit_amount": 31000,
-      "quantity": 10,
+      "title": "Gargantilha Pantera Dourada Lux",
+      "description": "A Gargantilha Pantera Dourada Lux é uma peça imponente que combina elegância com atitude. O pingente em forma de cabeça de pantera, cravejado com microzircônias e olhos em pedra verde, transmite força e sofisticação. Com corrente fina e delicada, essa joia é perfeita para quem deseja um visual marcante e poderoso. Ideal para eventos noturnos ou para elevar o look do dia a dia com um toque selvagem e refinado.",
+      "price": 17990,
+      "unit_amount": 17990,
+      "search": "Gargantilha pantera pedraria",
       "files": [
-        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416129/120753_vzgnde.jpg",
-        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416125/120753_01_fppejy.jpg",
-        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416127/120753_02_kkifzg.jpg"
-      ]
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747239727/120756_bnrv9k.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747239727/120756_01_f3lcbk.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747239728/120756_02_qubeq2.jpg"
+      ],
+      "quantity": 10
+    },
+    {
+      "id": 110000,
+      "category_id": 11,
+      "title": "Choker Dourada com Pingentes de Gota em Pedra Preta",
+      "description": "Choker sofisticada folheada a ouro, com delicados pingentes em formato de gota com pedra preta, incluindo um pingente central em destaque. Um design leve e elegante, ideal para compor looks com um toque de charme e modernidade. Perfeita para ocasiões especiais ou para dar um upgrade no visual do dia a dia.",
+      "price": 14990,
+      "unit_amount": 14990,
+      "search": "Choker 6 pedras pequenas e 1 grande 2.9g",
+      "files": [
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747238426/110259_yfxdzy.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747238426/110259_02_wqzy2p.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747238426/110259_01_sad94u.jpg"
+      ],
+      "quantity": 10
+    },
+    {
+      "id": 400000,
+      "category_id": 4,
+      "title": "Conjunto Dourado Flor de Cristal – Colar e Brincos",
+      "description": "Conjunto delicado folheado a ouro, composto por colar e brincos com pingente em formato de flor, adornado com zircônias brilhantes. A peça transmite leveza e sofisticação, sendo ideal para realçar sua beleza com um toque floral moderno. Perfeito para ocasiões especiais ou para iluminar produções cotidianas com elegância.",
+      "price": 13890,
+      "unit_amount": 13890,
+      "search": "Conjunto flor com pedras",
+      "files": [
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747233837/400388_m2asoc.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747233837/400388_01_vxfbjw.jpg"
+      ],
+      "quantity": 10
     }
   ],
   "category": [
@@ -53,25 +121,25 @@
     {
       "id": 2,
       "title": "argolas",
-      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185434/ear-rings.jpg",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185434/ear-rings.webp",
       "show_on_landing": true
     },
     {
       "id": 3,
       "title": "brincos",
-      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185568/e77c1293baf275f8db7653f7b3d41620_lkikls.jpg",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185568/e77c1293baf275f8db7653f7b3d41620_lkikls.webp",
       "show_on_landing": true
     },
     {
       "id": 4,
       "title": "conjunto",
-      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185606/c48fbe4cf496f846bc0226e717cb435c_qsjem3.jpg",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185606/c48fbe4cf496f846bc0226e717cb435c_qsjem3.webp",
       "show_on_landing": true
     },
     {
       "id": 5,
       "title": "corrente",
-      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185637/e11a1b01dee4a68e847dd724ea589a5d_cwqxce.jpg",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185637/e11a1b01dee4a68e847dd724ea589a5d_cwqxce.webp",
       "show_on_landing": true
     },
     {
@@ -83,20 +151,32 @@
     {
       "id": 7,
       "title": "pulseira",
-      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185800/a778cd6df8193014dfca12bf9c8b6483_icqmau.jpg",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185800/a778cd6df8193014dfca12bf9c8b6483_icqmau.webp",
       "show_on_landing": true
     },
     {
       "id": 8,
       "title": "tornozeleira",
-      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185822/70c5c461a77c3f4f01c58c20be9a0d38_mo35gs.jpg",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185822/70c5c461a77c3f4f01c58c20be9a0d38_mo35gs.webp",
       "show_on_landing": true
     },
     {
       "id": 9,
       "title": "trio",
-      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185854/3ae2990ef940fa2174cce4942b21ccf5_kxj9wb.jpg",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747185854/3ae2990ef940fa2174cce4942b21ccf5_kxj9wb.webp",
       "show_on_landing": true
+    },
+    {
+      "id": 11,
+      "title": "choker",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747238593/20dec427064d27ede9fa6d934c765698.jpg_qsy8s6.webp",
+      "show_on_landing": false
+    },
+    {
+      "id": 12,
+      "title": "gargantilha",
+      "thumbnail": "https://res.cloudinary.com/doo9pfft1/image/upload/v1747239638/thumbnail_gargantilha_wvqnrl.webp",
+      "show_on_landing": false
     }
   ]
 }

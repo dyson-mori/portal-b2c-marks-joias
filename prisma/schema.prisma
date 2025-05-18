@@ -14,12 +14,18 @@ datasource db {
   directUrl = env("NEXT_DIRECT_URL")
 }
 
+// enum OrderStatus {
+//   PENDING
+//   PROCESSING
+//   SHIPPED
+//   DELIVERED
+//   CANCELED
+//   RETURNED
+// }
+
 model Product {
   id          Int @id @unique
   category_id Int // will be use like -> Code Number <-
-
-  stripe_product_id String
-  stripe_price_id   String
 
   title       String
   description String
@@ -28,10 +34,12 @@ model Product {
   search      String // facilitate search
   thumbnail   String
   files       String @default("[]")
-  quantity    Int
+  quantity    Int // product quantity
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  orders Order[]
 
   categories Category @relation(fields: [category_id], references: [id])
 
@@ -68,27 +76,52 @@ model Category {
   @@map("categories")
 }
 
-// model SubCategory {
-//   id          String @id @default(cuid())
-//   category_id String
+model Order {
+  id String @id @default(cuid())
+  // userId String
+  // user   User   @relation(fields: [userId], references: [id])
 
-//   title String @unique
+  // status            OrderStatus @default(PENDING)
+  status             Int     @default(0)
+  payment_method     String // ex: 'credit_card', 'boleto'
+  payment_status     String // ex: 'approved', 'pending', 'rejected'
+  external_reference String? // usado no Mercado Pago
 
-//   category Category @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  total_amount  Decimal // total order value
+  shipping_sost Decimal // valor cobrado pelo frete
+  discount      Decimal  @default(0)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
-//   created_at DateTime @default(now())
-//   updated_at DateTime @updatedAt
+  delivery_address_id String
+  delivery_address    Address @relation(fields: [delivery_address_id], references: [id])
 
-//   @@map("sub")
-// }
+  products Product[]
 
-model Gateway {
-  code_id String @id @default(uuid())
+  tracking_code      String? // código dos correios ou logística própria
+  estimated_delivery DateTime? // previsão da entrega
+  delivered_at       DateTime? // quando foi entregue
 
-  client_id String?
+  notes String? // campo para observações logísticas
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  quantity  Int // quantity request
+  unitPrice Decimal
 
-  @@map("gateway")
+  @@map("order")
+}
+
+model Address {
+  id String @id @default(cuid())
+  // user   User?   @relation(fields: [userId], references: [id])
+  // userId String?
+
+  street       String
+  number       String
+  complement   String?
+  neighborhood String
+  city         String
+  state        String
+  zip_code     String
+
+  orders Order[]
 }
