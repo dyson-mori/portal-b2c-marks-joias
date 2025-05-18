@@ -53,7 +53,7 @@ export default function ShoppingCard() {
       cep: data.cep,
       description: data.description,
       phone: data.phone,
-      client_id: `client-id-${Math.floor(Math.random() * 5)}`,
+      client_id: `client-id-${Math.floor(Math.random() * 50)}`,
       external_reference_id: `pedido-${Math.floor(Math.random() * 10)}`,
       products: storage
     });

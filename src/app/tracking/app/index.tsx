@@ -31,10 +31,7 @@ export default function OrderSteps() {
     const { value } = evt.target as unknown as { value: string };
 
     if (evt.key === "Enter") {
-      console.log(value);
-
       const data = await api.tracking.search(value);
-
       setStatus(data.status); // Simulação do status sendo alterado
     };
   };
