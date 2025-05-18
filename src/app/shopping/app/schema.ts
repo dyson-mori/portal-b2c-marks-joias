@@ -7,18 +7,32 @@ export const schema = yup.object().shape({
   quantity: yup.number().required(),
 
   /* step 2 */
-  // full_name: yup.string().min(6, 'Too short'),
-  // phone: yup.string(),
-  // email: yup.string(),
-  // cpf: yup.string(),
+  full_name: yup.string().min(6, 'Too short').required(),
+  phone: yup
+    .string()
+    .test('isValidPhone', (value) => {
+      const digits = value?.replace(/[\[\]&]+/g, '');
+      return digits!.length >= 10
+    })
+    .required(),
+  email: yup.string().required(),
+  cpf: yup
+    .string()
+    .test('cpf', (value) => {
+      const digits = value?.replaceAll('.', '').replace('-', '');
+      return digits!.length === 11
+    })
+    .required(),
   // address: yup.string(),
-  // description: yup.string(),
-  // cep: yup
-  //   .string()
-  //   .test('address', 'address not found', async (value) => {
-  //     return true
-  //   }),
-});
+  description: yup.string().required(),
+  cep: yup
+    .string()
+    .test('cpf', (value) => {
+      const digits = value?.replaceAll('.', '').replace('-', '');
+      return digits!.length === 8
+    })
+    .required()
+}).required();
 
 export type schemaProps = yup.InferType<typeof schema>;
 
@@ -35,15 +49,6 @@ export const methodsPayments = [
 
 export const steps = [
   {
-    id: 'clyp5g9v30000y4iwb6dw4wfn',
-    name: 'Método de Pagamento',
-    // name: 'Payment Method',
-    fields: [
-      'method',
-      'price'
-    ]
-  },
-  {
     id: 'clyp5wne60009y4iwjkfeobj5',
     name: 'Endereço',
     // name: 'Address',
@@ -54,6 +59,15 @@ export const steps = [
       'cep',
       'address',
       'description'
+    ]
+  },
+  {
+    id: 'clyp5g9v30000y4iwb6dw4wfn',
+    name: 'Método de Pagamento',
+    // name: 'Payment Method',
+    fields: [
+      'method',
+      'price'
     ]
   },
   {

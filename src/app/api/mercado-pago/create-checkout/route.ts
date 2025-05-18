@@ -17,7 +17,13 @@ export async function OPTIONS() {
 };
 
 export async function POST(req: NextRequest) {
-  const { client_id, name, email, external_reference_id, products, first_name, last_name } = await req.json() as PaidMarketProps;
+  const { full_name, email, cep, phone, cpf, client_id, external_reference_id, products } = await req.json() as PaidMarketProps;
+
+  const splitting = full_name.split(' ');
+  const ddd = phone.slice(0, 2);
+  const phoneNumber = phone.slice(2, phone.length);
+
+  // return NextResponse.json({ ok: true })
 
   try {
     const preference = new Preference(paid_market_api);
@@ -31,15 +37,24 @@ export async function POST(req: NextRequest) {
           client_email: email,
         },
         payer: {
-          name,
-          first_name,
-          last_name
-        } as {
-          email: string;
-          name: string;
-          first_name: string;
-          last_name: string;
-        },
+          name: full_name,
+          email,
+          phone: {
+            number: ddd,
+            area_code: phoneNumber
+          },
+          address: {
+            zip_code: cep,
+            street_name: '',
+            street_number: ''
+          },
+          identification: {
+            type: 'CPF',
+            identification: Number(cpf)
+          },
+          first_name: splitting[0],
+          last_name: splitting[splitting.length - 1],
+        } as object,
         items: products.map(product => ({
           id: String(product.id),
           title: product.title,

@@ -19,11 +19,6 @@ const themes = {
     philippine_gray: '#909090'
   },
   font: {
-    size_test: {
-      size: () => {
-
-      }
-    },
     size: {
       thin: '0.625rem', // 10px
       extraLight: '0.75rem', // 12px

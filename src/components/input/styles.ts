@@ -12,12 +12,8 @@ export const Container = styled.div`
   ${({ theme }) => css`
     box-shadow: ${theme.settings.box.simple};
     background-color: ${theme.colors.white};
-    border-radius: ${theme.settings.radius.small};
+    /* border-radius: ${theme.settings.radius.small}; */
   `};
-
-  svg {
-    margin: 0 10px;
-  };
 `;
 
 export const Input = styled.input`
@@ -25,10 +21,11 @@ export const Input = styled.input`
   outline: 0;
 
   width: 100%;
+  height: 100%;
 
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
-    font-size: ${theme.font.size.medium};
+    font-size: ${theme.font.size.light};
     border-radius: ${theme.settings.radius.small};
   `};
 `;

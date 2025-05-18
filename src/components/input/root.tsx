@@ -4,7 +4,7 @@ import { Container } from './styles';
 
 export const InputRoot: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <Container>
+    <Container id='input-container'>
       {children}
     </Container>
   )

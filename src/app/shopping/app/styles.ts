@@ -29,6 +29,24 @@ export const Content = styled.div`
 
   width: 100%;
   height: 100%;
+
+  .svg-container {
+    position: relative;
+    width: 50px;
+  };
+
+  .svg-container > svg {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+  };
+
+  .space {
+    height: 10px;
+  }
 `;
 
 export const MethodPayment = styled.div`

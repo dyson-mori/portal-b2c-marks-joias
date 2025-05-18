@@ -10,7 +10,7 @@ export const Container = styled.form`
   padding: 30px 10px 10px 10px;
   margin-left: 5px;
 
-  width: calc(100vw / 4);
+  min-width: calc(100vw / 4);
 
   ${({ theme }) => css`
     box-shadow: ${theme.settings.box.simple};

@@ -18,13 +18,17 @@ export type StorageProps = {
 };
 
 export type PaidMarketProps = {
-  external_reference_id: string;
+  full_name: string;
   email: string;
-  name: string;
+  cep: string;
+  description: string;
+  phone: string;
+  cpf: string;
+
+  external_reference_id: string;
   client_id: string;
   products: StorageProps[];
-  first_name: string;
-  last_name: string;
+  // last_name: string;
 };
 
 export type GetPaymentWebhookResponse = {
@@ -52,6 +56,24 @@ export type GetPaymentWebhookResponse = {
     id: null,
     last_four_digits: string; // '9395',
     tags: string[]
+  },
+  payer: {
+    email: string; // 'vivianecarvalhomorao@hotmail.com',
+    entity_type: null,
+    first_name: null,
+    id: string; // '1850029315',
+    identification: {
+      number: null,
+      type: null
+    },
+    last_name: null,
+    operator_id: null,
+    phone: {
+      number: null,
+      extension: null,
+      area_code: null
+    },
+    type: null
   },
   // charges_details: [
   //   {
@@ -113,24 +135,6 @@ export type GetPaymentWebhookResponse = {
   // order: {
   //   id: string; // '31080403168'
   //   type: string; // 'mercadopago'
-  // },
-  // payer: {
-  //   email: string; // 'vivianecarvalhomorao@hotmail.com',
-  //   entity_type: null,
-  //   first_name: null,
-  //   id: string; // '1850029315',
-  //   identification: {
-  //     number: null,
-  //     type: null
-  //   },
-  //   last_name: null,
-  //   operator_id: null,
-  //   phone: {
-  //     number: null,
-  //     extension: null,
-  //     area_code: null
-  //   },
-  //   type: null
   // },
   // payment_method: {
   //   // data: { routing_data: [Object] },

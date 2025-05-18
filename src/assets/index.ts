@@ -18,6 +18,11 @@ import { ReactComponent as Box } from './box.svg';
 import { ReactComponent as Clock } from './clock.svg';
 import { ReactComponent as AddCircle } from './add-circle.svg';
 import { ReactComponent as MinusCircle } from './minus-circle.svg';
+import { ReactComponent as Inbox } from './inbox.svg';
+import { ReactComponent as Home } from './home.svg';
+import { ReactComponent as Identity } from './identity.svg';
+import { ReactComponent as CubeScan } from './3d-cude-scan.svg';
+import { ReactComponent as Verify } from './verify.svg';
 
 export {
   Logo,
@@ -39,5 +44,10 @@ export {
   Box,
   Clock,
   AddCircle,
-  MinusCircle
+  MinusCircle,
+  Inbox,
+  Home,
+  Identity,
+  CubeScan,
+  Verify
 }
