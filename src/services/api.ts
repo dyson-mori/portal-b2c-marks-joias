@@ -81,5 +81,8 @@ export const api = {
   },
   tracking: {
     search: (order_id: string) => fetcher({ method: 'GET', url: `/tracking?order_id=${order_id}` }),
+  },
+  banner: {
+    list: () => fetcher({ method: 'GET', url: '/banner' }),
   }
 };

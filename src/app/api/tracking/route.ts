@@ -9,6 +9,16 @@ export async function GET(request: NextRequest) {
   const data = await prisma.order.findFirst({
     where: {
       id: order_id
+    },
+    include: {
+      products: {
+        select: {
+          id: true,
+          thumbnail: true,
+          price: true,
+          search: true,
+        }
+      }
     }
   });
 

@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
+import { Banner } from '@prisma/client';
+
 import { useWindowDimensions } from '@hooks';
+
 import { BannerWrapper, Slide } from './styles';
 
-const AnimatedBanner = () => {
+type BannerProps = {
+  data: Banner[]
+};
+
+const AnimatedBanner = ({ data }: BannerProps) => {
   const [index, setIndex] = useState(0);
   const { width, height } = useWindowDimensions();
 
-  const bannerData = [
-    "https://res.cloudinary.com/doo9pfft1/image/upload/v1747150929/IMG_7085_etrci0.jpg",
-    "https://res.cloudinary.com/doo9pfft1/image/upload/v1747331486/inside-store_ealsn7.jpg"
-  ];
-
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % bannerData.length);
+      setIndex((prev) => (prev + 1) % data.length);
     }, 5000);
 
     return () => clearInterval(timer);
@@ -22,14 +24,14 @@ const AnimatedBanner = () => {
 
   return (
     <BannerWrapper>
-      {bannerData.map((src, i) => (
+      {data.map((item, i) => (
         <Slide
           key={i}
-          src={src}
+          src={item.url}
           $active={i === index}
           width={width}
           height={height / 1.5}
-          alt={src}
+          alt={item.url}
         />
       ))}
     </BannerWrapper>

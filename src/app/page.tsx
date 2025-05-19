@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 export default async function Products() {
   const products = await api.products.list(`/products?limit=${8}`);
   const categories = await api.category.list();
+  const banner = await api.banner.list();
 
-  return <LandingPage products={products} categories={categories} />;
+  return <LandingPage banner={banner} categories={categories} products={products} />;
 };

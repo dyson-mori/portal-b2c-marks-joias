@@ -125,3 +125,15 @@ model Address {
 
   orders Order[]
 }
+
+model Banner {
+  id String @id @default(cuid())
+
+  url    String
+  public Boolean @default(false)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("banner")
+}

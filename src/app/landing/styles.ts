@@ -4,7 +4,7 @@ export const Container = styled.main`
   font-family: sans-serif;
 `;
 
-export const Banner = styled.div`
+export const Notice = styled.div`
   display: flex;
 
   justify-content: center;

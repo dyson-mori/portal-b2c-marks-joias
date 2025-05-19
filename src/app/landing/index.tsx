@@ -1,6 +1,7 @@
 "use client"
+import Link from 'next/link';
 
-import { Category } from '@prisma/client';
+import { Category, Banner } from '@prisma/client';
 
 import { Box, Clock, Delivery, Location } from '@assets';
 
@@ -8,17 +9,17 @@ import { ProductProps } from '@global/interfaces';
 import { useWindowDimensions } from '@hooks';
 import { Button, Landing, Modal } from '@components';
 
-import { Container, Banner } from './styles';
+import { Container, Notice } from './styles';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import Link from 'next/link';
 
 type LandingPageProps = {
   products: ProductProps[];
   categories: Category[];
+  banner: Banner[];
 };
 
-export default function LandingPage({ products, categories }: LandingPageProps) {
+export default function LandingPage({ products, categories, banner }: LandingPageProps) {
   const route = useRouter();
   const { width } = useWindowDimensions();
 
@@ -76,15 +77,15 @@ export default function LandingPage({ products, categories }: LandingPageProps) 
 
   return (
     <Container>
-      <Landing.Banner />
+      <Landing.Banner data={banner} />
       <Landing.Info info={info} />
       <Landing.Categories categories={categories} onSelectCategory={onSelectCategoryTitle} />
 
-      <Banner>
+      <Notice>
         ✨
         <p>Trabalhe com nossos <Link href='/consigned'>Consignados</Link> e aumente sua renda com peças que vendem sozinhas!</p>
         ✨
-      </Banner>
+      </Notice>
 
       <Landing.Sales products={products} />
       <Landing.About width={width} />
