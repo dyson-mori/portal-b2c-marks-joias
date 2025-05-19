@@ -61,7 +61,7 @@ const fetcher = async ({
 export const api = {
   products: {
     list: (param?: string) => fetcher({ method: 'GET', url: param ?? '/products' }),
-    find: (product_id: number) => fetcher({ method: 'GET', url: `/product?product_id=${product_id}` })
+    find: (product_id: number) => fetcher({ method: 'GET', url: `/product?product_id=${product_id}` }),
   },
   product: {
     find: (product_id: string) => fetcher({ method: 'GET', url: `/product?product_id=${product_id}` })

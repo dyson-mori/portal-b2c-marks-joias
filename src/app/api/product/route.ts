@@ -15,18 +15,32 @@ export async function GET(request: NextRequest) {
       description: true,
       price: true,
       files: true,
-      quantity: true
+      quantity: true,
+      category_id: true
+    }
+  });
+
+  if (!product) {
+    return NextResponse.json({}, { status: 400, statusText: 'products not received' });
+  };
+
+  const related_products = await prisma.product.findMany({
+    where: {
+      category_id: product.category_id,
+      NOT: {
+        id: product.id
+      }
     }
   });
 
   const format = {
     ...product,
-    files: JSON.parse(product!.files)
+    files: JSON.parse(product.files),
+    related: related_products.map(product => ({
+      ...product,
+      files: JSON.parse(product.files)
+    }))
   }
-
-  if (!product) {
-    return NextResponse.json({}, { status: 400, statusText: 'products not received' });
-  };
 
   return NextResponse.json(format, { status: 200, statusText: 'products received successfully' });
 };

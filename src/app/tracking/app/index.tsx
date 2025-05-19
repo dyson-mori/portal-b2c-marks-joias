@@ -79,12 +79,12 @@ export default function OrderSteps() {
           {steps.map((step, idx) => (
             <div key={idx} style={{ display: "flex", alignItems: "center" }}>
               <Step>
-                {idx === 1 && (
+                {idx === 1 && idx <= status && (
                   <Poppup>
                     assistir
                   </Poppup>
                 )}
-                {idx === 2 && (
+                {idx === 2 && idx <= status && (
                   <Poppup>
                     assistir
                   </Poppup>

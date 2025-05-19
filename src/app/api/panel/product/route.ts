@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
   const product_amount = await prisma.product.count({
     where: {
-      id: category_id!,
+      category_id: category_id!,
     }
   });
 
@@ -31,9 +31,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(null, { status: 400, statusText: 'category not found!' });
   };
 
+  const count = formatCode(category!.id, product_amount)
+
   const product = await prisma.product.create({
     data: {
-      id: formatCode(category!.id, product_amount),
+      id: count,
       category_id: category.id,
 
       title,
@@ -48,10 +50,10 @@ export async function POST(request: NextRequest) {
   });
 
   if (!product) {
-    return NextResponse.json(product, { status: 400, statusText: 'unable to create this product!' });
+    return NextResponse.json(undefined, { status: 400, statusText: 'unable to create this product!' });
   };
 
-  return NextResponse.json(product, { status: 201, statusText: 'successfully created product!' });
+  return NextResponse.json(true, { status: 201, statusText: 'successfully created product!' });
 };
 
 export async function PUT(request: NextRequest) {

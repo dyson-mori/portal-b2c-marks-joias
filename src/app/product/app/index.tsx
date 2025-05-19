@@ -9,9 +9,9 @@ import { ProductProps } from '@global/interfaces';
 import { ShoppingContext } from '@context/shopping';
 
 import { useWindowDimensions } from '@hooks';
-import { ProductComponent, Splash } from '@components';
+import { Product, ProductComponent, Splash } from '@components';
 
-import { Container, Content } from './styles';
+import { Container, Content, Related, Tag } from './styles';
 
 type Props = {
   product: ProductProps;
@@ -51,6 +51,18 @@ export default function ProductScreen({ product }: Props) {
             onAddToCart={onAddToCart}
           />
         </Content>
+        <Tag>
+          <h2>Produtos Relacionados</h2>
+        </Tag>
+        <Related>
+          {product.related.map((related, index) => (
+            <Product
+              key={index.toString()}
+              product={related}
+              href={`/product?product_id=${related.id}`}
+            />
+          ))}
+        </Related>
       </Container>
     </Suspense>
   );

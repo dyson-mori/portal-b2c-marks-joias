@@ -22,7 +22,7 @@ type Template = {
 
 export default function Template({ children, header }: Readonly<Template>) {
   const param = usePathname();
-  const hide = param === '/product' || param === '/success';
+  const hide = param === '/success';
 
   return (
     <ThemeProvider theme={themes}>

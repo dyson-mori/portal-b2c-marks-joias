@@ -48,7 +48,7 @@ function DesktopImage({ data, width }: Props) {
               priority
               width={80}
               height={80}
-              src={item}
+              src={item.replace('.webm', '.jpg')}
               alt={item}
               loading="eager"
               style={{ objectFit: 'cover' }}
@@ -67,7 +67,7 @@ function DesktopImage({ data, width }: Props) {
         priority
         width={500}
         height={500}
-        src={data.files[select]}
+        src={data.files[select].replace('.webm', '.jpg')}
         alt={data.title}
         loading="eager"
         style={{ objectFit: 'cover' }}
