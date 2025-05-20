@@ -4,13 +4,18 @@ export const Container = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
 
   width: 100%;
 
+  padding: 10px;
+
+  div:last-child {
+    border: 0px;
+  };
+
   ${({ theme }) => css`
-    box-shadow: ${theme.settings.box.simple};
-    background-color: ${theme.colors.white};
+    /* box-shadow: ${theme.settings.box.simple};
+    background-color: ${theme.colors.white}; */
 
     @media (max-width: ${theme.settings.responsive.maxWidth}){
       margin-bottom: 5px;
@@ -42,7 +47,7 @@ export const Product = styled.div`
   position: relative;
   display: flex;
 
-  padding: 5px 10px;
+  padding: 10px;
 
   width: 100%;
   align-items: center;
@@ -69,6 +74,8 @@ export const Product = styled.div`
     height: 100px;
     aspect-ratio: 1/1;
   }
+
+  border-bottom: 1px solid #f4f4f4;
 
   ${({ theme }) => css`
     a {

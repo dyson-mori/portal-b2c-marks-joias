@@ -14,6 +14,10 @@ export default createGlobalStyle`
       background-color: ${theme.colors.background};
     `};
   };
+  input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: #000 !important;
+  };
 
   /* width */
   ::-webkit-scrollbar {

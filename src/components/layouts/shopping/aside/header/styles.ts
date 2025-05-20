@@ -4,11 +4,10 @@ export const Container = styled.header`
   display: flex;
 
   align-items: center;
-  justify-content: center;
 
   width: 100%;
 
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   button {
     border: 0;

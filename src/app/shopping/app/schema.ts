@@ -31,7 +31,11 @@ export const schema = yup.object().shape({
       const digits = value?.replaceAll('.', '').replace('-', '');
       return digits!.length === 8
     })
-    .required()
+    .required(),
+
+  street: yup.string().required(),
+  city: yup.string().required(),
+  state: yup.string().required(),
 }).required();
 
 export type schemaProps = yup.InferType<typeof schema>;
@@ -50,7 +54,7 @@ export const methodsPayments = [
 export const steps = [
   {
     id: 'clyp5wne60009y4iwjkfeobj5',
-    name: 'Endereço',
+    name: 'Informação do pagamento',
     // name: 'Address',
     fields: [
       'full_name',

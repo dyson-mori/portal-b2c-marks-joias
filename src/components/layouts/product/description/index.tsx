@@ -20,7 +20,7 @@ export default function Description({ data, width, storage, handleBuy, onAddToCa
   const label = storage.find(item => item.id === data.id) ? 'Remover do Carrinho' : 'Adicionar ao Carrinho';
 
   return (
-    <Container style={{ width }}>
+    <Container style={{ width: width - 100 }}>
       <h1>{data.title}</h1>
 
       <div style={{ height: 10 }} />

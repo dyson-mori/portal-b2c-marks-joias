@@ -7,8 +7,6 @@ export const Container = styled.article`
   width: 100%;
   padding: 10px 50px;
 
-  min-height: 82vh;
-
   ${({ theme }) => css`
     color: ${theme.colors.dark_charcoal};
 
@@ -24,7 +22,7 @@ export const Container = styled.article`
 export const Content = styled.div`
   display: flex;
 
-  align-items: center;
+  align-items: start;
   flex-direction: column;
 
   width: 100%;
@@ -46,7 +44,17 @@ export const Content = styled.div`
 
   .space {
     height: 10px;
+  };
+
+  h4 {
+    font-weight: 600;
+    text-align: start;
   }
+
+  h5 {
+    font-weight: 600;
+    margin-bottom: 2px;
+  };
 `;
 
 export const MethodPayment = styled.div`

@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
       created_at: 'desc'
     },
     where: {
-      id: category_title ? category?.id : undefined
+      category_id: category_title ? category?.id : undefined
     },
     select: {
       id: true,

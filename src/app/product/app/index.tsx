@@ -22,7 +22,7 @@ export default function ProductScreen({ product }: Props) {
   const { width } = useWindowDimensions();
 
   const route = useRouter();
-  const width_section = width <= 500 ? width - 20 : width / 2 - 100;
+  const width_section = width <= 500 ? width - 20 : width / 2;
 
   const handleBuyNow = () => {
     const foundProduct = storage.find(data => data.id === product.id);

@@ -4,13 +4,14 @@ export const Container = styled.form`
   display: flex;
   position: relative;
 
-  align-items: center;
   flex-direction: column;
 
-  padding: 30px 10px 10px 10px;
+  padding: 0px 10px 10px 10px;
+  /* padding: 30px 10px 10px 10px; */
   margin-left: 5px;
 
-  min-width: calc(100vw / 4);
+  min-width: calc(100vw / 3.5);
+  height: min-content;
 
   ${({ theme }) => css`
     box-shadow: ${theme.settings.box.simple};

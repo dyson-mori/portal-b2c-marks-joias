@@ -3,102 +3,96 @@ import styled, { css } from "styled-components";
 export const Container = styled.section`
   padding: 15px 50px;
 
-  button {
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-  }
-
   h3 {
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: #e91e63;
 
     ${({ theme }) => css`
+      color: ${theme.colors.primary};
       font-family: ${theme.font.family.montserrat_alternates};
       font-size: ${theme.font.size.medium};
     `};
   };
 
-  img {
+  /* img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  };
+  }; */
 
-  .categories {
-    display: flex;
-    justify-content: center;
-  };
+  @media (max-width: 500px){
+    padding: 15px 10px;
 
-  .categories > button {
+    ${({ theme }) => css`
+      h3 {
+        font-size: ${theme.font.size.medium};
+      };
+    `};
+  };
+`;
+
+export const List = styled.div`
+  display: flex;
+  justify-content: center;
+
+  button {
     position: relative;
+
+    border: 0;
+    padding: 0;
+    cursor: pointer;
 
     margin: 5px;
 
-    width: 100%;
+    width: 150px;
+    height: 150px;
   };
 
-  .categories > button > img {
+  button > img {
     aspect-ratio: 1/1;
   };
 
-  .categories > button:nth-child(1) {
-    position: relative;
-
-    margin-left: 0px;
-  };
-
-  .categories > button:last-child {
-    position: relative;
-
-    margin-right: 0px;
-  };
-
-  .categories > button > p {
+  button > p {
     position: absolute;
 
     left: 50%;
-
-    transform: translate(-50%);
-
     bottom: 10px;
+    transform: translate(-50%);
 
     color: #fff;
 
     text-transform: capitalize;
 
     font-weight: 500;
-    font-family: var(--font-montserrat-alternates), sans-serif;
     letter-spacing: 1.5px;
 
     ${({ theme }) => css`
-      font-size: ${theme.font.size.normal};
+      font-size: ${theme.font.size.light};
+      font-family: ${theme.font.family.montserrat_alternates}
     `};
   };
 
+  button:first-child {
+    position: relative;
+    margin-left: 0px;
+  };
+
+  button:last-child {
+    position: relative;
+    margin-right: 0px;
+  };
+
   @media (max-width: 500px){
-    padding: 15px 10px;
-
-    .categories {
-      overflow: auto;
-      justify-content: start;
-      scrollbar-width: none;
-      -ms-overflow-style: none; 
-    };
-
-    .categories > button {
-      min-width: 35%;
-    };
+    overflow: auto;
+    justify-content: start;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     
     ${({ theme }) => css`
-      h3 {
-        font-size: ${theme.font.size.medium};
-      };
-      .categories > button > p {
-        font-weight: 400;
-        font-size: ${theme.font.size.light};
-      };
-    `};
+    button > p {
+      font-weight: 400;
+      font-size: ${theme.font.size.light};
+    };
+  `};
   };
 `;

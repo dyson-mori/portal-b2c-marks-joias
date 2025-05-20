@@ -31,7 +31,7 @@ export default function LandingPage({ products, categories, banner }: LandingPag
       label: 'Loja Física'
     },
     {
-      icon: <Box width={24} height={24} />,
+      icon: <Box width={24} height={24} stroke='#FA0B5B' strokeWidth={1.5} />,
       label: 'Produtos Estocados'
     },
     {

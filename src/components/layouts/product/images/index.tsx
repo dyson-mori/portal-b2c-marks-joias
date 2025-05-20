@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import { ProductProps } from '@global/interfaces';
 
-import { ContainerDesktop, ContainerMobile, Button, Options } from './styles';
+import { ContainerDesktop, ContainerMobile, Button, Options, GroupMainImage } from './styles';
 
 type Props = {
   data: ProductProps;
@@ -63,15 +63,40 @@ function DesktopImage({ data, width }: Props) {
     <ContainerDesktop style={{ width }}>
       <OptionsComponent />
 
-      <Image
-        priority
-        width={500}
-        height={500}
-        src={data.files[select].replace('.webm', '.jpg')}
-        alt={data.title}
-        loading="eager"
-        style={{ objectFit: 'cover' }}
-      />
+      <GroupMainImage>
+        {data.files.map((file, index) => (
+          <Image
+            key={index.toString()}
+            priority
+            width={500}
+            height={500}
+            src={file}
+            alt={data.title}
+            loading="eager"
+            style={{
+              objectFit: 'cover',
+              opacity: select === index ? 1 : 0
+            }}
+          />
+        ))}
+      </GroupMainImage>
+
+      {/* {data.files[select].endsWith('.webm') ? (
+        <video style={{ objectFit: 'cover' }} loop autoPlay muted>
+          <source src={data.files[select]} type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
+      ) : (
+          <Image
+            priority
+            width={500}
+            height={500}
+            src={data.files[select]}
+            alt={data.title}
+            loading="eager"
+            style={{ objectFit: 'cover' }}
+          />
+      )} */}
     </ContainerDesktop>
   )
 };

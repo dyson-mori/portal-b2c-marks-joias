@@ -3,17 +3,30 @@ import styled, { css } from 'styled-components';
 export const ContainerDesktop = styled.section`
   display: flex;
 
-  img {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 1/1;
-  };
-
   ${({ theme }) => css`
     @media (max-width: ${theme.settings.responsive.maxWidth}) {
       display: none;
     };
   `};
+`;
+
+export const GroupMainImage = styled.div`
+  position: relative;
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+
+  img {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1;
+
+    transition: 0.5s;
+  };
 `;
 
 export const Options = styled.div`

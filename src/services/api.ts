@@ -84,5 +84,9 @@ export const api = {
   },
   banner: {
     list: () => fetcher({ method: 'GET', url: '/banner' }),
+  },
+  correio: {
+    get: (cep: string) => fetch(`https://viacep.com.br/ws/${cep}/json/`).then(jsn => jsn.json()),
+    frete: () => fetch(`https://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx`).then(jsn => jsn.json())
   }
 };
