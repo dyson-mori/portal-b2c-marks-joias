@@ -28,20 +28,6 @@ export const Content = styled.div`
   width: 100%;
   height: 100%;
 
-  .svg-container {
-    position: relative;
-    width: 50px;
-  };
-
-  .svg-container > svg {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-  };
-
   .space {
     height: 10px;
   };
@@ -134,22 +120,3 @@ export const Methods = styled.button<{ $selected: boolean }>`
   `};
 `;
 
-export const Result = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  width: 100%;
-
-  border-top: 1px dashed #ddd;
-
-  margin-top: 10px;
-
-  padding: 10px;
-
-  ${({ theme }) => css`
-    #price {
-      font-size: ${theme.font.size.normal};
-      font-weight: ${theme.font.weight[600]};
-    };
-  `};
-`;

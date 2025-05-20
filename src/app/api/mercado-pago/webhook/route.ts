@@ -28,26 +28,34 @@ export async function POST(request: NextRequest) {
       const payment = new Payment(paid_market_api);
       const paymentData = await payment.get({ id: data.id }); // data.id = collection_id
 
+      const fullAddress = paymentData.payer?.address?.street_name as string;
+      const [street, neighborhood, city, state] = fullAddress.split("•").map(item => item.trim());
+      const complement = paymentData.metadata.description;
+
       const address = await prisma.address.create({
         data: {
-          city: 'contagem',
-          neighborhood: 'eldorado',
-          number: '920',
-          state: 'MG',
-          street: 'rua acacias',
-          zip_code: '32310370',
-          complement: 'casa 1'
+          city,
+          neighborhood,
+          number: paymentData.payer!.address!.street_number!,
+          state,
+          street,
+          zip_code: paymentData.payer!.address!.zip_code!,
+          complement
         }
       });
 
+      const total_amount = paymentData.additional_info?.items?.reduce((acc, item) => {
+        return acc + item.unit_price * item.quantity;
+      }, 0);
+
       await prisma.order.create({
         data: {
-          status: 0,
-          payment_method: 'credit card',
+          status: 1,
+          payment_method: 'card',
           payment_status: paymentData.status!,
           external_reference: paymentData.external_reference,
-          total_amount: 31000, // rever isso
-          shipping_sost: 40, // rever isso
+          shipping_sost: 0, // valor do transporte, seja correio ou particular
+          total_amount: total_amount!, // valor total do produto + shipping_sost
           discount: 0,
           products: {
             connect: paymentData.additional_info!.items?.map(el => ({

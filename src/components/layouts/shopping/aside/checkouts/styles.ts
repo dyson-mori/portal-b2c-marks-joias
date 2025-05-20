@@ -6,7 +6,6 @@ export const Container = styled.div`
   justify-content: end;
 
   width: 100%;
-  min-height: 200px;
 
   padding: 5px 10px;
 

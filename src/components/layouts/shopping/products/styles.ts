@@ -52,22 +52,11 @@ export const Product = styled.div`
   width: 100%;
   align-items: center;
 
-  .name {
-    display: flex;
-    padding: 0 20px;
-  };
-
-  .price {
-    p {
-      white-space: nowrap;
-    };
-  };
-
-  .quantity {
+  /* .quantity {
     display: flex;
     justify-content: center;
     width: 50%;
-  }
+  }; */
 
   img {
     width: 100px;
@@ -78,24 +67,6 @@ export const Product = styled.div`
   border-bottom: 1px solid #f4f4f4;
 
   ${({ theme }) => css`
-    a {
-      display: inline-block;
-      font-weight: 600;
-      color: ${theme.colors.dark_charcoal};
-      font-size: ${theme.font.size.light};
-      white-space: nowrap;
-      text-wrap: nowrap;
-      width: calc(100vw / 3.5);
-      overflow: hidden; /* "overflow" value must be different from "visible" */
-      text-overflow: ellipsis;
-      text-decoration: none;
-    };
-
-    p {
-      font-weight: 400;
-      font-size: ${theme.font.size.light};
-    };
-
     @media (max-width: ${theme.settings.responsive.maxWidth}){
       height: 100%;
       padding: 0px;
@@ -108,32 +79,103 @@ export const Product = styled.div`
         height: 100%;
       };
 
-      .name {
-        position: absolute;
-
-        width: 100%;
-        justify-content: center;
-
-        bottom: 60px;
-
-        a {
-          width: calc(100vw / 1.2);
-          color: #fff;
-          font-weight: 400;
-        };
-      };
-
-      .price {
-        display: none;
-      };
-
-      .quantity {
+      /* .quantity {
         position: absolute;
 
         width: 100%;
 
         bottom: 10px;
+      }; */
+    };
+  `};
+`;
+
+export const TitleDescription = styled.div`
+  display: flex;
+
+  justify-content: center;
+
+  flex-direction: column;
+  padding: 0 10px;
+
+  width: 100%;
+  height: 100%;
+
+  /* border: 1px dashed #555; */
+
+  a {
+    display: inline-block;
+    font-weight: 600;
+    white-space: nowrap;
+    text-wrap: nowrap;
+    width: calc(100vw / 3.5);
+    overflow: hidden; /* "overflow" value must be different from "visible" */
+    text-overflow: ellipsis;
+    text-decoration: none;
+  };
+
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* máximo de 3 linhas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 5px;
+  };
+
+  ${({ theme }) => css`
+    a {
+      color: ${theme.colors.dark_charcoal};
+      font-size: ${theme.font.size.light};
+    };
+    
+    p {
+      font-weight: 400;
+      color: ${theme.colors.granite_gray};
+      font-size: ${theme.font.size.light};
+    };
+
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      position: absolute;
+
+      width: 100%;
+      justify-content: center;
+
+      bottom: 60px;
+
+      a {
+        color: #fff;
+        font-weight: 400;
+        width: calc(100vw / 1.2);
       };
+    };
+  `};
+`;
+
+export const Price = styled.div`
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  /* width: 100%; */
+  height: 100%;
+  padding: 0 15px;
+
+  p {
+    white-space: nowrap;
+    font-weight: 400;
+  };
+
+  ${({ theme }) => css`
+    p {
+      font-size: ${theme.font.size.light};
+    };
+  `};
+
+  ${({ theme }) => css`
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      display: none;
     };
   `};
 `;
@@ -144,13 +186,20 @@ export const AddQuantity = styled.div`
   ${({ theme }) => css`
     svg {
       stroke: ${theme.colors.primary};
-    }
+    };
+
     p {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 25px;
       font-size: ${theme.font.size.light};
+    };
+
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      position: absolute;
+      width: 100%;
+      bottom: 10px;
     };
   `};
 
@@ -194,6 +243,26 @@ export const Delete = styled.button`
         height: 30px;
         stroke-width: 1.5;
       };
+    };
+  `};
+`;
+
+export const Result = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+
+  border-top: 1px dashed #ddd;
+
+  margin-top: 10px;
+
+  padding: 10px;
+
+  ${({ theme }) => css`
+    #price {
+      font-size: ${theme.font.size.normal};
+      font-weight: ${theme.font.weight[600]};
     };
   `};
 `;

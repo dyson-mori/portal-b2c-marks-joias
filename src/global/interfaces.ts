@@ -21,12 +21,17 @@ export type StorageProps = {
 export type PaidMarketProps = {
   full_name: string;
   email: string;
-  cep: string;
   description: string;
   phone: string;
 
-  external_reference_id: string;
-  client_id: string;
+  cpf: string;
+
+  zip_code: string; // '32310370';
+  number: string; // '920';
+  street: string; // 'rua acacias';
+  neighborhood: string; // 'eldorado';
+  city: string; // 'contagem';
+  state: string; // 'MG';
+
   products: StorageProps[];
-  // last_name: string;
 };

@@ -23,6 +23,9 @@ import { ReactComponent as Home } from './home.svg';
 import { ReactComponent as Identity } from './identity.svg';
 import { ReactComponent as CubeScan } from './3d-cude-scan.svg';
 import { ReactComponent as Verify } from './verify.svg';
+import { ReactComponent as Map } from './map.svg';
+import { ReactComponent as City } from './city.svg';
+import { ReactComponent as Pen } from './pen.svg';
 
 export {
   Logo,
@@ -49,5 +52,8 @@ export {
   Home,
   Identity,
   CubeScan,
-  Verify
+  Verify,
+  Map,
+  City,
+  Pen
 }

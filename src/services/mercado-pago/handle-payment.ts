@@ -5,9 +5,9 @@ import { PaidMarketProps } from "@global/interfaces";
 
 export async function handleMercadoPagoPayment(paymentData: PaymentResponse) {
   const metadata = paymentData.metadata as PaidMarketProps;
-  const { email, client_id } = metadata;
+  const { email } = metadata;
 
-  if (!email || !client_id) {
+  if (!email) {
     return { status: 500 };
     // return { status: 'incomplete metadata' };
   };

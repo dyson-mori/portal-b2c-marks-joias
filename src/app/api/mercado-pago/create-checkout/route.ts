@@ -5,6 +5,12 @@ import { paid_market_api } from "@services/mercado-pago";
 import { PaidMarketProps } from "@global/interfaces";
 import { formats } from "@helpers/format";
 
+function generatePaymentId() {
+  const timestamp = Date.now(); // Ex: 1716258356842
+  const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase(); // Ex: 3F5KZP
+  return `PAY-${timestamp}-${randomPart}`; // Ex: PAY-1716258356842-3F5KZP
+}
+
 export async function OPTIONS() {
   return NextResponse.json({}, {
     status: 200,
@@ -17,24 +23,35 @@ export async function OPTIONS() {
 };
 
 export async function POST(req: NextRequest) {
-  const { full_name, email, cep, phone, client_id, external_reference_id, products } = await req.json() as PaidMarketProps;
+  const {
+    full_name,
+    email,
+    zip_code,
+    phone,
+    products,
+    city,
+    description,
+    neighborhood,
+    number,
+    state,
+    street,
+    cpf
+  } = await req.json() as PaidMarketProps;
 
   const splitting = full_name.split(' ');
   const ddd = phone.slice(0, 2);
   const phoneNumber = phone.slice(2, phone.length);
-
-  // return NextResponse.json({ ok: true })
 
   try {
     const preference = new Preference(paid_market_api);
 
     const createdPreference = await preference.create({
       body: {
-        external_reference: external_reference_id, // IMPORTANTE: Isso aumenta a pontuação da sua integração com o Mercado Pago - É o id da compra no nosso sistema
+        external_reference: generatePaymentId(), // IMPORTANTE: Isso aumenta a pontuação da sua integração com o Mercado Pago - É o id da compra no nosso sistema
         notification_url: `${process.env.NEXT_PUBLIC_MARKS_URL}/mercado-pago/webhook`,
         metadata: {
-          client_id: client_id,
           client_email: email,
+          description
         },
         payer: {
           name: full_name,
@@ -46,14 +63,14 @@ export async function POST(req: NextRequest) {
             area_code: phoneNumber
           },
           address: {
-            zip_code: cep,
-            street_name: '',
-            street_number: ''
+            zip_code: zip_code,
+            street_name: `${street} • ${neighborhood} • ${city} • ${state}`,
+            street_number: number
           },
-          // identification: {
-          //   type: 'CPF',
-          //   identification: Number(cpf)
-          // }
+          identification: {
+            type: 'CPF',
+            identification: Number(cpf)
+          }
         } as object,
         items: products.map(product => ({
           id: String(product.id),
@@ -64,7 +81,7 @@ export async function POST(req: NextRequest) {
           unit_price: Number(formats.formatDecimal(String(product.unit_amount))),
         })),
         payment_methods: {
-          installments: 12, // Número máximo de parcelas permitidas - calculo feito automaticamente
+          installments: 5, // Número máximo de parcelas permitidas - calculo feito automaticamente
         },
         auto_return: "approved",
         back_urls: {

@@ -16,16 +16,14 @@ export const schema = yup.object().shape({
     })
     .required(),
   email: yup.string().required(),
-  // cpf: yup
-  //   .string()
-  //   .test('cpf', (value) => {
-  //     const digits = value?.replaceAll('.', '').replace('-', '');
-  //     return digits!.length === 11
-  //   })
-  //   .required(),
-  // address: yup.string(),
-  description: yup.string().required(),
-  cep: yup
+  cpf: yup
+    .string()
+    .test('cpf', (value) => {
+      const digits = value?.replaceAll('.', '').replace('-', '');
+      return digits!.length === 11
+    })
+    .required(),
+  zip_code: yup
     .string()
     .test('cpf', (value) => {
       const digits = value?.replaceAll('.', '').replace('-', '');
@@ -36,6 +34,9 @@ export const schema = yup.object().shape({
   street: yup.string().required(),
   city: yup.string().required(),
   state: yup.string().required(),
+  number: yup.string().required(),
+  neighborhood: yup.string().required(),
+  description: yup.string().notRequired().default('')
 }).required();
 
 export type schemaProps = yup.InferType<typeof schema>;
