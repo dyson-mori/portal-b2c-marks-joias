@@ -2,7 +2,7 @@ import * as yup from 'yup';
 
 export const schema = yup.object().shape({
   /* step 1 */
-  method: yup.string().required().nullable(),
+  method: yup.string().required().nullable().default(''),
   price: yup.number().required(),
   quantity: yup.number().required(),
 
@@ -36,6 +36,7 @@ export const schema = yup.object().shape({
   state: yup.string().required(),
   number: yup.string().required(),
   neighborhood: yup.string().required(),
+  full_street: yup.string().nullable().default(''),
   description: yup.string().notRequired().default('')
 }).required();
 

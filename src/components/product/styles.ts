@@ -29,12 +29,10 @@ export const Container = styled(Link)`
 export const Footer = styled.footer`
   position: absolute;
   left: 0;
-  bottom: 00;
+  bottom: 0;
 
   display: flex;
   flex-direction: column;
-
-  /* justify-content: space-between; */
 
   width: 100%;
   padding: 10px;

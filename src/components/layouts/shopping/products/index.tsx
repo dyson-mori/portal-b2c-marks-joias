@@ -8,8 +8,7 @@ import { StorageProps } from '@global/interfaces';
 import { AddCircle, MinusCircle, Trash } from '@assets';
 
 import { formats } from '@helpers/format';
-import { Container, CartEmpty, Product, Delete, AddQuantity, TitleDescription, Price, Result } from './styles';
-import { Shopping } from '..';
+import { Container, CartEmpty, Products, Product, Delete, AddQuantity, TitleDescription, Price } from './styles';
 
 interface Props {
   storage: StorageProps[];
@@ -22,12 +21,6 @@ export default function SavedProducts({ storage, setEditStorage, setRemoveStorag
     display: 'flex',
     maxWidth: "300px"
   };
-
-  const totalCentavos = storage
-    .map(v => Math.round(v.price * 100))
-    .reduce((acc, val) => acc + val, 0);
-
-  const sumPrices = totalCentavos / 100;
 
   const handleQuantity = (action: 'add' | 'remove', product: StorageProps) => {
     if (action === 'add' && product.quantity < product.maxQuantity) {
@@ -60,48 +53,42 @@ export default function SavedProducts({ storage, setEditStorage, setRemoveStorag
 
   return (
     <Container>
-      {storage.map((item, index) => (
-        <Product key={index.toString()}>
-          <Image
-            priority
-            src={item.thumbnail}
-            width={400}
-            height={400}
-            alt={item.title}
-            style={{ objectFit: 'cover' }}
-          />
+      <Products>
+        {storage.map((item, index) => (
+          <Product key={index.toString()}>
+            <Image
+              priority
+              src={item.thumbnail}
+              width={400}
+              height={400}
+              alt={item.title}
+            />
 
-          <TitleDescription>
-            <Link href={`product?product_id=${item.id}`}>{item.title}</Link>
-            <p>{item.description}</p>
-          </TitleDescription>
+            <TitleDescription>
+              <Link href={`product?product_id=${item.id}`}>{item.title}</Link>
+              <p>{item.description}</p>
+            </TitleDescription>
 
-          <Price>
-            <p>{formats.money(item.unit_amount)}</p>
-          </Price>
+            <Price>
+              <p>{formats.money(item.unit_amount)}</p>
+            </Price>
 
-          <AddQuantity>
-            <button onClick={() => handleQuantity('remove', item)}>
-              <MinusCircle width={30} height={30} strokeWidth={1} />
-            </button>
-            <p>{item.quantity}</p>
-            <button onClick={() => handleQuantity('add', item)}>
-              <AddCircle width={30} height={30} strokeWidth={1} />
-            </button>
-          </AddQuantity>
+            <AddQuantity>
+              <button onClick={() => handleQuantity('remove', item)}>
+                <MinusCircle width={30} height={30} strokeWidth={1} />
+              </button>
+              <p>{item.quantity}</p>
+              <button onClick={() => handleQuantity('add', item)}>
+                <AddCircle width={30} height={30} strokeWidth={1} />
+              </button>
+            </AddQuantity>
 
-          <Delete type='button' onClick={() => setRemoveStorage(item)}>
-            <Trash width={20} height={20} stroke='red' strokeWidth={2} />
-          </Delete>
-        </Product>
-      ))}
-
-      <Shopping.Checkouts storage={storage} />
-
-      <Result>
-        <p>Total a Pagar</p>
-        <p id='price'>{formats.money(sumPrices)}</p>
-      </Result>
+            <Delete type='button' onClick={() => setRemoveStorage(item)}>
+              <Trash width={20} height={20} stroke='red' strokeWidth={2} />
+            </Delete>
+          </Product>
+        ))}
+      </Products>
     </Container>
   )
 }

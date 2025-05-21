@@ -14,7 +14,7 @@ import { ShoppingContext } from '@context/shopping';
 import { api } from '@services/api';
 import { formats } from '@helpers/format';
 import { Input, Shopping, Splash } from '@components';
-import { Inbox, Routing, User, Home, Mobile, Map, City, Location, Pen, Identity } from '@assets';
+import { Inbox, Routing, User, Home, Mobile, Pen, Identity } from '@assets';
 
 import {
   // methodsPayments,
@@ -24,6 +24,7 @@ import {
 import {
   Container,
   Content,
+  Result,
   // MethodPayment,
   // Methods,
   // Result
@@ -68,7 +69,7 @@ export default function ShoppingCard() {
     mode: 'onChange'
   });
 
-  const { zip_code } = watch();
+  const { city, neighborhood, street, state, zip_code } = watch();
 
   const processForm: SubmitHandler<schemaProps> = async data => {
     setLoading(true);
@@ -143,7 +144,12 @@ export default function ShoppingCard() {
           setValue("state", uf);
           setValue("neighborhood", bairro);
         });
-    }
+    } else if (street && neighborhood && city && state) {
+      setValue("street", '');
+      setValue("city", '');
+      setValue("state", '');
+      setValue("neighborhood", '');
+    };
   }, [zip_code]);
 
   useEffect(() => {
@@ -255,73 +261,38 @@ export default function ShoppingCard() {
               }}
             />
 
-            <div style={{ height: 2 }} />
-            <Controller
-              name='street'
-              control={control}
-              render={({ field: { value, onChange } }) => {
-                return (
-                  <Input.Root variant="checkout" border='0'>
-                    <Input.Icon icon={Map} width={20} height={20} stroke='#FA0B5B' strokeWidth={1.5} />
-                    <Input.Input value={value ?? ''} placeholder='Rua' onChange={onChange} />
-                  </Input.Root>
-                )
-              }}
-            />
-
-            <div style={{ height: 2 }} />
-            <Controller
-              name='city'
-              control={control}
-              render={({ field: { value, onChange } }) => {
-                return (
-                  <Input.Root variant="checkout" border='0'>
-                    <Input.Icon icon={City} width={20} height={20} stroke='#FA0B5B' strokeWidth={1.5} />
-                    <Input.Input value={value ?? ''} placeholder='Cidade' onChange={onChange} />
-                  </Input.Root>
-                )
-              }}
-            />
-
-            <div style={{ height: 2 }} />
-            <Controller
-              name='neighborhood'
-              control={control}
-              render={({ field: { value, onChange } }) => {
-                return (
-                  <Input.Root variant="checkout" border='0'>
-                    <Input.Icon icon={Location} width={20} height={20} fill='#FA0B5B' strokeWidth={1.5} />
-                    <Input.Input value={value ?? ''} placeholder='Bairro' onChange={onChange} />
-                  </Input.Root>
-                )
-              }}
-            />
-
-            <div style={{ height: 2 }} />
-            <Controller
-              name='state'
-              control={control}
-              render={({ field: { value, onChange } }) => {
-                return (
-                  <Input.Root variant="checkout" border='0'>
-                    <Input.Icon icon={Location} width={20} height={20} fill='#FA0B5B' strokeWidth={1.5} />
-                    <Input.Input value={value ?? ''} placeholder='Estado' onChange={onChange} />
-                  </Input.Root>
-                )
-              }}
-            />
-
-            <div style={{ height: 2 }} />
-            <Controller
-              name='number'
-              control={control}
-              render={({ field: { onChange } }) => (
-                <Input.Root variant="checkout" border='0'>
-                  <Input.Icon icon={Home} width={20} height={20} stroke='#FA0B5B' strokeWidth={1.5} />
-                  <Input.Input type='number' placeholder='Numero da Residência' onChange={onChange} />
-                </Input.Root>
-              )}
-            />
+            {
+              street && neighborhood && city && state && (
+                <>
+                  <div style={{ height: 2 }} />
+                  <Controller
+                    name='full_street'
+                    control={control}
+                    render={({ field: { onChange } }) => (
+                      <Input.Root variant="checkout" border='0'>
+                        <Input.Icon icon={Home} width={20} height={20} stroke='#FA0B5B' strokeWidth={1.5} />
+                        <Input.Input
+                          disabled
+                          defaultValue={`${street} • ${neighborhood} • ${city} • ${state}`}
+                          onChange={onChange}
+                        />
+                      </Input.Root>
+                    )}
+                  />
+                  <div style={{ height: 2 }} />
+                  <Controller
+                    name='number'
+                    control={control}
+                    render={({ field: { onChange } }) => (
+                      <Input.Root variant="checkout" border='0'>
+                        <Input.Icon icon={Home} width={20} height={20} stroke='#FA0B5B' strokeWidth={1.5} />
+                        <Input.Input placeholder='Número da Residencia' onChange={onChange} />
+                      </Input.Root>
+                    )}
+                  />
+                </>
+              )
+            }
 
             <div style={{ height: 2 }} />
             <Controller
@@ -337,12 +308,12 @@ export default function ShoppingCard() {
 
             <div style={{ height: 10 }} />
 
-            {/* <Shopping.Checkouts storage={storage} />
+            <Shopping.Checkouts storage={storage} />
 
             <Result>
               <p>Total a Pagar</p>
               <p id='price'>{formats.money(sumPrices)}</p>
-            </Result> */}
+            </Result>
 
           </Content>
 

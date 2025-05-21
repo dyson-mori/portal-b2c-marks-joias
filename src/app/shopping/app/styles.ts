@@ -5,6 +5,7 @@ export const Container = styled.article`
   justify-content: space-between;
 
   width: 100%;
+  height: 85vh;
   padding: 10px 50px;
 
   ${({ theme }) => css`
@@ -15,6 +16,7 @@ export const Container = styled.article`
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      height: auto;
     };
   `};
 `;
@@ -120,3 +122,27 @@ export const Methods = styled.button<{ $selected: boolean }>`
   `};
 `;
 
+export const Result = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 100%;
+
+  border-top: 1px dashed #ddd;
+
+  margin-top: 10px;
+
+  padding: 10px;
+
+  ${({ theme }) => css`
+    #price {
+      font-size: ${theme.font.size.normal};
+      font-weight: ${theme.font.weight[600]};
+    };
+
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      display: none;
+    }
+  `};
+`;

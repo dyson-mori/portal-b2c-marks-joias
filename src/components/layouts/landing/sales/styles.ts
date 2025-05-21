@@ -27,19 +27,14 @@ export const Container = styled.section`
 
 export const ProductList = styled.div`
   display: flex;
+
   flex-wrap: wrap;
   justify-content: space-between;
 
-  img {
-    object-fit: cover;
-    margin-bottom: 5px;
-  };
+  width: 100%;
 
-  @media (max-width: 500px){
-    justify-content: center;
-    img {
-      margin: 5px;
-    };
+  @media (max-width: 710px){
+    justify-content: space-evenly;
   };
 `;
 

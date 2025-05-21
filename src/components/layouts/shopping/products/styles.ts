@@ -9,29 +9,9 @@ export const Container = styled.section`
 
   padding: 10px;
 
-  div:last-child {
-    border: 0px;
-  };
-
   ${({ theme }) => css`
-    /* box-shadow: ${theme.settings.box.simple};
-    background-color: ${theme.colors.white}; */
-
     @media (max-width: ${theme.settings.responsive.maxWidth}){
-      margin-bottom: 5px;
-      flex-direction: row;
-      justify-content: start;
-      background-color: transparent;
-      box-shadow: none;
-
-      overflow-x: scroll;
-      overflow-y: hidden;
-
-      scroll-snap-type: x mandatory;
-
-      aspect-ratio: 1 / 1;
-
-      scrollbar-width: none;
+      padding: 10px 0;
     }
   `};
 `;
@@ -43,6 +23,43 @@ export const CartEmpty = styled.div`
   justify-content: center;
 `;
 
+export const Products = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100%;
+
+  padding: 10px;
+
+  div:last-child {
+    border: 0px;
+  };
+
+  ${({ theme }) => css`
+    @media (max-width: ${theme.settings.responsive.maxWidth}){
+      padding: 0;
+      flex-direction: row;
+      justify-content: start;
+
+      width: 100%;
+      height: auto;
+
+      gap: 10px;
+
+      overflow-x: scroll;
+      overflow-y: hidden;
+
+      scroll-snap-type: x mandatory;
+
+      aspect-ratio: 1 / 1;
+
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+  `};
+`;
+
 export const Product = styled.div`
   position: relative;
   display: flex;
@@ -52,40 +69,31 @@ export const Product = styled.div`
   width: 100%;
   align-items: center;
 
-  /* .quantity {
-    display: flex;
-    justify-content: center;
-    width: 50%;
-  }; */
-
   img {
     width: 100px;
     height: 100px;
     aspect-ratio: 1/1;
-  }
+    object-fit: cover;
+  };
 
   border-bottom: 1px solid #f4f4f4;
 
   ${({ theme }) => css`
     @media (max-width: ${theme.settings.responsive.maxWidth}){
+      width: 100%;
       height: 100%;
+
       padding: 0px;
-      margin: 2px;
+      /* margin: 2px; */
       aspect-ratio: 1/1;
       scroll-snap-align: start;
+      border-bottom: 0px;
+
 
       img {
         width: 100%;
         height: 100%;
       };
-
-      /* .quantity {
-        position: absolute;
-
-        width: 100%;
-
-        bottom: 10px;
-      }; */
     };
   `};
 `;
@@ -139,15 +147,20 @@ export const TitleDescription = styled.div`
       position: absolute;
 
       width: 100%;
-      justify-content: center;
+      height: auto;
 
       bottom: 60px;
 
       a {
         color: #fff;
         font-weight: 400;
-        width: calc(100vw / 1.2);
+        width: 100%;
+        text-align: center;
       };
+
+      p {
+        display: none;
+      }
     };
   `};
 `;
@@ -183,6 +196,14 @@ export const Price = styled.div`
 export const AddQuantity = styled.div`
   display: flex;
 
+  button {
+    border: 0px;
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  };
+
   ${({ theme }) => css`
     svg {
       stroke: ${theme.colors.primary};
@@ -193,23 +214,30 @@ export const AddQuantity = styled.div`
       justify-content: center;
       align-items: center;
       width: 25px;
+      color: #000;
       font-size: ${theme.font.size.light};
     };
 
     @media (max-width: ${theme.settings.responsive.maxWidth}){
       position: absolute;
       width: 100%;
-      bottom: 10px;
+      bottom: 0px;
+      justify-content: center;
+
+      /* background: linear-gradient(180deg, rgba(48,48,48,0) 0%, rgba(48,48,48,1) 100%, rgba(0,212,255,1) 100%); */
+      svg {
+        width: 50px;
+        height: 50px;
+        stroke: ${theme.colors.primary};
+      };
+
+      P {
+        width: 50px;
+        font-size: ${theme.font.size.normal};
+        font-weight: 600;
+      };
     };
   `};
-
-  button {
-    border: 0px;
-    background-color: transparent;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-  };
 `;
 
 export const Delete = styled.button`
@@ -239,30 +267,10 @@ export const Delete = styled.button`
       right: 15px;
 
       svg {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
         stroke-width: 1.5;
       };
-    };
-  `};
-`;
-
-export const Result = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  width: 100%;
-
-  border-top: 1px dashed #ddd;
-
-  margin-top: 10px;
-
-  padding: 10px;
-
-  ${({ theme }) => css`
-    #price {
-      font-size: ${theme.font.size.normal};
-      font-weight: ${theme.font.weight[600]};
     };
   `};
 `;

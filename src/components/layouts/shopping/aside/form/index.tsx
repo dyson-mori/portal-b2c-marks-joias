@@ -16,7 +16,7 @@ export default function Form({ disabled, currentStep, children, loadingButton, o
   return (
     <Container onSubmit={onSubmit}>
       {children}
-      <Button type="submit" $variant={loadingButton ? "loading" : "success"} disabled={disabled}>
+      <Button type="submit" $variant={loadingButton ? "loading-success" : "success"} disabled={disabled}>
         {currentStep === 2 ? 'Finalizar' : 'Próximo'}
       </Button>
     </Container>

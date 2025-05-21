@@ -72,7 +72,7 @@ export const IconStyles = styled.div`
   position: relative;
   width: 50px;
 
-   svg {
+  svg {
     position: absolute;
 
     top: 50%;

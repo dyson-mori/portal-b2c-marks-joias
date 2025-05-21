@@ -58,6 +58,13 @@ export const Container = styled.button<{ $variant: Variant }>`
       opacity: .5;
     `};
 
+    ${$variant === 'loading-success' && css`
+      background-color: ${theme.colors.success};
+      color: ${theme.colors.white};
+      cursor: default;
+      opacity: .5;
+    `};
+
     ${$variant === 'white' && css`
       background-color: ${theme.colors.white};
       color: ${theme.colors.granite_gray};

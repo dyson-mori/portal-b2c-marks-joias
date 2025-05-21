@@ -37,7 +37,7 @@ const IconComponent: React.FC<IconProps> = ({ icon: Icon, width, height, fill, s
   <IconStyles>
     <Icon width={width} height={height} fill={fill ?? 'transparent'} stroke={stroke ?? 'transparent'} strokeWidth={strokeWidth} />
   </IconStyles>
-)
+);
 
 const InputComponent: React.FC<InputHTMLAttributes<HTMLInputElement>> = ({ ...rest }) => {
   return (
@@ -55,5 +55,5 @@ export const Input = {
   Root,
   Icon: IconComponent,
   Input: InputComponent,
-  TextArea
+  TextArea,
 }
