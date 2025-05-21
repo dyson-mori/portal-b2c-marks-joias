@@ -48,7 +48,7 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         quantity: 1,
 
         unit_amount: product.price,
-        maxQuantity: 10,
+        maxQuantity: product.quantity,
         description: product.description,
       }];
     }
