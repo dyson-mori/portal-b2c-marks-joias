@@ -5,7 +5,7 @@ export const Container = styled.article`
   justify-content: space-between;
 
   width: 100%;
-  height: 85vh;
+  min-height: 85vh;
   padding: 10px 50px;
 
   ${({ theme }) => css`
