@@ -15,7 +15,7 @@ type Props = {
       id: string;
       quantity: string;
       title: string;
-        thumbnail: string;
+      picture_url: string;
       unit_price: string;
     }[];
     payer: {
@@ -60,7 +60,7 @@ export default function SuccessApp({ data }: Props) {
             key={index.toString()}
             width={350}
             height={350}
-            src={row.thumbnail}
+            src={row.picture_url}
             alt={row.title}
           />
         ))}
