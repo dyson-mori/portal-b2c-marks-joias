@@ -7,8 +7,6 @@ export type ProductProps = Product & {
 
 export type StorageProps = {
   id: number;
-  product_id: string;
-  price_id: string;
   title: string;
   price: number;
   maxQuantity: number;

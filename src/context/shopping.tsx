@@ -39,9 +39,6 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       updatedCart = [...state, {
         id: product.id,
 
-        price_id: '', // remove
-        product_id: '', // remove
-
         thumbnail: product.files[0],
         title: product.title,
         price: product.price,
