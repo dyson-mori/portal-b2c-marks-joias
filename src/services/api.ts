@@ -8,7 +8,7 @@ import { PaidMarketProps } from "@global/interfaces";
 interface FetcherParams {
   url: string;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-  // next?: RequestInit['next'];
+  next?: RequestInit['next'];
   body?: object;
   cache?: 'default' | 'force-cache' | 'no-cache' | 'no-store' | 'reload' | 'only-if-cached',
   // body?: Record<string, object>;
@@ -22,6 +22,7 @@ const fetcher = async ({
   method,
   body,
   header = {},
+  next = {},
   cache = 'default'
 }: FetcherParams) => {
   try {
@@ -33,7 +34,7 @@ const fetcher = async ({
     const res = await fetch(fullUrl, {
       method,
       cache,
-      next: { revalidate: 0 },
+      next,
       headers: {
         'Content-Type': 'application/json',
         ...header,
@@ -69,7 +70,15 @@ export const api = {
     find: (product_id: string) => fetcher({ method: 'GET', url: `/product?product_id=${product_id}` })
   },
   header: {
-    list: () => fetcher({ method: 'GET', url: '/header', cache: 'force-cache' })
+    list: () =>
+      fetcher({
+        method: 'GET',
+        url: '/header',
+        cache: 'force-cache',
+        next: {
+          revalidate: 60 /*secounds*/ * 60 /*minutes*/ * 24 /*hours*/ * 3 /*days*/
+        }
+      })
   },
   category: {
     list: () => fetcher({ method: 'GET', url: '/category', cache: 'force-cache' }),
@@ -85,7 +94,15 @@ export const api = {
     search: (order_id: string) => fetcher({ method: 'GET', url: `/tracking?order_id=${order_id}` }),
   },
   banner: {
-    list: () => fetcher({ method: 'GET', url: '/banner', cache: 'force-cache' }),
+    list: () =>
+      fetcher({
+        method: 'GET',
+        url: '/banner',
+        cache: 'force-cache',
+        next: {
+          revalidate: 60 /*secounds*/ * 60 /*minutes*/ * 24 /*hours*/ * 3 /*days*/
+        }
+      }),
   },
   correio: {
     get: (cep: string) => fetch(`https://viacep.com.br/ws/${cep}/json/`).then(jsn => jsn.json()),
