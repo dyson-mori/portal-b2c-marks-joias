@@ -1,14 +1,14 @@
-// import nodemailer from 'nodemailer';
+import nodemailer from 'nodemailer';
 
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     type: "OAuth2",
-//     user: "me@gmail.com",
-//     clientId: process.env.GOOGLE_CLIENT_ID,
-//     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-//     refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
-//   },
-// });
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GOOGLE_APP_EMAIL,
+    pass: process.env.GOOGLE_APP_PASSWORD,
+  },
+  tls: {
+    rejectUnauthorized: false
+  }
+});
 
-// export { transporter };
+export { transporter };
