@@ -4,3 +4,4 @@ export * from './layouts';
 export * from './splash';
 export * from './modal';
 export * from './input';
+export * from './checkbox';

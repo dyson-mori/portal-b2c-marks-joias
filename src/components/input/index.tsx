@@ -10,15 +10,16 @@ type RootProp = {
   children: ReactNode;
   variant: Variant;
   border?: string;
+  disabled?: boolean;
 };
 
-function Root({ children, variant, border }: RootProp) {
+function Root({ children, variant, border, disabled = false }: RootProp) {
   const style = {
     borderRadius: border
   };
 
   return (
-    <Container style={style} $variant={variant} id='input-container'>
+    <Container style={style} $variant={variant} $disabled={disabled} id='input-container'>
       {children}
     </Container>
   )

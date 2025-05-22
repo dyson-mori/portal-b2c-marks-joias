@@ -23,7 +23,7 @@ export default function SavedProducts({ storage, setEditStorage, setRemoveStorag
   };
 
   const handleQuantity = (action: 'add' | 'remove', product: StorageProps) => {
-    if (action === 'add' && product.quantity < product.maxQuantity) {
+    if (action === 'add' && product.quantity < product.total_quantity) {
       return setEditStorage({
         ...product,
         price: product.price + product.unit_amount!,

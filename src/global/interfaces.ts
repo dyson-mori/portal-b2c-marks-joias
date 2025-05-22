@@ -9,11 +9,11 @@ export type StorageProps = {
   id: number;
   title: string;
   price: number;
-  maxQuantity: number;
   thumbnail: string;
   quantity: number;
   unit_amount: number;
   description: string;
+  total_quantity: number;
 };
 
 export type PaidMarketProps = {
@@ -23,6 +23,7 @@ export type PaidMarketProps = {
   phone: string;
 
   cpf: string;
+  pick_up_in_store: boolean;
 
   zip_code: string; // '32310370';
   number: string; // '920';

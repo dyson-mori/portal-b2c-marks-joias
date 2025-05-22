@@ -13,7 +13,7 @@ import { ShoppingContext } from '@context/shopping';
 
 import { api } from '@services/api';
 import { formats } from '@helpers/format';
-import { Input, Shopping, Splash } from '@components';
+import { CheckBox, Input, Shopping, Splash } from '@components';
 import { Inbox, Routing, User, Home, Mobile, Pen, Identity } from '@assets';
 
 import {
@@ -69,7 +69,7 @@ export default function ShoppingCard() {
     mode: 'onChange'
   });
 
-  const { city, neighborhood, street, state, zip_code } = watch();
+  const { city, neighborhood, street, state, zip_code, pick_up_in_store } = watch();
 
   const processForm: SubmitHandler<schemaProps> = async data => {
     setLoading(true);
@@ -80,70 +80,26 @@ export default function ShoppingCard() {
       phone: data.phone,
       products: storage,
       cpf: data.cpf,
+
+      zip_code: data.zip_code,
       street: data.street,
       city: data.city,
       state: data.state,
       number: data.number,
       neighborhood: data.neighborhood,
+
       description: data.description ?? '',
-      zip_code: data.zip_code
+      pick_up_in_store: data.pick_up_in_store,
     });
 
     return route.push(result.initPoint);
   };
 
-  async function calcularFrete(data: { cep: string }) {
-    const params = new URLSearchParams({
-      sCepOrigem: "01001-000", // CEP de origem (loja)
-      sCepDestino: data.cep,
-      nVlPeso: "1",
-      nCdFormato: "1",
-      nVlComprimento: "20",
-      nVlAltura: "5",
-      nVlLargura: "15",
-      nCdServico: "04510", // PAC = 04510 | SEDEX = 04014
-      nVlDiametro: "0",
-      sCdMaoPropria: "n",
-      nVlValorDeclarado: "0",
-      sCdAvisoRecebimento: "n",
-      StrRetorno: "xml",
-      nCdEmpresa: "",
-      sDsSenha: "",
-    });
-
-    const url = `https://cors-anywhere.herokuapp.com/https://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?${params.toString()}`;
-
-    const response = await fetch(url);
-    const text = await response.text();
-
-    // Extrair valor do frete do XML
-    const match = text.match(/<Valor>([^<]*)<\/Valor>/);
-    if (match && match[1]) {
-      const valorFrete = parseFloat(match[1].replace(",", "."));
-      console.log({ valorFrete });
-    // console.log(produtoPreco + valorFrete);
-
-      // setFrete(valorFrete);
-      // setTotal(produtoPreco + valorFrete);
-    } else {
-      alert("Não foi possível calcular o frete.");
-    }
-  }
-
-  // const Icons = ({ id }: { id: string }) => {
-  //   if (id === 'clyp6mut5000ay4iw0rcg2vve')
-  //     return <Cards width={25} height={25} strokeWidth={1.5} stroke="#dedede" />
-
-  //   return <Pix width={25} height={25} fill="#dedede" />;
-  // };
-
   useEffect(() => {
     if (zip_code?.length === 8) {
       api.correio.get(zip_code)
-        .then((res) => {
-          const { logradouro, localidade, uf, bairro, cep } = res as ZipCodeProps;
-
-          calcularFrete({ cep });
+        .then(async (res) => {
+          const { logradouro, localidade, uf, bairro } = res as ZipCodeProps;
 
           setValue("street", logradouro);
           setValue("city", localidade);
@@ -259,9 +215,16 @@ export default function ShoppingCard() {
               control={control}
               render={({ field: { value, onChange } }) => {
                 return (
-                  <Input.Root variant="checkout" border='0 9px 0 0'>
+                  <Input.Root variant="checkout" border='0 9px 0 0' disabled={pick_up_in_store}>
                     <Input.Icon icon={Routing} width={20} height={20} stroke='#FA0B5B' strokeWidth={1.8} />
-                    <Input.Input value={formats.cep(value)} name='cep' type='text' placeholder='CEP' onChange={onChange} />
+                    <Input.Input
+                      disabled={pick_up_in_store}
+                      value={formats.cep(value)}
+                      name='cep'
+                      type='text'
+                      placeholder='CEP'
+                      onChange={onChange}
+                    />
                   </Input.Root>
                 )
               }}
@@ -309,6 +272,15 @@ export default function ShoppingCard() {
                   <Input.Icon icon={Pen} width={20} height={20} stroke='#FA0B5B' strokeWidth={1.5} />
                   <Input.Input placeholder='Descrição (Opcional)' onChange={onChange} />
                 </Input.Root>
+              )}
+            />
+
+            <div style={{ height: 2 }} />
+            <Controller
+              name='pick_up_in_store'
+              control={control}
+              render={({ field: { onChange } }) => (
+                <CheckBox title='Desejo retirar no local!' onChange={onChange} />
               )}
             />
 

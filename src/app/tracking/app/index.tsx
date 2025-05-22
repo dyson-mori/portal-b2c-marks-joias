@@ -1,8 +1,12 @@
 "use client";
+
 import { useState } from "react";
+
 import { Box, CubeScan, Delivery, Verify } from "@assets";
-import { Container, Content, Input, Step, Progress, StepLabel, Steps, Pulse, Poppup } from "./styles";
 import { api } from "@services/api";
+import { orderStatusNumber } from "@helpers/index";
+
+import { Container, Content, Input, Step, Progress, StepLabel, Steps, Pulse, Poppup } from "./styles";
 
 interface StepProps {
   pulse: "active" | "deactivate" | "completed";
@@ -23,8 +27,6 @@ const getStepState = (status: number, activeIndex: number, completedIndex: numbe
 });
 
 export default function OrderSteps() {
-  // cmau83bgb0005ucso7h450qxz
-
   const [status, setStatus] = useState(0);
 
   const handleInput = async (evt: React.KeyboardEvent<HTMLInputElement>) => {
@@ -32,7 +34,7 @@ export default function OrderSteps() {
 
     if (evt.key === "Enter") {
       const data = await api.tracking.search(value);
-      setStatus(data.status); // Simulação do status sendo alterado
+      setStatus(orderStatusNumber(data.status)); // Simulação do status sendo alterado
     };
   };
 

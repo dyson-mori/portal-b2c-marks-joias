@@ -14,32 +14,37 @@ datasource db {
   directUrl = env("NEXT_DIRECT_URL")
 }
 
-// enum OrderStatus {
-//   PENDING
-//   PROCESSING
-//   SHIPPED
-//   DELIVERED
-//   CANCELED
-//   RETURNED
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELED
+  RETURNED
+}
+
+// model User {
+//   id String @id @default(uuid())
+
+//   Order Order[]
+
+//   @@map("user")
 // }
 
 model Product {
   id          Int @id @unique
   category_id Int // will be use like -> Code Number <-
 
-  title       String
-  description String
-  price       Int // review this
-  unit_amount Int // review this
-  search      String // facilitate search
-  thumbnail   String
-  files       String @default("[]")
-  quantity    Int // product quantity
+  title          String
+  description    String
+  price          Int // review this
+  search         String // facilitate search
+  thumbnail      String
+  total_quantity Int // product quantity
+  files          String @default("[]")
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-
-  orders Order[]
 
   categories Category @relation(fields: [category_id], references: [id])
 
@@ -78,25 +83,20 @@ model Category {
 
 model Order {
   id String @id @default(cuid())
-  // userId String
-  // user   User   @relation(fields: [userId], references: [id])
 
-  // status            OrderStatus @default(PENDING)
-  status             Int     @default(0)
+  status             OrderStatus @default(PENDING)
   payment_method     String // ex: 'credit_card', 'boleto'
   payment_status     String // ex: 'approved', 'pending', 'rejected'
-  external_reference String? // usado no Mercado Pago
+  external_reference String // usado no Mercado Pago. Ex: PAY-1716258356842-3F5KZP
 
   total_amount  Decimal // total order value
   shipping_sost Decimal // valor cobrado pelo frete
-  discount      Decimal  @default(0)
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
+  discount      Decimal @default(0)
 
-  delivery_address_id String
-  delivery_address    Address @relation(fields: [delivery_address_id], references: [id])
+  pick_up_in_store Boolean? @default(false)
 
-  products Product[]
+  address String? @default("{}")
+  product String  @default("[]") // snapShot
 
   tracking_code      String? // código dos correios ou logística própria
   estimated_delivery DateTime? // previsão da entrega
@@ -104,8 +104,8 @@ model Order {
 
   notes String? // campo para observações logísticas
 
-  quantity  Int // quantity request
-  unitPrice Decimal
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("order")
 }
@@ -115,15 +115,13 @@ model Address {
   // user   User?   @relation(fields: [userId], references: [id])
   // userId String?
 
-  street       String
+  zip_code     String
   number       String
-  complement   String?
+  street       String
   neighborhood String
   city         String
   state        String
-  zip_code     String
-
-  orders Order[]
+  complement   String?
 }
 
 model Banner {

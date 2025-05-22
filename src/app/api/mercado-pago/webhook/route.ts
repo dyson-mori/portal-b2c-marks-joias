@@ -1,9 +1,11 @@
 import { NextResponse, NextRequest } from "next/server";
+
 import { Payment } from "mercadopago";
+import { AdditionalInfo } from "mercadopago/dist/clients/payment/commonTypes";
+
+import { prisma } from "@services/prisma";
 import { paid_market_api } from "@services/mercado-pago";
 import { handleMercadoPagoPayment } from "@services/mercado-pago/handle-payment";
-import { prisma } from "@services/prisma";
-import { AdditionalInfo } from "mercadopago/dist/clients/payment/commonTypes";
 
 type PaymentProps = {
   action: string; // "payment.updated",
@@ -29,23 +31,31 @@ export async function POST(request: NextRequest) {
       const payment = new Payment(paid_market_api);
       const paymentData = await payment.get({ id: data.id }); // data.id = collection_id
 
-      const complement = paymentData.metadata.description;
+      const { description } = paymentData.metadata;
       const { items, payer } = paymentData.additional_info as AdditionalInfo;
 
       const fullAddress = payer?.address?.street_name as string;
       const [street, neighborhood, city, state] = fullAddress.split(" • ").map(item => item.trim());
 
-      const address = await prisma.address.create({
-        data: {
-          city,
-          neighborhood,
-          number: payer!.address!.street_number!,
-          state,
-          street,
-          zip_code: payer!.address!.zip_code!,
-          complement
-        }
-      });
+      let address_obj = {};
+
+      const pick_up_in_store = true;
+
+      if (!pick_up_in_store) {
+        const address = await prisma.address.create({
+          data: {
+            city,
+            neighborhood,
+            number: payer!.address!.street_number!,
+            state,
+            street,
+            zip_code: payer!.address!.zip_code!,
+            complement: description
+          }
+        });
+
+        address_obj = address;
+      };
 
       const total_amount = items!.reduce((acc, item) => {
         return acc + item.unit_price * item.quantity;
@@ -53,32 +63,29 @@ export async function POST(request: NextRequest) {
 
       await prisma.order.create({
         data: {
-          status: 1,
+          status: "PENDING",
           payment_method: paymentData.payment_method!.type!,
           payment_status: paymentData.status!,
-          external_reference: paymentData.external_reference,
+          external_reference: paymentData.external_reference!,
           shipping_sost: 0, // valor do transporte, seja correio ou particular
           total_amount: total_amount!, // valor total do produto + shipping_sost
           discount: 0,
-          products: {
-            connect: items?.map(el => ({ id: Number(el.id) }))
-          },
-          delivery_address_id: address.id,
+          product: JSON.stringify(items),
+          address: JSON.stringify(address_obj),
           notes: '',
-          quantity: 1, // remover isso
-          unitPrice: 0, // remover isso
+          pick_up_in_store
         }
       });
 
       await Promise.all(
-        items!.map(async (produto) => {
+        items!.map(async (product) => {
           await prisma.product.update({
             where: {
-              id: Number(produto.id)
+              id: Number(product.id)
             },
             data: {
-              quantity: {
-                decrement: Number(produto.quantity) // reduz do estoque atual
+              total_quantity: {
+                decrement: Number(product.quantity) // reduz do estoque atual
               }
             }
           });

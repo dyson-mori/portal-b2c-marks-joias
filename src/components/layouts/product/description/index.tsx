@@ -17,7 +17,7 @@ type Props = {
 
 export default function Description({ data, width, storage, handleBuy, onAddToCart }: Props) {
   const label = storage.find(item => item.id === data.id) ? 'Remover do Carrinho' : 'Adicionar ao Carrinho';
-  const isItInStock = data.quantity === 0;
+  const isItInStock = data.total_quantity === 0;
 
   return (
     <Container style={{ width: width - 100 }}>

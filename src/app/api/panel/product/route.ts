@@ -13,7 +13,7 @@ function formatCode(code: number, last_product: number) {
 };
 
 export async function POST(request: NextRequest) {
-  const { category_id, title, description, files, price, search, quantity } = await request.json() as Product;
+  const { category_id, title, description, files, price, search, total_quantity } = await request.json() as Product;
 
   const product_amount = await prisma.product.count({
     where: {
@@ -41,11 +41,10 @@ export async function POST(request: NextRequest) {
       title,
       description,
       price: Number(price),
-      unit_amount: price,
       files: JSON.stringify(files),
       thumbnail: files[0],
       search,
-      quantity
+      total_quantity
     }
   });
 

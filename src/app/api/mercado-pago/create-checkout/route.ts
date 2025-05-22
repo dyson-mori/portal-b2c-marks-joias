@@ -4,12 +4,7 @@ import { paid_market_api } from "@services/mercado-pago";
 
 import { PaidMarketProps } from "@global/interfaces";
 import { formats } from "@helpers/format";
-
-function generatePaymentId() {
-  const timestamp = Date.now(); // Ex: 1716258356842
-  const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase(); // Ex: 3F5KZP
-  return `PAY-${timestamp}-${randomPart}`; // Ex: PAY-1716258356842-3F5KZP
-}
+import { generatePaymentId } from "@helpers/index";
 
 export async function OPTIONS() {
   return NextResponse.json({}, {
@@ -35,7 +30,8 @@ export async function POST(req: NextRequest) {
     number,
     state,
     street,
-    cpf
+    cpf,
+    pick_up_in_store
   } = await req.json() as PaidMarketProps;
 
   const splitting = full_name.split(' ');
@@ -51,7 +47,8 @@ export async function POST(req: NextRequest) {
         notification_url: `${process.env.NEXT_PUBLIC_MARKS_URL}/mercado-pago/webhook`,
         metadata: {
           client_email: email,
-          description
+          description,
+          pick_up_in_store
         },
         payer: {
           name: full_name,
@@ -99,7 +96,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ preferenceId: createdPreference.id, initPoint: createdPreference.init_point }, {
       headers: {
         'Access-Control-Allow-Origin': '*', // ou use seu domínio ngrok
-      },
+      }
     });
   } catch (err) {
     console.error(err);

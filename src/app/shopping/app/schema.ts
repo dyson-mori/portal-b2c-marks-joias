@@ -23,21 +23,55 @@ export const schema = yup.object().shape({
       return digits!.length === 11
     })
     .required(),
+
   zip_code: yup
     .string()
-    .test('cpf', (value) => {
-      const digits = value?.replaceAll('.', '').replace('-', '');
-      return digits!.length === 8
-    })
-    .required(),
+    .when('pick_up_in_store', {
+      is: true,
+      then: (schema) => schema.notRequired(),
+      otherwise: (schema) =>
+        schema
+          .test('zip_code', (value) => {
+            const digits = value?.replaceAll('.', '').replace('-', '');
+            return digits!.length === 8;
+          })
+          .required(),
+    }).default(''),
 
-  street: yup.string().required(),
-  city: yup.string().required(),
-  state: yup.string().required(),
-  number: yup.string().required(),
-  neighborhood: yup.string().required(),
+  street: yup.string().when('pick_up_in_store', {
+    is: true,
+    then: (schema) => schema.notRequired(),
+    otherwise: (schema) => schema.required(),
+  }).default(''),
+
+  city: yup.string().when('pick_up_in_store', {
+    is: true,
+    then: (schema) => schema.notRequired(),
+    otherwise: (schema) => schema.required(),
+  }).default(''),
+
+  state: yup.string().when('pick_up_in_store', {
+    is: true,
+    then: (schema) => schema.notRequired(),
+    otherwise: (schema) => schema.required(),
+  }).default(''),
+
+  number: yup.string().when('pick_up_in_store', {
+    is: true,
+    then: (schema) => schema.notRequired(),
+    otherwise: (schema) => schema.required(),
+  }).default(''),
+
+  neighborhood: yup.string().when('pick_up_in_store', {
+    is: true,
+    then: (schema) => schema.notRequired(),
+    otherwise: (schema) => schema.required(),
+  }).default(''),
+
   full_street: yup.string().nullable().default(''),
-  description: yup.string().notRequired().default('')
+  description: yup.string().notRequired().default(''),
+
+  pick_up_in_store: yup.boolean().required().default(false),
 }).required();
 
 export type schemaProps = yup.InferType<typeof schema>;

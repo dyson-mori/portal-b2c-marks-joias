@@ -13,7 +13,7 @@
     {
       "title": "Consignado",
       "param": "/consigned",
-      "public": true
+      "public": false
     },
     {
       "title": "Rastreamento",
@@ -23,63 +23,111 @@
   ],
   "products": [
     {
-      "id": 120005,
-      "category_id": 12,
-      "title": "Gargantilha Pavão Real Multicolor",
-      "description": "A Gargantilha Pavão Real Multicolor é uma peça vibrante e cheia de personalidade. Com um pingente em formato de pavão, cravejado com zircônias coloridas que remetem à beleza das penas dessa ave majestosa, ele transmite elegância e originalidade. O corpo do pavão é detalhado com microzircônias transparentes, enquanto as asas em pedras multicoloridas trazem um charme alegre e sofisticado. Ideal para quem ama joias únicas e marcantes!",
-      "price": 31000,
-      "unit_amount": 31000,
-      "search": "Gargantilha espirito santo pedraria",
+      "id": 400001,
+      "category_id": 4,
+      "title": "Conjunto Rosé Clássico com Zircônias",
+      "description": "Inspirado na delicadeza e elegância das formas circulares, o Conjunto Rosé Clássico combina banho dourado com detalhes em zircônias que realçam o brilho e a sofisticação da peça. Ideal para mulheres que amam um toque refinado no visual do dia a dia ou em eventos especiais.",
+      "price": 100,
+      "search": "Conjunto circular com pedraria",
       "files": [
-        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416129/120753_vzgnde.jpg",
-        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416125/120753_01_fppejy.jpg",
-        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416127/120753_02_kkifzg.jpg"
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747848587/400393_-_Copia_a9hl5d.webp",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747848587/400393-cm_htz4kp.jpg"
       ],
-      "quantity": 10
+      "total_quantity": 1
+    },
+    {
+      "id": 400002,
+      "category_id": 4,
+      "title": "Conjunto Corações Rubi e Zircônias",
+      "description": "Pura sofisticação! O Conjunto Corações Rubi e Zircônias traz o brilho marcante das pedras vermelhas em formato de coração, combinadas com zircônias cintilantes que valorizam ainda mais a peça. Um charme ideal para ocasiões especiais ou para elevar seu look com romantismo e elegância.",
+      "price": 100,
+      "search": "Conjunto coracao 6 pedras 1 pedra vermelha",
+      "files": [
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747848587/400373_dzp26o.webp",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747848587/400373-cm_unbe9b.jpg"
+      ],
+      "total_quantity": 1
     },
     {
       "id": 120004,
       "category_id": 12,
-      "title": "Gargantilha Coração Vazado com Zircônias Coloridas",
-      "description": "A Gargantilha Coração Vazado com Zircônias Coloridas é a combinação perfeita entre romantismo e modernidade. Seu design leve e elegante destaca um coração vazado adornado com zircônias multicoloridas, que trazem brilho e vivacidade à peça. Com acabamento dourado e tamanho delicado, é ideal para quem deseja expressar amor, alegria e estilo em um único acessório. Perfeito para presentear ou complementar seu visual com charme e personalidade.",
-      "price": 19890,
-      "unit_amount": 19890,
-      "search": "Gargantilha coracao pedraria colorida",
+      "title": "Gargantilha Coração Contorno Dourado",
+      "description": "Delicada e atemporal, a Gargantilha Coração Contorno Dourado é perfeita para quem ama demonstrar sentimentos com estilo. O pingente em formato de coração vazado traz leveza e romantismo, enquanto o banho dourado garante brilho e elegância para qualquer ocasião.",
+      "price": 11000,
+      "search": "Gargantilha coracao liso",
       "files": [
-        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747403814/120755_ziope7.jpg",
-        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747403814/120755_01_rveris.jpg",
-        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747403814/120755_02_cs4aeh.jpg"
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747668294/120758_s6roeq.jpg",
+        "https://res.cloudinary.com/doo9pfft1/video/upload/v1747668295/120758_laeaoy.webm"
       ],
-      "quantity": 10
+      "total_quantity": 1
     },
     {
-      "id": 110003,
-      "category_id": 11,
-      "title": "Choker Dourada com Pedras Pretas Facetadas",
-      "description": "Choker elegante folheada a ouro, composta por pedras pretas facetadas que refletem a luz com sofisticação. Um acessório moderno e delicado, perfeito para valorizar o pescoço com estilo. Ideal para compor looks versáteis — do casual ao refinado.",
-      "price": 17990,
-      "unit_amount": 17990,
-      "search": "Choker elos 12 pedras 4.3g",
+      "id": 120000,
+      "category_id": 12,
+      "title": "Gargantilha Coração Pantera",
+      "description": "Elegância e atitude em uma só peça. A Gargantilha Coração Pantera combina o charme do banho dourado com o design moderno do pingente em forma de coração com recorte de pantera — símbolo de força, poder e estilo. Perfeita para quem gosta de marcar presença com sofisticação.",
+      "price": 16990,
+      "search": "Gargantilha coracao liso 4.2g",
       "files": [
-        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747240125/110254_n1tgsf.jpg",
-        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747240126/110254_01_zwwont.jpg"
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747667107/120703_dvjnrf.jpg",
+        "https://res.cloudinary.com/doo9pfft1/video/upload/v1747667108/120703_video_vn2rzi.webm"
       ],
-      "quantity": 10
+      "total_quantity": 1
     },
     {
-      "id": 120002,
+      "id": 120005,
       "category_id": 12,
       "title": "Gargantilha Pantera Dourada Lux",
       "description": "A Gargantilha Pantera Dourada Lux é uma peça imponente que combina elegância com atitude. O pingente em forma de cabeça de pantera, cravejado com microzircônias e olhos em pedra verde, transmite força e sofisticação. Com corrente fina e delicada, essa joia é perfeita para quem deseja um visual marcante e poderoso. Ideal para eventos noturnos ou para elevar o look do dia a dia com um toque selvagem e refinado.",
       "price": 17990,
-      "unit_amount": 17990,
       "search": "Gargantilha pantera pedraria",
       "files": [
         "https://res.cloudinary.com/doo9pfft1/image/upload/v1747239727/120756_bnrv9k.jpg",
         "https://res.cloudinary.com/doo9pfft1/image/upload/v1747239727/120756_01_f3lcbk.jpg",
         "https://res.cloudinary.com/doo9pfft1/image/upload/v1747239728/120756_02_qubeq2.jpg"
       ],
-      "quantity": 10
+      "total_quantity": 1
+    },
+    {
+      "id": 120002,
+      "category_id": 12,
+      "title": "Gargantilha Pavão Real Multicolor",
+      "description": "A Gargantilha Pavão Real Multicolor é uma peça vibrante e cheia de personalidade. Com um pingente em formato de pavão, cravejado com zircônias coloridas que remetem à beleza das penas dessa ave majestosa, ele transmite elegância e originalidade. O corpo do pavão é detalhado com microzircônias transparentes, enquanto as asas em pedras multicoloridas trazem um charme alegre e sofisticado. Ideal para quem ama joias únicas e marcantes!",
+      "price": 31000,
+      "search": "Gargantilha espirito santo pedraria",
+      "files": [
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416129/120753_vzgnde.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416125/120753_01_fppejy.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747416127/120753_02_kkifzg.jpg"
+      ],
+      "total_quantity": 1
+    },
+    {
+      "id": 120001,
+      "category_id": 12,
+      "title": "Gargantilha Coração Vazado com Zircônias Coloridas",
+      "description": "A Gargantilha Coração Vazado com Zircônias Coloridas é a combinação perfeita entre romantismo e modernidade. Seu design leve e elegante destaca um coração vazado adornado com zircônias multicoloridas, que trazem brilho e vivacidade à peça. Com acabamento dourado e tamanho delicado, é ideal para quem deseja expressar amor, alegria e estilo em um único acessório. Perfeito para presentear ou complementar seu visual com charme e personalidade.",
+      "price": 19890,
+      "search": "Gargantilha coracao pedraria colorida",
+      "files": [
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747403814/120755_ziope7.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747403814/120755_01_rveris.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747403814/120755_02_cs4aeh.jpg"
+      ],
+      "total_quantity": 1
+    },
+    {
+      "id": 110001,
+      "category_id": 11,
+      "title": "Choker Dourada com Pedras Pretas Facetadas",
+      "description": "Choker elegante folheada a ouro, composta por pedras pretas facetadas que refletem a luz com sofisticação. Um acessório moderno e delicado, perfeito para valorizar o pescoço com estilo. Ideal para compor looks versáteis — do casual ao refinado.",
+      "price": 17990,
+      "search": "Choker elos 12 pedras 4.3g",
+      "files": [
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747240125/110254_n1tgsf.jpg",
+        "https://res.cloudinary.com/doo9pfft1/image/upload/v1747240126/110254_01_zwwont.jpg"
+      ],
+      "total_quantity": 1
     },
     {
       "id": 110000,
@@ -87,14 +135,13 @@
       "title": "Choker Dourada com Pingentes de Gota em Pedra Preta",
       "description": "Choker sofisticada folheada a ouro, com delicados pingentes em formato de gota com pedra preta, incluindo um pingente central em destaque. Um design leve e elegante, ideal para compor looks com um toque de charme e modernidade. Perfeita para ocasiões especiais ou para dar um upgrade no visual do dia a dia.",
       "price": 14990,
-      "unit_amount": 14990,
       "search": "Choker 6 pedras pequenas e 1 grande 2.9g",
       "files": [
         "https://res.cloudinary.com/doo9pfft1/image/upload/v1747238426/110259_yfxdzy.jpg",
         "https://res.cloudinary.com/doo9pfft1/image/upload/v1747238426/110259_02_wqzy2p.jpg",
         "https://res.cloudinary.com/doo9pfft1/image/upload/v1747238426/110259_01_sad94u.jpg"
       ],
-      "quantity": 10
+      "total_quantity": 1
     },
     {
       "id": 400000,
@@ -102,13 +149,12 @@
       "title": "Conjunto Dourado Flor de Cristal – Colar e Brincos",
       "description": "Conjunto delicado folheado a ouro, composto por colar e brincos com pingente em formato de flor, adornado com zircônias brilhantes. A peça transmite leveza e sofisticação, sendo ideal para realçar sua beleza com um toque floral moderno. Perfeito para ocasiões especiais ou para iluminar produções cotidianas com elegância.",
       "price": 13890,
-      "unit_amount": 13890,
       "search": "Conjunto flor com pedras",
       "files": [
         "https://res.cloudinary.com/doo9pfft1/image/upload/v1747233837/400388_m2asoc.jpg",
         "https://res.cloudinary.com/doo9pfft1/image/upload/v1747233837/400388_01_vxfbjw.jpg"
       ],
-      "quantity": 10
+      "total_quantity": 1
     }
   ],
   "category": [

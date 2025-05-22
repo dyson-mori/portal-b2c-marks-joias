@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 type Variant = "primary" | "checkout";
 
-export const Container = styled.div<{ $variant: Variant }>`
+export const Container = styled.div<{ $variant: Variant, $disabled: boolean }>`
   position: relative;
   display: flex;
 
@@ -25,7 +25,9 @@ export const Container = styled.div<{ $variant: Variant }>`
     -moz-appearance: textfield;
   }
 
-  ${({ theme, $variant }) => css`
+  ${({ theme, $variant, $disabled }) => css`
+    opacity: ${$disabled ? .5 : 1};
+
     ${$variant === 'checkout' && css`
       border: 1px solid #dedede;
       border-radius: ${theme.settings.radius.large};

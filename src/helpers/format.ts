@@ -45,7 +45,7 @@ export const formats = {
     };
 
     return e;
-  }
+  },
 };
 
 /*
