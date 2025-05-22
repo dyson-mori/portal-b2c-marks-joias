@@ -92,40 +92,43 @@ export default function ShoppingCard() {
     return route.push(result.initPoint);
   };
 
-  // async function calcularFrete(data: { cep: string }) {
-  //   const params = new URLSearchParams({
-  //     sCepOrigem: "01001-000", // CEP de origem (loja)
-  //     sCepDestino: data.cep,
-  //     nVlPeso: "1",
-  //     nCdFormato: "1",
-  //     nVlComprimento: "20",
-  //     nVlAltura: "5",
-  //     nVlLargura: "15",
-  //     nCdServico: "04510", // PAC = 04510 | SEDEX = 04014
-  //     nVlDiametro: "0",
-  //     sCdMaoPropria: "n",
-  //     nVlValorDeclarado: "0",
-  //     sCdAvisoRecebimento: "n",
-  //     StrRetorno: "xml",
-  //     nCdEmpresa: "",
-  //     sDsSenha: "",
-  //   });
+  async function calcularFrete(data: { cep: string }) {
+    const params = new URLSearchParams({
+      sCepOrigem: "01001-000", // CEP de origem (loja)
+      sCepDestino: data.cep,
+      nVlPeso: "1",
+      nCdFormato: "1",
+      nVlComprimento: "20",
+      nVlAltura: "5",
+      nVlLargura: "15",
+      nCdServico: "04510", // PAC = 04510 | SEDEX = 04014
+      nVlDiametro: "0",
+      sCdMaoPropria: "n",
+      nVlValorDeclarado: "0",
+      sCdAvisoRecebimento: "n",
+      StrRetorno: "xml",
+      nCdEmpresa: "",
+      sDsSenha: "",
+    });
 
-  //   const url = `https://cors-anywhere.herokuapp.com/https://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?${params.toString()}`;
+    const url = `https://cors-anywhere.herokuapp.com/https://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?${params.toString()}`;
 
-  //   const response = await fetch(url);
-  //   const text = await response.text();
+    const response = await fetch(url);
+    const text = await response.text();
 
-  //   // Extrair valor do frete do XML
-  //   const match = text.match(/<Valor>([^<]*)<\/Valor>/);
-  //   if (match && match[1]) {
-  //     const valorFrete = parseFloat(match[1].replace(",", "."));
-  //     setFrete(valorFrete);
-  //     setTotal(produtoPreco + valorFrete);
-  //   } else {
-  //     alert("Não foi possível calcular o frete.");
-  //   }
-  // }
+    // Extrair valor do frete do XML
+    const match = text.match(/<Valor>([^<]*)<\/Valor>/);
+    if (match && match[1]) {
+      const valorFrete = parseFloat(match[1].replace(",", "."));
+      console.log({ valorFrete });
+    // console.log(produtoPreco + valorFrete);
+
+      // setFrete(valorFrete);
+      // setTotal(produtoPreco + valorFrete);
+    } else {
+      alert("Não foi possível calcular o frete.");
+    }
+  }
 
   // const Icons = ({ id }: { id: string }) => {
   //   if (id === 'clyp6mut5000ay4iw0rcg2vve')
@@ -138,7 +141,10 @@ export default function ShoppingCard() {
     if (zip_code?.length === 8) {
       api.correio.get(zip_code)
         .then((res) => {
-          const { logradouro, localidade, uf, bairro } = res as ZipCodeProps;
+          const { logradouro, localidade, uf, bairro, cep } = res as ZipCodeProps;
+
+          calcularFrete({ cep });
+
           setValue("street", logradouro);
           setValue("city", localidade);
           setValue("state", uf);

@@ -10,6 +10,7 @@ interface FetcherParams {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   // next?: RequestInit['next'];
   body?: object;
+  cache?: 'default' | 'force-cache' | 'no-cache' | 'no-store' | 'reload' | 'only-if-cached',
   // body?: Record<string, object>;
   header?: HeadersInit;
 }
@@ -20,7 +21,8 @@ const fetcher = async ({
   url,
   method,
   body,
-  header = {}
+  header = {},
+  cache = 'default'
 }: FetcherParams) => {
   try {
     // const cookieStore = cookies();
@@ -30,7 +32,7 @@ const fetcher = async ({
 
     const res = await fetch(fullUrl, {
       method,
-      cache: 'no-store',
+      cache,
       next: { revalidate: 0 },
       headers: {
         'Content-Type': 'application/json',
@@ -67,10 +69,10 @@ export const api = {
     find: (product_id: string) => fetcher({ method: 'GET', url: `/product?product_id=${product_id}` })
   },
   header: {
-    list: () => fetcher({ method: 'GET', url: '/header' })
+    list: () => fetcher({ method: 'GET', url: '/header', cache: 'force-cache' })
   },
   category: {
-    list: () => fetcher({ method: 'GET', url: '/category' }),
+    list: () => fetcher({ method: 'GET', url: '/category', cache: 'force-cache' }),
   },
   shopping: {
     search: (products_id: string) => fetcher({ method: 'GET', url: `/shopping?${products_id}` }),
@@ -83,7 +85,7 @@ export const api = {
     search: (order_id: string) => fetcher({ method: 'GET', url: `/tracking?order_id=${order_id}` }),
   },
   banner: {
-    list: () => fetcher({ method: 'GET', url: '/banner' }),
+    list: () => fetcher({ method: 'GET', url: '/banner', cache: 'force-cache' }),
   },
   correio: {
     get: (cep: string) => fetch(`https://viacep.com.br/ws/${cep}/json/`).then(jsn => jsn.json()),

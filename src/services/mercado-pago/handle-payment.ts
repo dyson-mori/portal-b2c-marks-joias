@@ -9,7 +9,6 @@ export async function handleMercadoPagoPayment(paymentData: PaymentResponse) {
 
   if (!email) {
     return { status: 500 };
-    // return { status: 'incomplete metadata' };
   };
 
   /*
