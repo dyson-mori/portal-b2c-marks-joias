@@ -75,6 +75,7 @@ export default function ShoppingCard() {
     setLoading(true);
 
     const result = await api.paid_market.create({
+      payment_method: "master",
       email: data.email,
       full_name: data.full_name,
       phone: data.phone,

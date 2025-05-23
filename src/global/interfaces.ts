@@ -17,6 +17,7 @@ export type StorageProps = {
 };
 
 export type PaidMarketProps = {
+  payment_method: string;
   full_name: string;
   email: string;
   client_email?: string;
