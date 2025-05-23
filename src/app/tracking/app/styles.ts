@@ -71,7 +71,7 @@ export const Step = styled.div`
   `};
 `;
 
-export const Poppup = styled.button`
+export const Popup = styled.button`
   border: 0;
   background: transparent;
   position: absolute;

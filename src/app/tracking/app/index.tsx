@@ -6,7 +6,7 @@ import { Box, CubeScan, Delivery, Verify } from "@assets";
 import { api } from "@services/api";
 import { orderStatusNumber } from "@helpers/index";
 
-import { Container, Content, Input, Step, Progress, StepLabel, Steps, Pulse, Poppup } from "./styles";
+import { Container, Content, Input, Step, Progress, StepLabel, Steps, Pulse, Popup } from "./styles";
 
 interface StepProps {
   pulse: "active" | "deactivate" | "completed";
@@ -34,7 +34,7 @@ export default function OrderSteps() {
 
     if (evt.key === "Enter") {
       const data = await api.tracking.search(value);
-      setStatus(orderStatusNumber(data.status)); // Simulação do status sendo alterado
+      setStatus(orderStatusNumber(data.status));
     };
   };
 
@@ -75,21 +75,21 @@ export default function OrderSteps() {
 
   return (
     <Container>
-      <Input placeholder="Código do Pedido" max={8} min={0} onKeyDown={handleInput} />
+      <Input placeholder="Código do Pedido" onKeyDown={handleInput} />
       <Content>
         <Steps>
           {steps.map((step, idx) => (
             <div key={idx} style={{ display: "flex", alignItems: "center" }}>
               <Step>
-                {idx === 1 && idx <= status && (
-                  <Poppup>
-                    assistir
-                  </Poppup>
-                )}
                 {idx === 2 && idx <= status && (
-                  <Poppup>
+                  <Popup>
                     assistir
-                  </Poppup>
+                  </Popup>
+                )}
+                {idx === 3 && idx <= status && (
+                  <Popup>
+                    assistir
+                  </Popup>
                 )}
                 <Pulse $background={step.state.pulse}>{step.icon}</Pulse>
                 <StepLabel>
