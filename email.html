@@ -1,19 +1,4 @@
-import "server-only";
-
-import { PaymentResponse } from "mercadopago/dist/clients/payment/commonTypes";
-import { PaidMarketProps } from "@global/interfaces";
-import { transporter } from "@services/nodemailer";
-import { formats } from "@helpers/format";
-
-export async function handleMercadoPagoPayment(paymentData: PaymentResponse, total_amount: number) {
-  const metadata = paymentData.metadata as PaidMarketProps;
-  const { client_email } = metadata;
-
-  if (!client_email) {
-    return { status: 500 };
-  };
-
-  const html = `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 
 <head>
@@ -130,41 +115,23 @@ export async function handleMercadoPagoPayment(paymentData: PaymentResponse, tot
     <article>
       <h1>Compra realizada com sucesso!</h1>
 
-      <p>Olá, <strong>${paymentData.additional_info!.payer?.first_name}</strong> 👋</p>
+      <p>Olá, <strong>{{NOME_DO_CLIENTE}}</strong> 👋</p>
       <p>Recebemos o seu pedido e ele está sendo processado.</p>
       <p>Abaixo estão os detalhes:</p>
 
       <div class="details">
         <p><strong>Número do pedido:</strong> PAY-1747869655085-AJ64Z8</p>
         <p><strong>Data da compra:</strong> {{DATA_DA_COMPRA}}</p>
-        <p><strong>Total:</strong> ${formats.money(total_amount)}</p>
+        <p><strong>Total:</strong> R$ {{VALOR_TOTAL}}</p>
       </div>
 
       <p>Você receberá novas atualizações por e-mail ou WhatsApp conforme seu pedido avança no processo de envio.</p>
     </article>
     <footer>
       <p>Este e-mail foi enviado automaticamente, não é necessário respondê-lo.</p>
-      <p>&copy; 2025 Mark's Jóias. Todos os direitos reservados.</p>
+      <p>&copy; {{ANO_ATUAL}} Mark's Jóias. Todos os direitos reservados.</p>
     </footer>
   </main>
 </body>
 
-</html>`;
-
-  const info = await transporter.sendMail({
-    from: "supp.programming@gmail.com",
-    // to: "ssergiojunioleal@gmail.com",
-    to: "e5e0d64df2-b16a8a@inbox.mailtrap.io",
-    subject: "Compra Aprovada ✔",
-    text: "Prazer Fulano da Silva", // plain‑text body
-    html
-  });
-
-  /*
-    Faz alguma ação aqui - manda email pro usuario, libera acesso, erc.
-
-    send a message to the customer and the store informing them about the purchase
-  */
-
-  return { status: 201, info };
-};
+</html>

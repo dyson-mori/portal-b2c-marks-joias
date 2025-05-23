@@ -19,6 +19,7 @@ export type StorageProps = {
 export type PaidMarketProps = {
   full_name: string;
   email: string;
+  client_email?: string;
   description: string;
   phone: string;
 

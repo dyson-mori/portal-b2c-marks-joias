@@ -35,8 +35,9 @@ export async function POST(req: NextRequest) {
   } = await req.json() as PaidMarketProps;
 
   const splitting = full_name.split(' ');
-  const ddd = phone.slice(0, 2);
-  const phoneNumber = phone.slice(2, phone.length);
+  const phoneNumberReplaced = phone.replace(/\D/g, '');
+  const ddd = phoneNumberReplaced.slice(0, 2);
+  const phoneNumber = phoneNumberReplaced.slice(2, phone.length);
 
   try {
     const preference = new Preference(paid_market_api);

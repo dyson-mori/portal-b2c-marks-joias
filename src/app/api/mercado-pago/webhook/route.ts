@@ -33,7 +33,6 @@ export async function POST(request: NextRequest) {
 
       const { description } = paymentData.metadata;
       const { items, payer } = paymentData.additional_info as AdditionalInfo;
-
       const fullAddress = payer?.address?.street_name as string;
       const [street, neighborhood, city, state] = fullAddress.split(" • ").map(item => item.trim());
 
@@ -92,8 +91,9 @@ export async function POST(request: NextRequest) {
         })
       );
 
+
       if (paymentData.status === "approved") {
-        const { status } = await handleMercadoPagoPayment(paymentData);
+        const { status } = await handleMercadoPagoPayment(paymentData, total_amount);
 
         return NextResponse.json(status, { status: 200, statusText: 'payment received successfully!' });
       };
