@@ -29,8 +29,8 @@ export async function handleMercadoPagoPayment(paymentData: PaymentResponse) {
       <td align="center">
         <table width="600" cellpadding="0" cellspacing="0" border="0">
           <tr>
-            <td bgcolor="#ff0d6a" align="center" style="padding: 20px 0;">
-              <img src="https://res.cloudinary.com/doo9pfft1/image/upload/v1748011679/logo-128x128_2x_white_pvlrh2.png"
+            <td bgcolor="#303030" align="center" style="padding: 20px 0;">
+              <img src="https://res.cloudinary.com/doo9pfft1/image/upload/v1748021188/logo-dourado_snd5pb.png"
                 alt="MJ Logo" width="100" height="100" style="display: block;" />
             </td>
           </tr>
