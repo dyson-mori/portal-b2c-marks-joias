@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 export const Container = styled.section`
   padding: 0 40px;
 
+  width: calc(100% / 2);
+
   ${({ theme }) => css`
     pre {
       white-space: pre-wrap;

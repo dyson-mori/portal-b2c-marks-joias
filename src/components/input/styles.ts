@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 type Variant = "primary" | "checkout";
 
@@ -82,4 +82,29 @@ export const IconStyles = styled.div`
 
     transform: translate(-50%, -50%);
   };
+`;
+
+const shimmer = keyframes`
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+`;
+
+export const Skeleton = styled.div`
+  width: 100%;
+  height: 45px;
+  border-radius: 3px;
+  background: #f0f0f0;
+  background-image: linear-gradient(
+    90deg,
+    #f0f0f0 0px,
+    #e0e0e0 40px,
+    #f0f0f0 80px
+  );
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  animation: ${shimmer} 1.2s infinite linear;
 `;

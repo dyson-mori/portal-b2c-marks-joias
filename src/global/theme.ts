@@ -1,4 +1,4 @@
-const success = '#47C747';
+const success = '#5CB85C';
 const warning = '#f9BE14';
 
 const themes = {

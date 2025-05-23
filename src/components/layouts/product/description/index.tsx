@@ -8,19 +8,18 @@ import { Container, Delivery as DeliveryStyled } from './styles';
 import { formats } from '@helpers/format';
 
 type Props = {
-  width: number;
   data: ProductProps;
   storage: StorageProps[];
   handleBuy(): void;
   onAddToCart(): void;
 };
 
-export default function Description({ data, width, storage, handleBuy, onAddToCart }: Props) {
+export default function Description({ data, storage, handleBuy, onAddToCart }: Props) {
   const label = storage.find(item => item.id === data.id) ? 'Remover do Carrinho' : 'Adicionar ao Carrinho';
   const isItInStock = data.total_quantity === 0;
 
   return (
-    <Container style={{ width: width - 100 }}>
+    <Container>
       <h1>{data.title}</h1>
 
       <div style={{ height: 10 }} />

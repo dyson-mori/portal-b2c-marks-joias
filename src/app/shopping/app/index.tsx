@@ -52,6 +52,7 @@ export default function ShoppingCard() {
   const { storage, setRemoveStorage, setEditStorage } = useContext(ShoppingContext);
 
   const [loading, setLoading] = useState(false);
+  const [loadingZipCode, setLoadingZipCode] = useState(false);
 
   const totalCentavos = storage
     .map(v => Math.round(v.price * 100))
@@ -64,18 +65,18 @@ export default function ShoppingCard() {
     defaultValues: {
       price: sumPrices,
       quantity: 1,
-      method: 'cartão',
+      payment_method: 'cart',
     },
     mode: 'onChange'
   });
 
-  const { city, neighborhood, street, state, zip_code, pick_up_in_store } = watch();
+  const { city, neighborhood, street, state, zip_code, pick_up_in_store, payment_method } = watch();
 
   const processForm: SubmitHandler<schemaProps> = async data => {
     setLoading(true);
 
     const result = await api.paid_market.create({
-      payment_method: "master",
+      payment_method: "cards", // pix or cards
       email: data.email,
       full_name: data.full_name,
       phone: data.phone,
@@ -93,11 +94,17 @@ export default function ShoppingCard() {
       pick_up_in_store: data.pick_up_in_store,
     });
 
+    if (payment_method === 'pix') {
+      return console.log(result)
+    };
+
     return route.push(result.initPoint);
   };
 
   useEffect(() => {
     if (zip_code?.length === 8) {
+      setLoadingZipCode(true);
+
       api.correio.get(zip_code)
         .then(async (res) => {
           const { logradouro, localidade, uf, bairro } = res as ZipCodeProps;
@@ -106,8 +113,11 @@ export default function ShoppingCard() {
           setValue("city", localidade);
           setValue("state", uf);
           setValue("neighborhood", bairro);
+
+          setLoadingZipCode(false);
         });
-    } else if (street && neighborhood && city && state) {
+
+    } else if (street && neighborhood && city && state && !pick_up_in_store) {
       setValue("street", '');
       setValue("city", '');
       setValue("state", '');
@@ -232,7 +242,7 @@ export default function ShoppingCard() {
             />
 
             {
-              street && neighborhood && city && state && (
+              street && neighborhood && city && state && !pick_up_in_store && (
                 <>
                   <div style={{ height: 2 }} />
                   <Controller
@@ -253,10 +263,10 @@ export default function ShoppingCard() {
                   <Controller
                     name='number'
                     control={control}
-                    render={({ field: { onChange } }) => (
-                      <Input.Root variant="checkout" border='0'>
+                    render={({ field: { value, onChange } }) => (
+                      <Input.Root variant="checkout" border='0' isLoading={loadingZipCode}>
                         <Input.Icon icon={Home} width={20} height={20} stroke='#FA0B5B' strokeWidth={1.5} />
-                        <Input.Input placeholder='Número da Residencia' onChange={onChange} />
+                        <Input.Input defaultValue={value} placeholder='Número da Residencia' onChange={onChange} />
                       </Input.Root>
                     )}
                   />
@@ -269,7 +279,7 @@ export default function ShoppingCard() {
               name='description'
               control={control}
               render={({ field: { onChange } }) => (
-                <Input.Root variant="checkout" border='0 0 9px 9px'>
+                <Input.Root variant="checkout" border='0 0 9px 9px' isLoading={loadingZipCode}>
                   <Input.Icon icon={Pen} width={20} height={20} stroke='#FA0B5B' strokeWidth={1.5} />
                   <Input.Input placeholder='Descrição (Opcional)' onChange={onChange} />
                 </Input.Root>

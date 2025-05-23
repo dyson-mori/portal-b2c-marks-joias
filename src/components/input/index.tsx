@@ -2,7 +2,7 @@
 
 import React, { ReactNode, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
 
-import { Container, IconStyles, Input as InputStyled, TextArea as TextAreaStyled } from './styles';
+import { Container, IconStyles, Input as InputStyled, Skeleton, TextArea as TextAreaStyled } from './styles';
 
 type Variant = "primary" | "checkout";
 
@@ -11,14 +11,17 @@ type RootProp = {
   variant: Variant;
   border?: string;
   disabled?: boolean;
+  isLoading?: boolean;
 };
 
-function Root({ children, variant, border, disabled = false }: RootProp) {
+function Root({ children, variant, border, disabled = false, isLoading }: RootProp) {
   const style = {
     borderRadius: border
   };
 
-  return (
+  return isLoading ? (
+    <Skeleton />
+  ) : (
     <Container style={style} $variant={variant} $disabled={disabled} id='input-container'>
       {children}
     </Container>

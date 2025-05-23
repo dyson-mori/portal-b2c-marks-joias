@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 export const Container = styled.main`
   width: 100%;
   padding: 25px 50px;
-
   
   ${({ theme }) => css`
     h2 {

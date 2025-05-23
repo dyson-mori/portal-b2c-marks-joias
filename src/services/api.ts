@@ -105,7 +105,11 @@ export const api = {
       }),
   },
   correio: {
-    get: (cep: string) => fetch(`https://viacep.com.br/ws/${cep}/json/`).then(jsn => jsn.json()),
-    frete: () => fetch(`https://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx`).then(jsn => jsn.json())
+    get: (cep: string) =>
+      fetch(`https://viacep.com.br/ws/${cep}/json/`, {
+        cache: 'no-store'
+      }).then(jsn => jsn.json()),
+    fret: () =>
+      fetch(`https://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx`).then(jsn => jsn.json())
   }
 };
