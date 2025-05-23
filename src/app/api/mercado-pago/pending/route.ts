@@ -20,9 +20,9 @@ export async function GET(request: Request) {
 
   if (paymentData.status === "approved" || paymentData.date_approved !== null) {
     // Pagamentos já foi realizado. redirecionamos para a página de sucesso
-    return NextResponse.redirect(new URL(`/?status=sucesso`, request.url));
+    return NextResponse.redirect(new URL(`/sucesso`, request.url));
   }
 
   // Pagamentos pendentes. redirecionamos para a página inicial
-  return NextResponse.redirect(new URL("/", request.url));
+  return NextResponse.redirect(new URL("/shopping", request.url));
 }

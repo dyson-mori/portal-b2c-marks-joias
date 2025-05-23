@@ -1,12 +1,8 @@
 import * as yup from 'yup';
 
 export const schema = yup.object().shape({
-  /* step 1 */
-  payment_method: yup.string().required().nullable().default(''),
   price: yup.number().required(),
-  quantity: yup.number().required(),
-
-  /* step 2 */
+  email: yup.string().required(),
   full_name: yup.string().min(6, 'Too short').required(),
   phone: yup
     .string()
@@ -15,7 +11,6 @@ export const schema = yup.object().shape({
       return digits!.length >= 10
     })
     .required(),
-  email: yup.string().required(),
   cpf: yup
     .string()
     .test('cpf', (value) => {
@@ -75,17 +70,6 @@ export const schema = yup.object().shape({
 }).required();
 
 export type schemaProps = yup.InferType<typeof schema>;
-
-export const methodsPayments = [
-  {
-    id: 'clyp6mut5000ay4iw0rcg2vve',
-    title: 'Cartão'
-  },
-  {
-    id: 'clyrlct24000ka4h0qjmxm39i',
-    title: 'Pix'
-  }
-];
 
 export const steps = [
   {

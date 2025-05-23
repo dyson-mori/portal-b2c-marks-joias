@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Payment, Preference } from "mercadopago";
+import { Preference } from "mercadopago";
 import { paid_market_api } from "@services/mercado-pago";
 
 import { PaidMarketProps } from "@global/interfaces";
@@ -19,7 +19,6 @@ export async function OPTIONS() {
 
 export async function POST(req: NextRequest) {
   const {
-    payment_method,
     full_name,
     email,
     zip_code,
@@ -35,7 +34,7 @@ export async function POST(req: NextRequest) {
     pick_up_in_store
   } = await req.json() as PaidMarketProps;
 
-  const splitting = full_name.split(' ');
+  // const splitting = full_name.split(' ');
   const phoneNumberReplaced = phone.replace(/\D/g, '');
   const ddd = phoneNumberReplaced.slice(0, 2);
   const phoneNumber = phoneNumberReplaced.slice(2, phone.length);
@@ -48,48 +47,6 @@ export async function POST(req: NextRequest) {
     picture_url: product.thumbnail,
     unit_price: Number(formats.formatDecimal(String(product.unit_amount))),
   }))
-
-
-  if (payment_method === 'pix') {
-    const reference = new Payment(paid_market_api);
-
-    const payment = await reference.create({
-      body: {
-        external_reference: generatePaymentId(), // IMPORTANTE: Isso aumenta a pontuação da sua integração com o Mercado Pago - É o id da compra no nosso sistema
-        transaction_amount: 100,
-        payment_method_id: 'pix',
-        // date_of_expiration,
-        additional_info: {
-          items
-        },
-        description,
-        payer: {
-          email,
-          first_name: splitting[0],
-          last_name: splitting[splitting.length - 1],
-          phone: {
-            number: ddd,
-            area_code: phoneNumber
-          },
-          address: {
-            zip_code: zip_code,
-            street_name: `${street} • ${neighborhood} • ${city} • ${state}`,
-            street_number: number
-          },
-          identification: {
-            type: 'CPF',
-            number: cpf
-          }
-        },
-        notification_url: `${process.env.NEXT_PUBLIC_MARKS_URL}/mercado-pago/webhook`,
-      }
-    });
-
-    const qrCode = payment.point_of_interaction!.transaction_data!.qr_code;
-    const qrCodeBase64 = payment.point_of_interaction!.transaction_data!.qr_code_base64;
-
-    return NextResponse.json({ qrCode, qrCodeBase64 })
-  };
 
   try {
     const preference = new Preference(paid_market_api);
@@ -126,7 +83,6 @@ export async function POST(req: NextRequest) {
         },
         payment_methods: {
           installments: 5, // Número máximo de parcelas permitidas - calculo feito automaticamente
-          default_payment_method_id: payment_method
         },
         back_urls: {
           success: `${req.headers.get("origin")}/success`,

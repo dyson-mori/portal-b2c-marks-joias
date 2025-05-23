@@ -17,7 +17,6 @@ import { CheckBox, Input, Shopping, Splash } from '@components';
 import { Inbox, Routing, User, Home, Mobile, Pen, Identity } from '@assets';
 
 import {
-  // methodsPayments,
   schema,
   schemaProps
 } from './schema';
@@ -25,9 +24,6 @@ import {
   Container,
   Content,
   Result,
-  // MethodPayment,
-  // Methods,
-  // Result
 } from './styles';
 
 type ZipCodeProps = {
@@ -64,19 +60,16 @@ export default function ShoppingCard() {
     resolver: yupResolver(schema),
     defaultValues: {
       price: sumPrices,
-      quantity: 1,
-      payment_method: 'cart',
     },
     mode: 'onChange'
   });
 
-  const { city, neighborhood, street, state, zip_code, pick_up_in_store, payment_method } = watch();
+  const { city, neighborhood, street, state, zip_code, pick_up_in_store } = watch();
 
   const processForm: SubmitHandler<schemaProps> = async data => {
     setLoading(true);
 
     const result = await api.paid_market.create({
-      payment_method: "cards", // pix or cards
       email: data.email,
       full_name: data.full_name,
       phone: data.phone,
@@ -93,10 +86,6 @@ export default function ShoppingCard() {
       description: data.description ?? '',
       pick_up_in_store: data.pick_up_in_store,
     });
-
-    if (payment_method === 'pix') {
-      return console.log(result)
-    };
 
     return route.push(result.initPoint);
   };
@@ -135,33 +124,7 @@ export default function ShoppingCard() {
         <Shopping.SavedProducts storage={storage} setEditStorage={setEditStorage} setRemoveStorage={setRemoveStorage} />
 
         <Shopping.Form disabled={storage.length === 0 || !isValid} currentStep={0} onSubmit={handleSubmit(processForm)} loadingButton={loading}>
-          {/* <MethodPayment>
-            {methodsPayments.map((meth, i) => (
-              <Controller
-                key={i}
-                name='method'
-                control={control}
-                render={({ field: { value, onChange } }) => (
-                  <Methods
-                    key={i}
-                    type='button'
-                    disabled={storage?.length === 0}
-                    onClick={() => {
-                      onChange(meth.id);
-                      setValue('method', meth.id)
-                    }}
-                    $selected={meth.id === value}
-                  >
-                    <Icons id={meth.id} />
-                    <p>{meth.title}</p>
-                  </Methods>
-                )}
-              />
-            ))}
-          </MethodPayment> */}
-
-          <h4 style={{ margin: '20px 0' }}>Informação do pagamento</h4>
-
+          <h4 style={{ margin: '20px 0 10px 0', textAlign: 'center' }}>Informação do Pagamento</h4>
           <Content>
             <h5>Email</h5>
             <Controller

@@ -91,10 +91,8 @@ export async function POST(request: NextRequest) {
         })
       );
 
-
       if (paymentData.status === "approved") {
         const { status } = await handleMercadoPagoPayment(paymentData);
-
         return NextResponse.json(status, { status: 200, statusText: 'payment received successfully!' });
       };
     };
