@@ -1,27 +1,18 @@
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
-  host: "sandbox.smtp.mailtrap.io",
-  // service: "gmail",
-  port: 2525,
-  secure: false,
+  service: "gmail",
   auth: {
-    user: '0945bdfdb12a8e',
-    pass: 'c4f31899269cb9'
-    // user: process.env.GOOGLE_APP_EMAIL,
-    // pass: process.env.GOOGLE_APP_PASSWORD,
+    user: process.env.GOOGLE_APP_EMAIL,
+    pass: process.env.GOOGLE_APP_PASSWORD,
   },
-  tls: {
-    rejectUnauthorized: false
-  }
+  attachments: [
+    {
+      filename: 'logo.png',
+      path: 'https://res.cloudinary.com/doo9pfft1/image/upload/v1748014101/logo_bzgiot.png',
+      cid: 'logo'
+    }
+  ]
 });
-
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     user: process.env.GOOGLE_APP_EMAIL,
-//     pass: process.env.GOOGLE_APP_PASSWORD,
-//   }
-// });
 
 export { transporter };

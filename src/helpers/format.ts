@@ -1,3 +1,5 @@
+import { Items } from "mercadopago/dist/clients/commonTypes";
+
 export const formats = {
   money: (value: number) => {
     let v = String(value).replace(/\D/g, '');
@@ -46,6 +48,28 @@ export const formats = {
 
     return e;
   },
+  date_hours: (isoString: string) => {
+    const data = new Date(isoString);
+
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0'); // meses começam em 0
+    const ano = data.getFullYear();
+
+    const horas = String(data.getHours()).padStart(2, '0');
+    const minutos = String(data.getMinutes()).padStart(2, '0');
+    const segundos = String(data.getSeconds()).padStart(2, '0');
+
+    return `${dia}/${mes}/${ano} às ${horas}:${minutos}:${segundos}`;
+  },
+  calculate_total: (items: Items[]) => {
+    const total = items.reduce((soma, item) => {
+      const quantity = parseFloat(String(item.quantity));
+      const price = parseFloat(String(item.unit_price));
+      return soma + (quantity * price);
+    }, 0);
+
+    return total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
 };
 
 /*
