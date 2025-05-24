@@ -3,6 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@services/prisma";
 
 export async function GET(request: NextRequest) {
+  const token = request.headers.authorization?.replace('Bearer ', '');
+
+  if (!token || token !== process.env.SECRET_TOKEN) {
+    return NextResponse.json([], { status: 400, statusText: 'database does not return data' });
+  };
+
   const url = new URL(request.url);
   // const limit = url.searchParams.get("limit");
   const category_title = url.searchParams.get("category");
