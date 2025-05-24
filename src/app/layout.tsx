@@ -28,7 +28,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="pt" className={`${font.variable} ${montserrat_alternates.variable}`}>
       <body>
-        <Tempalte header={header}>
+        <Tempalte data={header}>
           {children}
         </Tempalte>
       </body>

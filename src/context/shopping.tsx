@@ -42,7 +42,7 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         thumbnail: product.files[0],
         title: product.title,
         price: product.price,
-        quantity: 1,
+        remove_quantity: 1,
 
         unit_amount: product.price,
         description: product.description,

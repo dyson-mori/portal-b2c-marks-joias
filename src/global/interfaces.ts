@@ -1,8 +1,16 @@
-import { Product } from "@prisma/client";
+import { Category, Header, Product, Sub } from "@prisma/client";
 
 export type ProductProps = Product & {
   files: string[]; // improve this
   related: Product[];
+};
+
+export type HeaderProps = {
+  header: Header[];
+  category: Category & {
+    title: string;
+    sub: Sub[];
+  }[];
 };
 
 export type StorageProps = {
@@ -10,7 +18,7 @@ export type StorageProps = {
   title: string;
   price: number;
   thumbnail: string;
-  quantity: number;
+  remove_quantity: number;
   unit_amount: number;
   description: string;
   total_quantity: number;

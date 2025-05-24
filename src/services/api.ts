@@ -74,7 +74,7 @@ export const api = {
       fetcher({
         method: 'GET',
         url: '/header',
-        cache: 'force-cache',
+        cache: 'no-cache',
         next: {
           revalidate: 60 /*secounds*/ * 60 /*minutes*/ * 24 /*hours*/ * 3 /*days*/
         }

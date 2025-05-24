@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 
 import { usePathname } from "next/navigation";
 
-import { Header as HeaderPrisma } from "@prisma/client";
+import { HeaderProps } from "@global/interfaces";
 
 import Global from "../global/styles";
 import themes from "../global/theme";
@@ -17,10 +17,10 @@ import Splash from "./splash";
 
 type Template = {
   children: React.ReactNode;
-  header: HeaderPrisma[];
+  data: HeaderProps;
 };
 
-export default function Template({ children, header }: Readonly<Template>) {
+export default function Template({ children, data }: Readonly<Template>) {
   const param = usePathname();
   const hide = param === '/success';
 
@@ -28,7 +28,7 @@ export default function Template({ children, header }: Readonly<Template>) {
     <ThemeProvider theme={themes}>
       <ShoppingProvider>
         <Suspense fallback={<Splash />}>
-          <Header header={header} hide={hide} param={param} />
+          <Header data={data} hide={hide} param={param} />
           {children}
           <Footer hide={hide} />
         </Suspense>

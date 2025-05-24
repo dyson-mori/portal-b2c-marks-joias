@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import Link from "next/link";
 
 export const Container = styled.header<{ $scrolled: boolean; $isLanding: boolean }>`
+  position: fixed;
   top: 0;
   
   display: flex;
@@ -12,9 +13,11 @@ export const Container = styled.header<{ $scrolled: boolean; $isLanding: boolean
   padding: 0 50px;
   
   ${({ theme, $scrolled, $isLanding }) => css`
-    position: ${$isLanding ? 'fixed' : 'sticky'};
+    /* position: ${$isLanding ? 'fixed' : 'sticky'}; */
 
-    background-color: ${$isLanding ? ($scrolled ? '#fff' : 'transparent') : '#fff'};
+    background-color: #fff;
+
+    /* background-color: ${$isLanding ? ($scrolled ? '#fff' : 'transparent') : '#fff'}; */
     box-shadow: ${$isLanding ? ($scrolled ? theme.settings.box.simple : 'none') : theme.settings.box.simple};
 
     @media (max-width: 500px) {
@@ -107,18 +110,4 @@ export const LinkStyle = styled(Link) <{ $selected: boolean }>`
       padding: 10px 15px;
     };
   `};
-`;
-
-export const Drawer = styled.nav`
-  display: none;
-  position: absolute;
-
-  width: 45%;
-  height: 100vh;
-
-  background-color: #f3f3f3;
-
-  @media (max-width: 500px){
-    display: flex;
-  };
 `;

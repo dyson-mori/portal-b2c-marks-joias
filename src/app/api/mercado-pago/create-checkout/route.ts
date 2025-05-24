@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     id: String(product.id),
     title: product.title,
     description: product.description,
-    quantity: product.quantity,
+    quantity: product.remove_quantity,
     picture_url: product.thumbnail,
     unit_price: Number(formats.formatDecimal(String(product.unit_amount))),
   }))
