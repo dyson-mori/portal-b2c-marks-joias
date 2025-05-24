@@ -18,9 +18,11 @@ export async function GET(request: Request) {
   const payment = new Payment(paid_market_api);
   const paymentData = await payment.get({ id: paymentId });
 
+  // JSON.stringify(paymentData, null, 2);
+
   if (paymentData.status === "approved" || paymentData.date_approved !== null) {
     // Pagamentos já foi realizado. redirecionamos para a página de sucesso
-    return NextResponse.redirect(new URL(`/sucesso`, request.url));
+    return NextResponse.redirect(new URL(`/success?payment_id=${paymentId}&external_reference=${paymentData.external_reference}`, request.url));
   }
 
   // Pagamentos pendentes. redirecionamos para a página inicial

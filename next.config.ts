@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'i.pinimg.com',
         port: ''
+      },
+      {
+        protocol: 'https',
+        hostname: 'http2.mlstatic.com',
+        port: ''
       }
     ]
   },

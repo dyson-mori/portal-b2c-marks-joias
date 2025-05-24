@@ -6,17 +6,6 @@ import { PaidMarketProps } from "@global/interfaces";
 import { formats } from "@helpers/format";
 import { generatePaymentId } from "@helpers/index";
 
-export async function OPTIONS() {
-  return NextResponse.json({}, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*', // ou restrinja ao domínio ngrok
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    },
-  });
-};
-
 export async function POST(req: NextRequest) {
   const {
     full_name,
@@ -34,7 +23,6 @@ export async function POST(req: NextRequest) {
     pick_up_in_store
   } = await req.json() as PaidMarketProps;
 
-  // const splitting = full_name.split(' ');
   const phoneNumberReplaced = phone.replace(/\D/g, '');
   const ddd = phoneNumberReplaced.slice(0, 2);
   const phoneNumber = phoneNumberReplaced.slice(2, phone.length);
@@ -96,11 +84,7 @@ export async function POST(req: NextRequest) {
       throw new Error("No preferenceID");
     }
 
-    return NextResponse.json({ preferenceId: createdPreference.id, initPoint: createdPreference.init_point }, {
-      headers: {
-        'Access-Control-Allow-Origin': '*', // ou use seu domínio ngrok
-      }
-    });
+    return NextResponse.json({ preferenceId: createdPreference.id, initPoint: createdPreference.init_point });
   } catch (err) {
     console.error(err);
     return NextResponse.error();
