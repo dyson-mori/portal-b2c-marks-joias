@@ -10,7 +10,7 @@ export type StorageProps = {
   title: string;
   price: number;
   thumbnail: string;
-  quantity: number;
+  remove_quantity: number;
   unit_amount: number;
   description: string;
   total_quantity: number;

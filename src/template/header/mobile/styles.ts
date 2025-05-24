@@ -2,24 +2,27 @@ import styled, { css } from 'styled-components';
 import Link from "next/link";
 
 export const Container = styled.header<{ $scrolled: boolean; $isLanding: boolean }>`
+  position: fixed;
   top: 0;
-  
+
   display: flex;
-  
+  align-items: center;
+  justify-content: space-between;
+
   width: 100%;
   height: 50px;
-  
-  padding: 0 50px;
-  
-  ${({ theme, $scrolled, $isLanding }) => css`
-    position: ${$isLanding ? 'fixed' : 'sticky'};
 
-    background-color: ${$isLanding ? ($scrolled ? '#fff' : 'transparent') : '#fff'};
+  padding: 0 50px;
+
+  ${({ theme, $scrolled, $isLanding }) => css`
+    /* position: ${$isLanding ? 'fixed' : 'sticky'}; */
+
+    background-color: #fff;
+    /* background-color: ${$isLanding ? ($scrolled ? '#fff' : 'transparent') : '#fff'}; */
     box-shadow: ${$isLanding ? ($scrolled ? theme.settings.box.simple : 'none') : theme.settings.box.simple};
 
     @media (max-width: 500px) {
-      padding: 0;
-      justify-content: space-between;
+      padding: 0 25px;
     };
   `};
 
@@ -66,47 +69,89 @@ export const Icon = styled(Link)`
   `};
 `;
 
-export const Nav = styled.nav`
+export const NavButton = styled.button`
   display: flex;
 
-  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
-  padding: 0 60px;
+  border: 0;
+  background-color: transparent;
 
-  width: 100%;
+  width: 50px;
+  height: 100%;
 
   ${({ theme }) => css`
-    @media (max-width: ${theme.settings.responsive.maxWidth}){
-      padding: 0 20px;
-    };
+    span {
+      width: 30%;
+      height: 2px;
+      border-radius: 5px;
+      background-color: ${theme.colors.primary};
+      margin: 1.3px;
+    }
   `};
-
-  @media (max-width: 500px){
-    display: none;
-  };
 `;
 
-export const LinkStyle = styled(Link) <{ $selected: boolean }>`
-  position: relative;
+export const Menu = styled.div`
+  position: fixed;
 
-  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  text-decoration: none;
+  width: 300px;
 
-  ${({ theme, $selected }) => css`
-    font-size: 90%;
-    font-weight: ${theme.font.weight[400]};
-    color: ${theme.colors.dark_charcoal};
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  background-color: #fff;
+  
+  z-index: 5;
+
+  transition: .5s;
+
+  ul {
+    width: 100%;
+  };
+
+  li {
+    list-style-type: none;
+  };
+
+  li > a {
+    padding: 0 10px;
+
+    height: 50px;
+  };
+
+  li > .sub-categories {
     
-    ${$selected && css`
-      color: ${theme.colors.primary};
-      font-weight: ${theme.font.weight[600]};
-    `};
+  }
 
-    @media (max-width: ${theme.settings.responsive.maxWidth}){
-      padding: 10px 15px;
+  ${({ theme }) => css`
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+
+      font-size: ${theme.font.size.normal};
+      font-weight: ${theme.font.weight[400]};
+      color: ${theme.colors.dark_charcoal};
+    };
+
+    svg {
+      stroke: ${theme.colors.primary};
     };
   `};
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 4;
+  transition: .5s;
 `;
 
 export const Drawer = styled.nav`

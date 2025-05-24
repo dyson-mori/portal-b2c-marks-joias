@@ -23,19 +23,19 @@ export default function SavedProducts({ storage, setEditStorage, setRemoveStorag
   };
 
   const handleQuantity = (action: 'add' | 'remove', product: StorageProps) => {
-    if (action === 'add' && product.quantity < product.total_quantity) {
+    if (action === 'add' && product.remove_quantity < product.total_quantity) {
       return setEditStorage({
         ...product,
         price: product.price + product.unit_amount!,
-        quantity: product.quantity + 1
+        remove_quantity: product.remove_quantity + 1
       })
     };
 
-    if (action === 'remove' && product.quantity > 1) {
+    if (action === 'remove' && product.remove_quantity > 1) {
       return setEditStorage({
         ...product,
         price: product.price - product.unit_amount!,
-        quantity: product.quantity - 1
+        remove_quantity: product.remove_quantity - 1
       })
     }
   };
@@ -77,7 +77,7 @@ export default function SavedProducts({ storage, setEditStorage, setRemoveStorag
               <button onClick={() => handleQuantity('remove', item)}>
                 <MinusCircle width={30} height={30} strokeWidth={1} />
               </button>
-              <p>{item.quantity}</p>
+              <p>{item.remove_quantity}</p>
               <button onClick={() => handleQuantity('add', item)}>
                 <AddCircle width={30} height={30} strokeWidth={1} />
               </button>

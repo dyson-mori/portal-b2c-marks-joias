@@ -26,6 +26,7 @@ import { ReactComponent as Verify } from './verify.svg';
 import { ReactComponent as Map } from './map.svg';
 import { ReactComponent as City } from './city.svg';
 import { ReactComponent as Pen } from './pen.svg';
+import { ReactComponent as Landing } from './landing.svg';
 
 export {
   Logo,
@@ -55,5 +56,6 @@ export {
   Verify,
   Map,
   City,
-  Pen
+  Pen,
+  Landing
 }

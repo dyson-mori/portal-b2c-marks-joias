@@ -48,6 +48,10 @@ const themes = {
       '900': 900,
     }
   },
+  responsive: {
+    mobile: 767,    // iPhone, Android phones
+    desktop: 1024,  // Laptops, monitores maiores
+  },
   settings: {
     grid: {
       template: {
@@ -89,7 +93,9 @@ const themes = {
       maxWidth: '600px',
 
       maxScreen: '1920px',
-      tablet: '1090px'
+
+      mobile: 767,    // iPhone, Android phones
+      desktop: 1024,  // Laptops, monitores maiores
     }
   }
 };
