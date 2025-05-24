@@ -31,14 +31,16 @@ export async function POST(request: NextRequest) {
       const payment = new Payment(paid_market_api);
       const paymentData = await payment.get({ id: data.id }); // data.id = collection_id
 
-      const { description } = paymentData.metadata;
+      if (paymentData.status !== "approved") {
+        return NextResponse.json("not approved", { status: 200, statusText: 'payment not approved!' });
+      };
+
+      const { description, pick_up_in_store } = paymentData.metadata;
       const { items, payer } = paymentData.additional_info as AdditionalInfo;
       const fullAddress = payer?.address?.street_name as string;
       const [street, neighborhood, city, state] = fullAddress.split(" • ").map(item => item.trim());
 
       let address_obj = {};
-
-      const pick_up_in_store = true;
 
       if (!pick_up_in_store) {
         const address = await prisma.address.create({
