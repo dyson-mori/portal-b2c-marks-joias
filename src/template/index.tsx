@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 
 import { usePathname } from "next/navigation";
 
-import { Category, Header as HeaderPrisma } from "@prisma/client";
+import { HeaderProps } from "@global/interfaces";
 
 import Global from "../global/styles";
 import themes from "../global/theme";
@@ -17,10 +17,7 @@ import Splash from "./splash";
 
 type Template = {
   children: React.ReactNode;
-  data: {
-    header: HeaderPrisma[];
-    category: Category[];
-  };
+  data: HeaderProps;
 };
 
 export default function Template({ children, data }: Readonly<Template>) {

@@ -1,22 +1,18 @@
 import React from 'react';
 
-import { Category, Header as HeaderPrisma } from '@prisma/client';
-
+import { HeaderProps } from '@global/interfaces';
 import { useWindowDimensions } from '@hooks';
 
 import Desktop from './desktop';
 import Mobile from './mobile';
 
-interface HeaderProps {
+interface DataProps {
   hide: boolean;
   param: string;
-  data: {
-    header: HeaderPrisma[];
-    category: Category[];
-  };
+  data: HeaderProps;
 };
 
-export default function Header({ hide, param, data }: HeaderProps) {
+export default function Header({ hide, param, data }: DataProps) {
   const { width } = useWindowDimensions();
   return width <= 720 ? (
     <Mobile hide={hide} param={param} data={data} />

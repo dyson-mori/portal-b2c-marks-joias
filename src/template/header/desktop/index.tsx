@@ -1,23 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { Category, Header as HeaderPrisma } from '@prisma/client';
-
 import { ShoppingContext } from '@context/shopping';
+import { HeaderProps } from '@global/interfaces';
 
 import { ShoppingCart, Logo } from '@assets';
 
 import { Container, Icon, Nav, LinkStyle } from './styles';
 
-interface HeaderProps {
+interface DataProps {
   hide: boolean;
   param: string;
-  data: {
-    header: HeaderPrisma[];
-    category: Category[];
-  };
+  data: HeaderProps;
 };
 
-export default function Desktop({ hide, param, data }: HeaderProps) {
+export default function Desktop({ hide, param, data }: DataProps) {
   const isLanding = param === '/';
 
   const { storage } = useContext(ShoppingContext);

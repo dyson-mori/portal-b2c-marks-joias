@@ -69,6 +69,10 @@ export const Icon = styled(Link)`
   `};
 `;
 
+export const HeaderLogo = styled.div`
+  padding: 10px;
+`;
+
 export const NavButton = styled.button`
   display: flex;
 
@@ -92,7 +96,7 @@ export const NavButton = styled.button`
   `};
 `;
 
-export const Menu = styled.div`
+export const Menu = styled.aside`
   position: fixed;
 
   display: flex;
@@ -111,8 +115,12 @@ export const Menu = styled.div`
 
   transition: .5s;
 
+  overflow-y: auto;
+  scrollbar-width: none;
+
   ul {
     width: 100%;
+    margin-bottom: 150px;
   };
 
   li {
@@ -152,18 +160,4 @@ export const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 4;
   transition: .5s;
-`;
-
-export const Drawer = styled.nav`
-  display: none;
-  position: absolute;
-
-  width: 45%;
-  height: 100vh;
-
-  background-color: #f3f3f3;
-
-  @media (max-width: 500px){
-    display: flex;
-  };
 `;

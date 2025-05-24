@@ -12,6 +12,13 @@ export async function GET() {
   const category = await prisma.category.findMany({
     orderBy: {
       title: 'asc'
+    },
+    include: {
+      sub: {
+        select: {
+          title: true
+        }
+      }
     }
   });
 
@@ -21,14 +28,7 @@ export async function GET() {
 
   const data = {
     header,
-    category: category.map(item => ({
-      ...item,
-      sub: item.id === 1 ? [
-        { title: 'casamento' },
-        { title: 'solitário' },
-        { title: 'relacionamento' },
-      ] : []
-    }))
+    category
   };
 
   return NextResponse.json(data, { status: 200, statusText: 'header received successfully' });

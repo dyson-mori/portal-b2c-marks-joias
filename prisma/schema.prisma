@@ -72,13 +72,27 @@ model Category {
 
   show_on_landing Boolean? @default(false)
 
-  // sub     SubCategory[]
+  sub     Sub[]
   product Product[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@map("categories")
+}
+
+model Sub {
+  id String @id @default(cuid())
+
+  title String
+
+  category_id Int
+  category    Category @relation(fields: [category_id], references: [id], onDelete: Cascade)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("sub")
 }
 
 model Order {
