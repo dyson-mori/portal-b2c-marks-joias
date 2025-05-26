@@ -28,10 +28,10 @@ const fetcher = async ({
   try {
     // const cookieStore = cookies();
     const fullUrl = `${NEXT_URL}${url}`;
-
+    const verify = url.includes('https');
     const isBodyAllowed = method !== 'GET' && method !== 'DELETE';
 
-    const res = await fetch(fullUrl, {
+    const res = await fetch(verify ? url : fullUrl, {
       method,
       cache,
       next,
@@ -105,11 +105,7 @@ export const api = {
       }),
   },
   correio: {
-    get: (cep: string) =>
-      fetch(`https://viacep.com.br/ws/${cep}/json/`, {
-        cache: 'no-store'
-      }).then(jsn => jsn.json()),
-    fret: () =>
-      fetch(`https://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx`).then(jsn => jsn.json())
+    get: (cep: string) => fetcher({ url: `https://viacep.com.br/ws/${cep}/json/`, method: 'GET' }),
+    fret: () => fetch(`https://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx`).then(jsn => jsn.json())
   }
 };

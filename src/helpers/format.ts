@@ -1,5 +1,3 @@
-import { Items } from "mercadopago/dist/clients/commonTypes";
-
 export const formats = {
   money: (value: number) => {
     let v = String(value).replace(/\D/g, '');
@@ -61,7 +59,7 @@ export const formats = {
 
     return `${dia}/${mes}/${ano} às ${horas}:${minutos}:${segundos}`;
   },
-  calculate_total: (items: Items[]) => {
+  calculate_total: (items: { quantity: number, unit_price: number }[]) => {
     const total = items.reduce((soma, item) => {
       const quantity = parseFloat(String(item.quantity));
       const price = parseFloat(String(item.unit_price));

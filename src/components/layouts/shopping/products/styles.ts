@@ -246,7 +246,6 @@ export const Delete = styled.button`
   min-width: 50px;
   height: 50px;
   background-color: transparent;
-  z-index: 5;
 
   transition: .3s;
 

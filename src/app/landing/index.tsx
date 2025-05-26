@@ -91,11 +91,14 @@ export default function LandingPage({ products, categories, banner }: LandingPag
       <Landing.About width={width} />
       <Landing.Feedback posts={posts} />
 
-      <Modal isOpen={open} onClose={console.log} >
+      <Modal open={open} onClickOutside={console.log} >
         <p>Mark&apos;s Jóias</p>
         <p>Esse projeto está em progresso!</p>
         <div style={{ height: 20 }} />
-        <Button onClick={() => setOpen(false)}>Entendi</Button>
+        <Button onClick={() => {
+          document.body.style.overflow = 'scroll';
+          setOpen(false)
+        }}>Entendi</Button>
       </Modal>
     </Container>
   );

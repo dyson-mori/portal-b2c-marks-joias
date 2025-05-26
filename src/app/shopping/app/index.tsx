@@ -14,33 +14,20 @@ import { ShoppingContext } from '@context/shopping';
 import { api } from '@services/api';
 import { formats } from '@helpers/format';
 import { CheckBox, Input, Shopping, Splash } from '@components';
-import { Inbox, Routing, User, Home, Mobile, Pen, Identity } from '@assets';
+import { Inbox, Routing, User, Home, Mobile, Pen, Identity, Pix, Cards } from '@assets';
 
 import {
   schema,
-  schemaProps
+  schemaProps,
+  ZipCodeProps
 } from './schema';
+
 import {
   Container,
   Content,
+  MethodPayment,
   Result,
 } from './styles';
-
-type ZipCodeProps = {
-  bairro: string;//"Eldorado"
-  cep: string;//"32310-370"
-  complemento: string;//""
-  ddd: string;//"31"
-  estado: string;//"Minas Gerais"
-  gia: string;//""
-  ibge: string;//"3118601"
-  localidade: string;//"Contagem"
-  logradouro: string;//"Rua Acácias"
-  regiao: string;//"Sudeste"
-  siafi: string;//"4371"
-  uf: string;//"MG"
-  unidade: string;//""
-};
 
 export default function ShoppingCard() {
   const route = useRouter();
@@ -49,10 +36,14 @@ export default function ShoppingCard() {
 
   const [loading, setLoading] = useState(false);
   const [loadingZipCode, setLoadingZipCode] = useState(false);
+  const [isZipCodeValid, setIsZipCodeValid] = useState(false);
 
   const totalCentavos = storage
-    .map(v => Math.round(v.price * 100))
-    .reduce((acc, val) => acc + val, 0);
+    .reduce((soma, item) => {
+      const quantity = parseFloat(String(item.remove_quantity));
+      const price = parseFloat(String(item.unit_amount));
+      return soma + (quantity * price);
+    }, 0);
 
   const sumPrices = totalCentavos / 100;
 
@@ -64,18 +55,19 @@ export default function ShoppingCard() {
     mode: 'onChange'
   });
 
-  const { city, neighborhood, street, state, zip_code, pick_up_in_store } = watch();
+  const { pick_up_in_store } = watch();
 
   const processForm: SubmitHandler<schemaProps> = async data => {
     setLoading(true);
 
     const result = await api.paid_market.create({
+      method_payment: data.method_payment,
       email: data.email,
       full_name: data.full_name,
       phone: data.phone,
       products: storage,
       cpf: data.cpf,
-
+      price: data.price,
       zip_code: data.zip_code,
       street: data.street,
       city: data.city,
@@ -87,32 +79,44 @@ export default function ShoppingCard() {
       pick_up_in_store: data.pick_up_in_store,
     });
 
+    if (!result) {
+      return setLoading(false);
+    }
+
+    if (data.method_payment === 'pix') {
+      return console.log(result);
+    };
+
     return route.push(result.initPoint);
   };
 
-  useEffect(() => {
-    if (zip_code?.length === 8) {
-      setLoadingZipCode(true);
-
-      api.correio.get(zip_code)
-        .then(async (res) => {
-          const { logradouro, localidade, uf, bairro } = res as ZipCodeProps;
-
-          setValue("street", logradouro);
-          setValue("city", localidade);
-          setValue("state", uf);
-          setValue("neighborhood", bairro);
-
-          setLoadingZipCode(false);
-        });
-
-    } else if (street && neighborhood && city && state && !pick_up_in_store) {
-      setValue("street", '');
-      setValue("city", '');
-      setValue("state", '');
-      setValue("neighborhood", '');
+  async function onSearchZipCode(value: React.ChangeEvent<HTMLInputElement>) {
+    if (value.target.value.length !== 8) {
+      setIsZipCodeValid(false);
+      setLoadingZipCode(false);
+      return;
     };
-  }, [zip_code]);
+
+    setLoadingZipCode(true);
+
+    try {
+      const data = await api.correio.get(value.target.value);
+      const { logradouro, localidade, uf, bairro } = data as ZipCodeProps;
+
+      setValue("street", logradouro);
+      setValue("city", localidade);
+      setValue("state", uf);
+      setValue("neighborhood", bairro);
+      setValue("full_street", `${logradouro} • ${bairro} • ${localidade} • ${uf}`)
+
+      setLoadingZipCode(false);
+      setIsZipCodeValid(true);
+    } catch (error) {
+      console.log({ error });
+      setIsZipCodeValid(false);
+      setLoadingZipCode(false);
+    }
+  };
 
   useEffect(() => {
     initMercadoPago(process.env.NEXT_PUBLIC_MERCADO_PAGO_PUBLIC_KEY!);
@@ -125,6 +129,23 @@ export default function ShoppingCard() {
 
         <Shopping.Form disabled={storage.length === 0 || !isValid} currentStep={0} onSubmit={handleSubmit(processForm)} loadingButton={loading}>
           <h4 style={{ margin: '20px 0 10px 0', textAlign: 'center' }}>Informação do Pagamento</h4>
+          <Controller
+            name='method_payment'
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <MethodPayment $selected={value}>
+                <button style={{ backgroundColor: value === 'cards' ? '#5CB85C5a' : 'transparent' }} onClick={() => onChange('cards')}>
+                  <Cards width={25} height={25} stroke='#5CB85C' />
+                </button>
+                <button style={{ backgroundColor: value === 'pix' ? '#5CB85C5a' : 'transparent' }} onClick={() => onChange('pix')}>
+                  <Pix width={25} height={25} fill='#5CB85C' />
+                </button>
+              </MethodPayment>
+            )}
+          />
+
+          <div className='space' />
+
           <Content>
             <h5>Email</h5>
             <Controller
@@ -197,7 +218,10 @@ export default function ShoppingCard() {
                       name='cep'
                       type='text'
                       placeholder='CEP'
-                      onChange={onChange}
+                      onChange={event => {
+                        onSearchZipCode(event);
+                        onChange(event);
+                      }}
                     />
                   </Input.Root>
                 )
@@ -205,18 +229,18 @@ export default function ShoppingCard() {
             />
 
             {
-              street && neighborhood && city && state && !pick_up_in_store && (
+              (loadingZipCode || isZipCodeValid) && (
                 <>
                   <div style={{ height: 2 }} />
                   <Controller
                     name='full_street'
                     control={control}
-                    render={({ field: { onChange } }) => (
-                      <Input.Root variant="checkout" border='0'>
+                    render={({ field: { value, onChange } }) => (
+                      <Input.Root variant="checkout" border='0' isLoading={loadingZipCode}>
                         <Input.Icon icon={Home} width={20} height={20} stroke='#FA0B5B' strokeWidth={1.5} />
                         <Input.Input
                           disabled
-                          defaultValue={`${street} • ${neighborhood} • ${city} • ${state}`}
+                          value={value ?? ''}
                           onChange={onChange}
                         />
                       </Input.Root>
@@ -242,7 +266,7 @@ export default function ShoppingCard() {
               name='description'
               control={control}
               render={({ field: { onChange } }) => (
-                <Input.Root variant="checkout" border='0 0 9px 9px' isLoading={loadingZipCode}>
+                <Input.Root variant="checkout" border='0 0 9px 9px'>
                   <Input.Icon icon={Pen} width={20} height={20} stroke='#FA0B5B' strokeWidth={1.5} />
                   <Input.Input placeholder='Descrição (Opcional)' onChange={onChange} />
                 </Input.Root>

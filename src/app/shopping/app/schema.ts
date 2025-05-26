@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 
 export const schema = yup.object().shape({
+  method_payment: yup.string().required(),
   price: yup.number().required(),
   email: yup.string().required(),
   full_name: yup.string().min(6, 'Too short').required(),
@@ -100,3 +101,19 @@ export const steps = [
     fields: []
   }
 ];
+
+export type ZipCodeProps = {
+  bairro: string;//"Eldorado"
+  cep: string;//"32310-370"
+  complemento: string;//""
+  ddd: string;//"31"
+  estado: string;//"Minas Gerais"
+  gia: string;//""
+  ibge: string;//"3118601"
+  localidade: string;//"Contagem"
+  logradouro: string;//"Rua Acácias"
+  regiao: string;//"Sudeste"
+  siafi: string;//"4371"
+  uf: string;//"MG"
+  unidade: string;//""
+};

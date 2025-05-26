@@ -1,64 +1,66 @@
-// components/Modal.tsx
-import React, { useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { CSSProperties, ReactNode, useRef, forwardRef, useEffect } from "react";
 
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-}
+import { Container, Content } from "./styles";
 
-export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [onClose]);
-
-  if (!isOpen) return null;
-
-  return (
-    <Overlay onClick={onClose}>
-      <Container onClick={(e) => e.stopPropagation()}>
-        {/* <CloseButton onClick={onClose}>×</CloseButton> */}
-        {children}
-      </Container>
-    </Overlay>
-  );
+interface Props {
+  open: boolean;
+  onClickOutside?: (b: boolean) => void;
+  children: ReactNode;
+  style?: CSSProperties;
 };
 
-const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
+function useClickOutside(ref: React.RefObject<HTMLElement | null>, callback: () => void) {
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        callback();
+      }
+    }
 
-const Overlay = styled.div`
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-`;
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref, callback]);
+}
 
-const Container = styled.div`
-  background: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  min-width: 300px;
-  animation: ${fadeIn} 0.3s ease forwards;
-  position: relative;
-`;
+const Modal = forwardRef<HTMLDivElement, Props>(
+  ({ open, onClickOutside, children, ...rest }) => {
+    const contentRef = useRef<HTMLDivElement>(null);
 
-// const CloseButton = styled.button`
-//   position: absolute;
-//   top: 0.5rem;
-//   right: 1rem;
-//   font-size: 1.5rem;
-//   background: none;
-//   border: none;
-//   cursor: pointer;
-// `;
+    const contentStyle: CSSProperties = {
+      visibility: open ? 'visible' : 'hidden',
+      opacity: open ? 1 : 0,
+    };
+
+    const content_styles = {
+      top: open ? '50%' : '65%',
+      transition: '0.5s'
+    };
+
+    useClickOutside(contentRef, () => {
+      if (onClickOutside) {
+        document.body.style.overflow = 'scroll';
+        onClickOutside(false);
+      }
+    });
+
+    useEffect(() => {
+      if (open) {
+        document.body.style.overflow = 'hidden';
+      }
+    }, [open]);
+
+    return (
+      <Container style={contentStyle}>
+        <Content ref={contentRef} style={content_styles} {...rest}>
+          {children}
+        </Content>
+      </Container>
+    );
+  }
+);
+
+Modal.displayName = "Modal"
+
+export { Modal }

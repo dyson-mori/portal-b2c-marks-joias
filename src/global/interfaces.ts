@@ -25,6 +25,7 @@ export type StorageProps = {
 };
 
 export type PaidMarketProps = {
+  method_payment: string;
   full_name: string;
   email: string;
   client_email?: string;
@@ -33,6 +34,8 @@ export type PaidMarketProps = {
 
   cpf: string;
   pick_up_in_store: boolean;
+
+  price: number;
 
   zip_code: string; // '32310370';
   number: string; // '920';

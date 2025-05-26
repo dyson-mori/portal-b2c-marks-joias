@@ -2,18 +2,13 @@ import styled, { css } from 'styled-components';
 import Link from "next/link";
 
 export const Container = styled.header<{ $scrolled: boolean; $isLanding: boolean }>`
-  position: fixed;
   top: 0;
-  
   display: flex;
-  
   width: 100%;
   height: 50px;
-  
   padding: 0 50px;
-  
   ${({ theme, $scrolled, $isLanding }) => css`
-    /* position: ${$isLanding ? 'fixed' : 'sticky'}; */
+    position: ${$scrolled ? 'fixed' : 'sticky'};
 
     background-color: #fff;
 

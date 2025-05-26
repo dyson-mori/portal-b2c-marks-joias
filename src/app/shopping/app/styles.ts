@@ -69,3 +69,15 @@ export const Result = styled.div`
     }
   `};
 `;
+
+export const MethodPayment = styled.div<{ $selected: string }>`
+  display: flex;
+  justify-content: space-evenly;
+
+  button {
+    width: 30%;
+    height: 50px;
+    background-color: transparent;
+    border: 0;
+  };
+`;
