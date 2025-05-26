@@ -76,8 +76,10 @@ export const MethodPayment = styled.div<{ $selected: string }>`
 
   button {
     width: 30%;
-    height: 50px;
+    height: 55px;
     background-color: transparent;
     border: 0;
+    cursor: pointer;
+    border-radius: 3px;
   };
 `;

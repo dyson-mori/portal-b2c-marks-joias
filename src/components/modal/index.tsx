@@ -25,7 +25,7 @@ function useClickOutside(ref: React.RefObject<HTMLElement | null>, callback: () 
 }
 
 const Modal = forwardRef<HTMLDivElement, Props>(
-  ({ open, onClickOutside, children, ...rest }) => {
+  ({ open, onClickOutside, children, ...rest }, ref) => {
     const contentRef = useRef<HTMLDivElement>(null);
 
     const contentStyle: CSSProperties = {
@@ -52,7 +52,7 @@ const Modal = forwardRef<HTMLDivElement, Props>(
     }, [open]);
 
     return (
-      <Container style={contentStyle}>
+      <Container ref={ref} style={contentStyle}>
         <Content ref={contentRef} style={content_styles} {...rest}>
           {children}
         </Content>

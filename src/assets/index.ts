@@ -27,6 +27,8 @@ import { ReactComponent as Map } from './map.svg';
 import { ReactComponent as City } from './city.svg';
 import { ReactComponent as Pen } from './pen.svg';
 import { ReactComponent as Landing } from './landing.svg';
+import { ReactComponent as BoldCard } from './bold-card.svg';
+import { ReactComponent as BoldCopy } from './bold-copy.svg';
 
 export {
   Logo,
@@ -57,5 +59,7 @@ export {
   Map,
   City,
   Pen,
-  Landing
+  Landing,
+  BoldCard,
+  BoldCopy
 }

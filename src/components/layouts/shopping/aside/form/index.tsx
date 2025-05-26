@@ -5,6 +5,7 @@ import { Button } from "../../../../button";
 import { Container } from "./styles";
 
 type Props = {
+  hide: boolean;
   disabled: boolean;
   loadingButton: boolean;
   currentStep: number;
@@ -12,7 +13,11 @@ type Props = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
 };
 
-export default function Form({ disabled, currentStep, children, loadingButton, onSubmit }: Props) {
+export default function Form({ hide, disabled, currentStep, children, loadingButton, onSubmit }: Props) {
+  if (hide) {
+    return;
+  };
+
   return (
     <Container onSubmit={onSubmit}>
       {children}
