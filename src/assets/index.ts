@@ -1,4 +1,5 @@
 import { ReactComponent as Logo } from './logo.svg';
+import { ReactComponent as WhiteLogo } from './white-logo.svg';
 import { ReactComponent as PaymentCheck } from './payment-check.svg';
 import { ReactComponent as ShoppingCart } from './shopping-cart.svg';
 import { ReactComponent as Tag } from './tag.svg';
@@ -29,9 +30,12 @@ import { ReactComponent as Pen } from './pen.svg';
 import { ReactComponent as Landing } from './landing.svg';
 import { ReactComponent as BoldCard } from './bold-card.svg';
 import { ReactComponent as BoldCopy } from './bold-copy.svg';
+import { ReactComponent as Instagram } from './instagram.svg';
+import { ReactComponent as TikTok } from './tiktok.svg';
 
 export {
   Logo,
+  WhiteLogo,
   PaymentCheck,
   ShoppingCart,
   Tag,
@@ -61,5 +65,7 @@ export {
   Pen,
   Landing,
   BoldCard,
-  BoldCopy
+  BoldCopy,
+  Instagram,
+  TikTok
 }
