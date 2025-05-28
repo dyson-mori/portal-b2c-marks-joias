@@ -149,3 +149,17 @@ model Banner {
 
   @@map("banner")
 }
+
+model Feedbacks {
+  id String @id @default(cuid())
+
+  photo   String?
+  name    String
+  message String
+  social  String? @default("[]")
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("feedback")
+}
