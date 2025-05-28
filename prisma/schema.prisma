@@ -153,10 +153,11 @@ model Banner {
 model Feedbacks {
   id String @id @default(cuid())
 
-  photo   String?
-  name    String
-  message String
-  social  String? @default("[]")
+  photo       String?
+  name        String
+  message     String
+  social      String? @default("[]")
+  was_it_used Boolean @default(false)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

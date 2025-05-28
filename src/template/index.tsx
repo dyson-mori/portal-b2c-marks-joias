@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Suspense } from "react";
+import React, { ReactNode, Suspense } from "react";
 import { ThemeProvider } from "styled-components";
 
 import { usePathname } from "next/navigation";
@@ -9,7 +9,9 @@ import { HeaderProps } from "@global/interfaces";
 
 import Global from "../global/styles";
 import themes from "../global/theme";
-import ShoppingProvider from '../context/shopping';
+
+import ShoppingProvider from '@context/shopping';
+import { useSession } from "@context/session";
 
 import Footer from "./footer";
 import Header from "./header";
@@ -20,6 +22,16 @@ type Template = {
   data: HeaderProps;
 };
 
+function WaitForSession({ children }: { children: ReactNode }) {
+  const { loading } = useSession()
+
+  if (loading) {
+    return <Splash />
+  }
+
+  return children;
+}
+
 export default function Template({ children, data }: Readonly<Template>) {
   const param = usePathname();
   const hide = param === '/success';
@@ -27,11 +39,13 @@ export default function Template({ children, data }: Readonly<Template>) {
   return (
     <ThemeProvider theme={themes}>
       <ShoppingProvider>
-        <Suspense fallback={<Splash />}>
-          <Header data={data} hide={hide} param={param} />
-          {children}
-          <Footer hide={hide} />
-        </Suspense>
+        <WaitForSession>
+          <Suspense fallback={<Splash />}>
+            <Header data={data} hide={hide} param={param} />
+            {children}
+            <Footer hide={hide} />
+          </Suspense>
+        </WaitForSession>
       </ShoppingProvider>
       <Global />
     </ThemeProvider>

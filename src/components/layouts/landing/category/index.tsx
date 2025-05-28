@@ -2,7 +2,9 @@ import Image from 'next/image';
 
 import { Category } from '@prisma/client';
 
-import { Container, List } from "./styles";
+import { DotLottiePlayer } from '@dotlottie/react-player';
+
+import { CategoryEmpty, Container, List } from "./styles";
 
 type CategoryProps = {
   categories: Category[];
@@ -10,6 +12,23 @@ type CategoryProps = {
 };
 
 export default function Categories({ categories, onSelectCategory }: CategoryProps) {
+  const lottie_styles = {
+    display: 'flex',
+    maxWidth: "150px"
+  };
+
+  if (categories.length === 0) {
+    return (
+      <Container>
+        <h3>Selecione uma Categoria</h3>
+        <CategoryEmpty>
+          <DotLottiePlayer style={lottie_styles} src="/lottie/marks-empty-card.lottie" autoplay />
+          <p>Nenhuma Categoria Encontrada!</p>
+        </CategoryEmpty>
+      </Container>
+    )
+  };
+
   return (
     <Container>
       <h3>Selecione uma Categoria</h3>

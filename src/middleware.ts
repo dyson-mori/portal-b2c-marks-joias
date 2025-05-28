@@ -1,19 +1,16 @@
-// middleware.ts
-import { NextResponse } from 'next/server';
-// import type { NextRequest } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server'
 
-export function middleware(
-  // request: NextRequest
-) {
-  const response = NextResponse.next();
+export function middleware(request: NextRequest) {
+  const origin = request.headers.get('origin') || '';
+  const allowedOrigin = process.env.NEXT_PUBLIC_MARKS_URL.replace('api', '');
 
-  response.headers.set('Access-Control-Allow-Origin', '*');
-  response.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+  if (origin && origin !== allowedOrigin) {
+    return new NextResponse('Forbidden', { status: 403 })
+  };
 
-  return response;
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/api/:path*'],
-};
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'], // aplica em todas as rotas visíveis
+}

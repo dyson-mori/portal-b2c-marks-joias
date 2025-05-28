@@ -2,7 +2,8 @@ import { Montserrat, Montserrat_Alternates } from "next/font/google";
 
 import { api } from "@services/api";
 
-import Tempalte from "../template";
+import Template from "../template";
+import SessionProvider from "@context/session";
 
 const font = Montserrat({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -28,9 +29,11 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="pt" className={`${font.variable} ${montserrat_alternates.variable}`}>
       <body>
-        <Tempalte data={header}>
-          {children}
-        </Tempalte>
+        <SessionProvider>
+          <Template data={header}>
+            {children}
+          </Template>
+        </SessionProvider>
       </body>
     </html>
   );

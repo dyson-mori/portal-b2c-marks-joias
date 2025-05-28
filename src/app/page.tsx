@@ -10,9 +10,13 @@ export const metadata: Metadata = {
 };
 
 export default async function Products() {
-  const products = await api.products.list(`/products?limit=${8}`);
-  const categories = await api.category.list();
+  const landing = await api.landing.list();
   const banner = await api.banner.list();
 
-  return <LandingPage banner={banner} categories={categories} products={products} />;
+  return <LandingPage
+    banner={banner}
+    categories={landing.categories}
+    products={landing.products}
+    feedbacks={landing.feedbacks}
+  />;
 };
