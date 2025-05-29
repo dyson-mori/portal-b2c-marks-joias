@@ -20,20 +20,25 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST() {
-  const cookie = await cookies();
-  const sessionId = cookie.get('session_id')?.value;
+  const cookieStore = await cookies()
+  const sessionId = cookieStore.get('session_id')?.value
 
-  if (!sessionId) {
-    const newId = `marks-joias-${Math.floor(100000 + Math.random() * 900000)}`;
+  if (sessionId) {
+    return NextResponse.json({ success: true })
+  }
 
-    cookie.set({
-      name: 'session_id',
-      value: newId,
-      httpOnly: true,
-      path: '/',            // <- MUITO IMPORTANTE
-      maxAge: 60 * 60 * 24 * 7, // 7 dias
-    });
-  };
+  const newId = `marks-joias-${Math.floor(100000 + Math.random() * 900000)}`
+  const response = NextResponse.json({ success: true })
 
-  return NextResponse.json(true, { status: 200 });
+  response.cookies.set({
+    name: 'session_id',
+    value: newId,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    path: '/',
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 24 * 7, // 7 dias
+  })
+
+  return response
 }

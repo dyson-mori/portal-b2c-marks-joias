@@ -1,24 +1,11 @@
 import { NextResponse } from "next/server";
-// import { cookies, headers } from "next/headers";
+// import { cookies } from "next/headers";
 
 import { prisma } from "@services/prisma";
 
-export async function GET(
-  // request: NextRequest
-) {
-  // const origin = request.headers.get('origin');
-
+export async function GET() {
   // const cookie = await cookies();
-  // const sessionId = cookie.getAll();
-
-  // const allowedOrigin = process.env.NEXT_PUBLIC_MARKS_URL.replace('api', '');
-
-  // console.log(origin);
-  // console.log(allowedOrigin);
-
-  // if (origin !== allowedOrigin) {
-  //   return new NextResponse('Forbidden', { status: 403 })
-  // }
+  // const sessionId = cookie.get('session_id');
 
   // if (!sessionId) {
   //   return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
@@ -56,6 +43,9 @@ export async function GET(
     orderBy: {
       created_at: 'asc'
     },
+    omit: {
+      was_it_used: true
+    }
   });
 
   if (!products) {

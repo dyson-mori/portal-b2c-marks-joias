@@ -1,8 +1,8 @@
 import { NextResponse, NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const origin = request.headers.get('origin') || '';
-  const allowedOrigin = process.env.NEXT_PUBLIC_MARKS_URL.replace('api', '');
+  const allowedOrigin = process.env.NEXT_PUBLIC_MARKS_URL.replace('/api', '');
 
   if (origin && origin !== allowedOrigin) {
     return new NextResponse('Forbidden', { status: 403 })

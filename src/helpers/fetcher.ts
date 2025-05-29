@@ -1,5 +1,7 @@
 "use server";
 
+import { cookies } from "next/headers";
+
 interface FetcherParams {
   url: string;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -16,12 +18,11 @@ const fetcher = async ({
   url,
   method,
   body,
-  header = {},
   next = {},
   cache = 'default'
 }: FetcherParams) => {
   try {
-    // const cookieStore = cookies();
+    const cookieStore = await cookies();
     const fullUrl = `${NEXT_URL}${url}`;
     const verify = url.includes('https');
     const isBodyAllowed = method !== 'GET' && method !== 'DELETE';
@@ -30,11 +31,11 @@ const fetcher = async ({
       method,
       cache,
       next,
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         'origin': `${NEXT_URL.replace('api', '')}`,
-        ...header,
-        // Cookie: cookieStore.toString()
+        Cookie: cookieStore.toString()
       },
       ...(isBodyAllowed && body ? { body: JSON.stringify(body) } : {})
     });

@@ -4,7 +4,8 @@ import fetcher from "@helpers/fetcher";
 
 export const api = {
   session: {
-    create: () => fetcher({ method: 'POST', url: '/session' })
+    find: () => fetcher({ method: 'GET', url: '/session' }),
+    create: () => fetcher({ method: 'POST', url: '/session' }),
   },
   landing: {
     list: () => fetcher({ method: 'GET', url: '/landing' })

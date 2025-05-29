@@ -23,27 +23,27 @@ const nextConfig: NextConfig = {
       }
     ]
   },
-  // async headers() {
-  //   return [
-  //     {
-  //       source: '/api/:path*',
-  //       headers: [
-  //         {
-  //           key: 'Access-Control-Allow-Origin',
-  //           value: process.env.NEXT_PUBLIC_MARKS_URL.replace('/api', ''), // só esse domínio poderá fazer fetch
-  //         },
-  //         {
-  //           key: 'Access-Control-Allow-Methods',
-  //           value: 'GET, POST, OPTIONS',
-  //         },
-  //         {
-  //           key: 'Access-Control-Allow-Headers',
-  //           value: 'Content-Type, Authorization',
-  //         },
-  //       ],
-  //     },
-  //   ]
-  // },
+  async headers() {
+    return [
+      {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: process.env.NEXT_PUBLIC_MARKS_URL.replace('/api', ''), // só esse domínio poderá fazer fetch
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, OPTIONS',
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Content-Type, Authorization',
+          },
+        ],
+      },
+    ]
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
