@@ -3,6 +3,7 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 
 import { api } from '@services/api';
+import { cookiesActionServer } from '@helpers/actions';
 
 type SessionContextType = {
   loading: boolean
@@ -15,14 +16,15 @@ const SessionContext = createContext<SessionContextType>({
 const SessionProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function init() {
-      const verify = await api.session.create();
-      if (verify.success) {
-        setLoading(false);
-      };
+  async function init() {
+    const verify = await api.session.create();
+    if (verify) {
+      cookiesActionServer('@marks:session_id', verify)
+      setLoading(false);
     };
+  };
 
+  useEffect(() => {
     init();
   }, []);
 

@@ -1,3 +1,5 @@
+// "use server"
+
 import { PaidMarketProps } from "@global/interfaces";
 
 import fetcher from "@helpers/fetcher";

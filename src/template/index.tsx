@@ -38,15 +38,15 @@ export default function Template({ children, data }: Readonly<Template>) {
 
   return (
     <ThemeProvider theme={themes}>
-      <ShoppingProvider>
-        <WaitForSession>
+      <WaitForSession>
+        <ShoppingProvider>
           <Suspense fallback={<Splash />}>
             <Header data={data} hide={hide} param={param} />
             {children}
             <Footer hide={hide} />
           </Suspense>
-        </WaitForSession>
-      </ShoppingProvider>
+        </ShoppingProvider>
+      </WaitForSession>
       <Global />
     </ThemeProvider>
   )

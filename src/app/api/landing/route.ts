@@ -1,15 +1,13 @@
-import { NextResponse } from "next/server";
-// import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 
 import { prisma } from "@services/prisma";
 
-export async function GET() {
-  // const cookie = await cookies();
-  // const sessionId = cookie.get('session_id');
+export async function GET(request: NextRequest) {
+  const url = new URL(request.url);
 
-  // if (!sessionId) {
-  //   return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
-  // };
+  if (url.origin !== process.env.NEXT_PUBLIC_MARKS_URL.replace('/api', '')) {
+    return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
+  };
 
   const products = await prisma.product.findMany({
     orderBy: {

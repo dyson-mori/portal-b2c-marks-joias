@@ -20,25 +20,36 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST() {
-  const cookieStore = await cookies()
-  const sessionId = cookieStore.get('session_id')?.value
+  const cookieStore = await cookies();
+  const existing = cookieStore.get('session_id');
 
-  if (sessionId) {
-    return NextResponse.json({ success: true })
-  }
+  if (!existing) {
+    const sessionId = `marks-joias-${Math.floor(100000 + Math.random() * 900000)}`;
 
-  const newId = `marks-joias-${Math.floor(100000 + Math.random() * 900000)}`
-  const response = NextResponse.json({ success: true })
+    const response = NextResponse.json(sessionId, {
+      headers: {
+        'Access-Control-Allow-Origin': '*', // ou '*'
+        'Access-Control-Allow-Credentials': 'true',
+      }
+    });
 
-  response.cookies.set({
-    name: 'session_id',
-    value: newId,
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    path: '/',
-    sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 7, // 7 dias
-  })
+    response.cookies.set({
+      name: 'session_id',
+      value: sessionId,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // ← obrigatório em produção
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7, // 7 dias
+    });
 
-  return response
+    return response;
+  };
+
+  return NextResponse.json(existing, {
+    headers: {
+      'Access-Control-Allow-Origin': '*', // ou '*'
+      'Access-Control-Allow-Credentials': 'true',
+    }
+  });
 }

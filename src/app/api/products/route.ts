@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-// import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import { prisma } from "@services/prisma";
 
 export async function GET(request: NextRequest) {
-  // const cookie = await cookies();
-  // const sessionId = cookie.get('session_id')?.value;
-
-  // if (!sessionId) {
-  //   return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
-  // };
-
   const url = new URL(request.url);
+  const cookie = await cookies();
+  const sessionId = cookie.get('@marks:session_id')?.value;
+
+  if (!sessionId || url.origin !== process.env.NEXT_PUBLIC_MARKS_URL.replace('/api', '')) {
+    return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
+  };
+
   const category_title = url.searchParams.get("category");
 
   const category = await prisma.category.findFirst({

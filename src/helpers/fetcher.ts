@@ -9,6 +9,7 @@ interface FetcherParams {
   body?: object;
   cache?: 'default' | 'force-cache' | 'no-cache' | 'no-store' | 'reload' | 'only-if-cached',
   // body?: Record<string, object>;
+  cookie?: object;
   header?: HeadersInit;
 }
 
@@ -19,6 +20,7 @@ const fetcher = async ({
   method,
   body,
   next = {},
+  header,
   cache = 'default'
 }: FetcherParams) => {
   try {
@@ -35,7 +37,8 @@ const fetcher = async ({
       headers: {
         'Content-Type': 'application/json',
         'origin': `${NEXT_URL.replace('api', '')}`,
-        Cookie: cookieStore.toString()
+        Cookie: cookieStore.toString(),
+        ...header,
       },
       ...(isBodyAllowed && body ? { body: JSON.stringify(body) } : {})
     });
