@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   const cookie = await cookies();
   const sessionId = cookie.get('@marks:session_id')?.value;
 
-  if (!sessionId || header.get('origin') !== process.env.NEXT_PUBLIC_MARKS_URL.replace('api', '')) {
+  if (!sessionId || header.get('origin') !== process.env.NEXT_PUBLIC_MARKS_URL.replace('/api', '')) {
     return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
   };
 

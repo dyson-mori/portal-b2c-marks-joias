@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.main`
   font-family: sans-serif;
+  max-width: 100%;
 `;
 
 export const Notice = styled.div`

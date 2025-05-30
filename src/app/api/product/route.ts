@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
   const sessionId = cookie.get('@marks:session_id')?.value;
   const product_id = url.searchParams.get("product_id");
 
-  if (!sessionId || header.get('origin') !== process.env.NEXT_PUBLIC_MARKS_URL.replace('api', '')) {
+  if (!sessionId || header.get('origin') !== process.env.NEXT_PUBLIC_MARKS_URL.replace('/api', '')) {
     return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
   };
 

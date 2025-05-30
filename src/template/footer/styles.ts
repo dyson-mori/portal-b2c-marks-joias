@@ -17,7 +17,7 @@ export const Container = styled.footer`
       font-size: ${theme.font.size.light};
     };
 
-    @media (max-width: 500px){
+    @media (max-width: ${theme.responsive.mobile}){
       p {
         font-size: ${theme.font.size.light};
       }
@@ -34,6 +34,11 @@ export const Contents = styled.div`
   width: 100%;
 
   margin-bottom: 10px;
+
+  @media (max-width: ${({ theme }) => theme.responsive.mobile}px) {
+    flex-direction: column;
+    align-items: center;
+  };
 `;
 
 export const Rows = styled.div`
@@ -48,7 +53,11 @@ export const Rows = styled.div`
   strong {
     color: #fff;
     font-weight: 500;
-  }
+  };
+
+  @media (max-width: ${({ theme }) => theme.responsive.mobile}px) {
+    width: 100%;
+  };
 `;
 
 export const Copyright = styled.div`

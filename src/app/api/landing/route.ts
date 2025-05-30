@@ -1,11 +1,16 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 import { prisma } from "@services/prisma";
+import { headers } from "next/headers";
 
-export async function GET(request: NextRequest) {
-  const url = new URL(request.url);
+export async function GET(
+  // request: NextRequest
+) {
+  const header = await headers();
+  // const url = new URL(request.url);
+  const origin = header.get('origin');
 
-  if (url.origin !== process.env.NEXT_PUBLIC_MARKS_URL.replace('/api', '')) {
+  if (origin !== process.env.NEXT_PUBLIC_MARKS_URL.replace('/api', '')) {
     return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
   };
 

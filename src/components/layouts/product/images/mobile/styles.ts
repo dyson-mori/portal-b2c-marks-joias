@@ -12,6 +12,10 @@ export const Container = styled.section`
 
   scrollbar-width: none;
 
+  video {
+    object-fit: cover;
+  }
+
   img {
     width: 100%;
     height: 100%;

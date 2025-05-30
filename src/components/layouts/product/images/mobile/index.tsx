@@ -18,24 +18,26 @@ export default function Mobile({ data, width }: Props) {
           loop
           muted
           autoPlay
-          style={{ width: width - 20, height: width - 20, objectFit: 'cover', scrollSnapAlign: 'start' }}
+          width={width - 20}
+          height={width - 20}
+          style={{ objectFit: 'cover', scrollSnapAlign: 'start' }}
         >
           <source src={file} type="video/webm" />
           Your browser does not support the video tag.
         </video>
       ) : (
         <Image
-            key={index.toString()}
-            priority
-            width={width - 20}
-            height={width - 20}
-            src={file}
-            alt={file}
-            style={{
-              objectFit: 'cover',
-              scrollSnapAlign: 'start'
-            }}
-          />
+          key={index.toString()}
+          priority
+          width={width - 20}
+          height={width - 20}
+          src={file}
+          alt={file}
+          style={{
+            objectFit: 'cover',
+            scrollSnapAlign: 'start'
+          }}
+        />
       ))}
     </Container>
   )

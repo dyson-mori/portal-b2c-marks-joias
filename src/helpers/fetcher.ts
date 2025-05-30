@@ -36,7 +36,7 @@ const fetcher = async ({
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'origin': `${NEXT_URL.replace('api', '')}`,
+        'origin': `${NEXT_URL.replace('/api', '')}`,
         Cookie: cookieStore.toString(),
         ...header,
       },
