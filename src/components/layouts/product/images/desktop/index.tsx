@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import Image from 'next/image';
 
-import { Container, Options, Button, GroupMainImage } from "./styles";
 import { ProductProps } from '@global/interfaces';
+
+import { Container, Options, Button, GroupMainImage } from "./styles";
 
 type Props = {
   data: ProductProps;
@@ -32,38 +33,29 @@ export default function Desktop({ data }: Props) {
 
       <GroupMainImage>
         {data.files.map((file, index) => (
-          <Image
-            key={index.toString()}
-            priority
-            width={500}
-            height={500}
-            src={file}
-            alt={data.title}
-            loading="eager"
-            style={{
-              objectFit: 'cover',
-              opacity: select === index ? 1 : 0
-            }}
-          />
+          <Fragment key={index.toString()}>
+            {file.endsWith('.webm') ? (
+              <video style={{ width: '100%', objectFit: 'cover', opacity: select === index ? 1 : 0 }} loop autoPlay muted>
+                <source src={file} type="video/webm" />
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+                <Image
+                  priority
+                  width={500}
+                  height={500}
+                  src={file}
+                  alt={data.title}
+                  loading="eager"
+                  style={{
+                    objectFit: 'cover',
+                    opacity: select === index ? 1 : 0
+                  }}
+                />
+            )}
+          </Fragment>
         ))}
       </GroupMainImage>
-
-      {/* {data.files[select].endsWith('.webm') ? (
-        <video style={{ objectFit: 'cover' }} loop autoPlay muted>
-          <source src={data.files[select]} type="video/webm" />
-          Your browser does not support the video tag.
-        </video>
-      ) : (
-          <Image
-            priority
-            width={500}
-            height={500}
-            src={data.files[select]}
-            alt={data.title}
-            loading="eager"
-            style={{ objectFit: 'cover' }}
-          />
-      )} */}
     </Container>
   )
 }

@@ -1,9 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
+import { cookies, headers } from "next/headers";
+
 import { prisma } from "@services/prisma";
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
+
+  const header = await headers();
+  const cookie = await cookies();
+
+  const sessionId = cookie.get('@marks:session_id')?.value;
   const product_id = url.searchParams.get("product_id");
+
+  if (!sessionId || header.get('origin') !== process.env.NEXT_PUBLIC_MARKS_URL.replace('api', '')) {
+    return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
+  };
 
   const product = await prisma.product.findFirst({
     where: {

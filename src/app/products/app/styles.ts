@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.main`
   display: flex;
@@ -19,15 +19,19 @@ export const Banner = styled.section`
   width: 100%;
   height: 60vh;
 
-  margin-bottom: 10px;
+  overflow: hidden;
 
   img {
     object-fit: cover;
     height: 100%;
   };
+
+  ${({ theme }) => css`
+    box-shadow: ${theme.settings.box.default};
+  `};
 `;
 
-export const SubCategories = styled.section`
+export const Categories = styled.section`
   display: flex;
 
   padding: 10px 0;
@@ -36,6 +40,7 @@ export const SubCategories = styled.section`
 
   button {
     margin: 0 5px;
+    /* width: min-content; */
   };
 
   button:first-child {

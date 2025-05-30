@@ -1,18 +1,14 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
-export async function GET(request: NextRequest) {
-  const url = new URL(request.url);
-
-  if (url.origin !== 'http://localhost:3000') {
-    return NextResponse.json("origin not found!", { status: 400, statusText: "user session not found!" });
-  };
-
+export async function GET() {
+  const header = await headers();
   const cookie = await cookies();
+
   const sessionId = cookie.get('session_id')?.value;
 
-  if (!sessionId) {
+  if (!sessionId || header.get('origin') !== process.env.NEXT_PUBLIC_MARKS_URL.replace('api', '')) {
     return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
   };
 
@@ -24,13 +20,11 @@ export async function POST() {
   const existing = cookieStore.get('session_id');
 
   if (!existing) {
-    const sessionId = `marks-joias-${Math.floor(100000 + Math.random() * 900000)}`;
+    const sessionId = `marks-joias-${Math.floor(100000000 + Math.random() * 900000000)}`;
 
     const response = NextResponse.json(sessionId, {
-      headers: {
-        'Access-Control-Allow-Origin': '*', // ou '*'
-        'Access-Control-Allow-Credentials': 'true',
-      }
+      status: 200,
+      statusText: "this session already exists!"
     });
 
     response.cookies.set({
@@ -40,16 +34,14 @@ export async function POST() {
       secure: process.env.NODE_ENV === 'production', // ← obrigatório em produção
       sameSite: 'lax',
       path: '/',
-      maxAge: 60 * 60 * 24 * 7, // 7 dias
+      maxAge: 60 * 60 * 24 * 1, // 7 dias
     });
 
     return response;
   };
 
   return NextResponse.json(existing, {
-    headers: {
-      'Access-Control-Allow-Origin': '*', // ou '*'
-      'Access-Control-Allow-Credentials': 'true',
-    }
+    status: 201,
+    statusText: "session was created successfully!"
   });
 }

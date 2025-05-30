@@ -5,18 +5,19 @@ import { prisma } from "@services/prisma";
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
+  const header = await headers();
   const cookie = await cookies();
   const sessionId = cookie.get('@marks:session_id')?.value;
 
-  if (!sessionId || url.origin !== process.env.NEXT_PUBLIC_MARKS_URL.replace('/api', '')) {
+  if (!sessionId || header.get('origin') !== process.env.NEXT_PUBLIC_MARKS_URL.replace('api', '')) {
     return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
   };
 
-  const category_title = url.searchParams.get("category");
+  const title = url.searchParams.get("title");
 
   const category = await prisma.category.findFirst({
     where: {
-      title: category_title ?? undefined
+      title: title ?? undefined
     }
   });
 
@@ -25,7 +26,7 @@ export async function GET(request: NextRequest) {
       created_at: 'desc'
     },
     where: {
-      category_id: category_title ? category?.id : undefined
+      category_id: title ? category?.id : undefined
     },
     select: {
       id: true,

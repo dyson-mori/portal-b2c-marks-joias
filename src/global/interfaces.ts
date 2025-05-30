@@ -5,6 +5,10 @@ export type ProductProps = Product & {
   related: Product[];
 };
 
+export type CategoryProps = Category & {
+  sub: string[]
+};
+
 export type HeaderProps = {
   header: Header[];
   category: Category & {

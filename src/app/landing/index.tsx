@@ -71,7 +71,7 @@ export default function LandingPage({ products, categories, banner, feedbacks }:
   // ];
 
   function onSelectCategoryTitle(title: string) {
-    route.push(`/products?category=${title}`)
+    route.push(`/products?title=${title}`)
   };
 
   return (

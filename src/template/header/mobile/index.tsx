@@ -88,12 +88,12 @@ export default function Mobile({ hide, param, data }: Props) {
             {
               data.category.map((item, index) => (
                 <Fragment key={index.toString()}>
-                  <Link href={`/products?category=${item.title}`} onClick={closeMenu}>
+                  <Link href={`/products?title=${item.title}`} onClick={closeMenu}>
                     <div style={{ width: 50 }} />
                     <strong>{item.title}</strong>
                   </Link>
                   {item.sub?.map((sub, index) => (
-                    <Link key={index.toString()} className='sub-categories' href={`/products?category=${item.title}&sub=${sub.title}`} onClick={closeMenu}>
+                    <Link key={index.toString()} className='sub-categories' href={`/products?title=${item.title}&sub=${sub.title}`} onClick={closeMenu}>
                       <div style={{ width: 70 }} />
                       {sub.title}
                     </Link>

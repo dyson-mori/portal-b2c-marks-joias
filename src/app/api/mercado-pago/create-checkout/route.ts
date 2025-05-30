@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { cookies, headers } from "next/headers";
+
 import { Preference } from "mercadopago";
+
 import { paid_market_api } from "@services/mercado-pago";
 
-import { PaidMarketProps } from "@global/interfaces";
 import { formats } from "@helpers/format";
 import { generatePaymentId } from "@helpers/index";
+import { PaidMarketProps } from "@global/interfaces";
 
 // export async function OPTIONS() {
 //   return NextResponse.json({}, {
@@ -18,6 +21,15 @@ import { generatePaymentId } from "@helpers/index";
 // };
 
 export async function POST(req: NextRequest) {
+  const header = await headers();
+  const cookie = await cookies();
+
+  const sessionId = cookie.get('@marks:session_id')?.value;
+
+  if (!sessionId || header.get('origin') !== process.env.NEXT_PUBLIC_MARKS_URL.replace('api', '')) {
+    return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
+  };
+
   const {
     full_name,
     email,
