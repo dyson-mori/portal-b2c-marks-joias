@@ -20,7 +20,7 @@ export default function Mobile({ data, width }: Props) {
           autoPlay
           width={width - 20}
           height={width - 20}
-          style={{ objectFit: 'cover', scrollSnapAlign: 'start' }}
+          style={{ minWidth: '100%', minHeight: '100%', objectFit: 'cover', display: 'block', scrollSnapAlign: 'start' }}
         >
           <source src={file} type="video/webm" />
           Your browser does not support the video tag.

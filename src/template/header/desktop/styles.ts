@@ -9,11 +9,9 @@ export const Container = styled.header<{ $scrolled: boolean; $isLanding: boolean
   padding: 0 50px;
   ${({ theme, $scrolled, $isLanding }) => css`
     position: ${$scrolled ? 'fixed' : 'sticky'};
+    box-shadow: ${$isLanding ? ($scrolled ? theme.settings.box.simple : 'none') : theme.settings.box.simple};
 
     background-color: #fff;
-
-    /* background-color: ${$isLanding ? ($scrolled ? '#fff' : 'transparent') : '#fff'}; */
-    box-shadow: ${$isLanding ? ($scrolled ? theme.settings.box.simple : 'none') : theme.settings.box.simple};
 
     @media (max-width: 500px) {
       padding: 0;

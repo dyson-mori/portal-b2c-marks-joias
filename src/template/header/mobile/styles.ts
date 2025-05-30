@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import Link from "next/link";
 
 export const Container = styled.header<{ $scrolled: boolean; $isLanding: boolean }>`
-  position: fixed;
   top: 0;
 
   display: flex;
@@ -15,11 +14,10 @@ export const Container = styled.header<{ $scrolled: boolean; $isLanding: boolean
   padding: 0 50px;
 
   ${({ theme, $scrolled, $isLanding }) => css`
-    /* position: ${$isLanding ? 'fixed' : 'sticky'}; */
+    position: ${$scrolled ? 'fixed' : 'sticky'};
+    box-shadow: ${$isLanding ? ($scrolled ? theme.settings.box.simple : 'none') : theme.settings.box.simple};
 
     background-color: #fff;
-    /* background-color: ${$isLanding ? ($scrolled ? '#fff' : 'transparent') : '#fff'}; */
-    box-shadow: ${$isLanding ? ($scrolled ? theme.settings.box.simple : 'none') : theme.settings.box.simple};
 
     @media (max-width: 500px) {
       padding: 0 25px;

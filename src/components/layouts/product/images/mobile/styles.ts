@@ -12,6 +12,8 @@ export const Container = styled.section`
 
   scrollbar-width: none;
 
+  gap: 5px;
+
   video {
     object-fit: cover;
   }

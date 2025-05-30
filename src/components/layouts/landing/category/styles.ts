@@ -20,7 +20,7 @@ export const Container = styled.section`
     object-fit: cover;
   }; */
 
-  @media (max-width: 500px){
+  @media (max-width: ${({ theme }) => theme.responsive.mobile}px){
     padding: 15px 10px;
 
     ${({ theme }) => css`
@@ -34,6 +34,11 @@ export const Container = styled.section`
 export const List = styled.div`
   display: flex;
   justify-content: center;
+
+  overflow-x: auto;
+  justify-content: start;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 
   button {
     position: relative;
