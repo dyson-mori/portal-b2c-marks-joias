@@ -59,13 +59,16 @@ export const Categories = styled.section`
   };
 `;
 
-export const SectionProducts = styled.section`
+export const SectionProducts = styled.section<{ $isLoading: boolean }>`
   display: flex;
+  position: relative;
 
   flex-wrap: wrap;
   justify-content: space-between;
 
   width: 100%;
+
+  opacity: ${({ $isLoading }) => $isLoading ? 0.5 : 1};
 
   @media (max-width: 710px){
     justify-content: space-evenly;
@@ -80,4 +83,17 @@ export const ProductEmpty = styled.div`
 
   width: 100%;
   height: 80vh;
+`;
+
+export const LoadingProducts = styled.div`
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 5;
 `;

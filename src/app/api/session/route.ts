@@ -6,7 +6,7 @@ export async function GET() {
   const header = await headers();
   const cookie = await cookies();
 
-  const sessionId = cookie.get('session_id')?.value;
+  const sessionId = cookie.get('@marks:session_id')?.value;
 
   if (!sessionId || header.get('origin') !== process.env.NEXT_PUBLIC_MARKS_URL.replace('api', '')) {
     return NextResponse.json("user session not found!", { status: 400, statusText: "user session not found!" });
@@ -17,7 +17,7 @@ export async function GET() {
 
 export async function POST() {
   const cookieStore = await cookies();
-  const existing = cookieStore.get('session_id');
+  const existing = cookieStore.get('@marks:session_id');
 
   if (!existing) {
     const sessionId = `marks-joias-${Math.floor(100000000 + Math.random() * 900000000)}`;
@@ -28,7 +28,7 @@ export async function POST() {
     });
 
     response.cookies.set({
-      name: 'session_id',
+      name: '@marks:session_id',
       value: sessionId,
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production', // ← obrigatório em produção

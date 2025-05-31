@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { revalidatePath } from 'next/cache';
 
 export async function cookiesActionServer(name: string, value: string) {
   const cookie = await cookies();
@@ -17,3 +18,7 @@ export async function cookiesActionServer(name: string, value: string) {
 
   return true;
 };
+
+export async function revalidateProducts() {
+  revalidatePath('/products');
+}

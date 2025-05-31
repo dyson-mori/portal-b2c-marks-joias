@@ -16,7 +16,7 @@ type Props = {
 
 export default async function Products({ searchParams }: Props) {
   const searchParam = await searchParams;
-  const search = searchParam.category ? `/products?limit=${16}&title=${searchParam.category}` : undefined
+  const search = searchParam.title ? `/products?limit=${16}&title=${searchParam.title}` : undefined
 
   const products = await api.products.list(search);
   const category = await api.category.list();

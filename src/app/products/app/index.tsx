@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Suspense, useState } from 'react';
+import React, { startTransition, Suspense, useState } from 'react';
 import Image from 'next/image';
 
 import { Product as PrismaProduct } from '@prisma/client';
@@ -11,8 +11,8 @@ import { CategoryProps } from '@global/interfaces';
 import { Button, Product, Splash } from '@components';
 import { useWindowDimensions } from '@hooks';
 
-import { Container, SectionProducts, ProductEmpty, Banner, Categories } from './styles';
-// import { useRouter, useSearchParams } from 'next/navigation';
+import { Container, SectionProducts, ProductEmpty, Banner, Categories, LoadingProducts } from './styles';
+import { api } from '@services/api';
 
 type MaybeArray<T> = T | T[];
 
@@ -21,29 +21,65 @@ type Props = {
   categories: MaybeArray<CategoryProps>;
 };
 
-export default function Products({ products, categories }: Props) {
-  // const route = useRouter();
-  // const searchParams = useSearchParams();
+function addUrlParam(key: 'title' | 'sub', value: string) {
+  const url = new URL(window.location.href);
+  url.searchParams.set(key, value);
+  window.history.pushState({}, '', url);
+};
 
+function removeUrlParam(key: string) {
+  const url = new URL(window.location.href);
+  url.searchParams.delete(key);
+  window.history.pushState({}, '', url);
+}
+
+export default function Products({ products, categories }: Props) {
   const { width, height } = useWindowDimensions();
 
+  const url = new URL(window.location.href);
+  const category_title = url.searchParams.get('title');
+  // const sub_category_title = url.searchParams.get('sub');
+
   const [label] = useState('');
-  const [select, setSelect] = useState({ category: '', sub: '' });
-  const [sub, setSub] = useState<string[]>([]);
+  const [productsData, setProducts] = useState(products);
+  const [loading, setLoading] = useState(false);
+  // const [sub, setSub] = useState<string[]>([]);
 
   const lottie_styles = {
     display: 'flex',
     maxWidth: "300px"
   };
 
-  function onSelect(type: 'category' | 'sub', value: string, el: string[]) {
-    if (type === 'category') {
-      setSub(el);
-      return setSelect({ category: value, sub: '' });
+  function handleFilterUpdate(newTitle: string, newSub?: string) {
+    setLoading(true);
+
+    if (category_title === newTitle) {
+      removeUrlParam('title')
+      return startTransition(async () => {
+        const data = await api.products.list('/products');
+        setProducts(data);
+        setLoading(false);
+      });
     };
 
-    return setSelect(prev => ({ ...prev, sub: value }));
-  };
+    startTransition(async () => {
+      const params = new URLSearchParams();
+      if (newTitle) params.set('title', newTitle);
+      if (newSub) params.set('sub', newSub);
+
+      if (category_title === newTitle) {
+        removeUrlParam(newTitle)
+      } else {
+        addUrlParam('title', newTitle);
+      }
+
+      const url = category_title === newTitle ? '/products' : `/products?${params.toString()}`;
+
+      const data = await api.products.list(url);
+      setProducts(data);
+      setLoading(false);
+    });
+  }
 
   return (
     <Suspense fallback={<Splash />}>
@@ -58,8 +94,8 @@ export default function Products({ products, categories }: Props) {
             {categories.map(category => (
               <Button
                 key={category.title}
-                $variant={select.category === category.title ? 'selected' : 'select'}
-                onClick={() => onSelect('category', category.title, category.sub)}
+                $variant={category_title === category.title ? 'selected' : 'select'}
+                onClick={() => handleFilterUpdate(category.title)}
               >
                 {category.title}
               </Button>
@@ -67,21 +103,27 @@ export default function Products({ products, categories }: Props) {
           </Categories>
         )}
 
-        {sub.length !== 0 && (
+        {/* {sub.length !== 0 && (
           <Categories>
+            <Button
+              $variant={sub_category_title === 'all' ? 'selected' : 'select'}
+              onClick={() => onSelect('sub', 'all', [])}
+            >
+              Todos
+            </Button>
             {sub.map(title => (
               <Button
                 key={title}
-                $variant={select.sub === title ? 'selected' : 'select'}
+                $variant={sub_category_title === title ? 'selected' : 'select'}
                 onClick={() => onSelect('sub', title, [])}
               >
                 {title}
               </Button>
             ))}
           </Categories>
-        )}
+        )} */}
 
-        {products.filter(e => e.title.toLowerCase().includes(label.toLowerCase())).length === 0 && (
+        {productsData.filter(e => e.title.toLowerCase().includes(label.toLowerCase())).length === 0 && (
           <ProductEmpty>
             <DotLottiePlayer style={lottie_styles} src="/lottie/marks-empty-card.lottie" autoplay />
             <p>Product Not Found</p>
@@ -89,15 +131,18 @@ export default function Products({ products, categories }: Props) {
         )}
 
         {
-          products.filter(e => e.title.toLowerCase().includes(label.toLowerCase())).length !== 0 && (
-            <SectionProducts>
+          productsData.filter(e => e.title.toLowerCase().includes(label.toLowerCase())).length !== 0 && (
+            <SectionProducts $isLoading={loading}>
               {
-                products.filter(pro => pro.title.toLowerCase().includes(label.toLowerCase())
-                  // products.filter(pro =>
-                  //   label.length > 0
-                  //     ? pro.name.toLowerCase().includes(label.toLowerCase())
-                  //     : selects.every(eve => pro.categories.some(cat => cat.id === eve.id))
+                loading && (
+                  <LoadingProducts>
+                    <DotLottiePlayer style={lottie_styles} src="/lottie/marks-loading.lottie" autoplay loop />
+                  </LoadingProducts>
                 )
+              }
+              {
+                productsData
+                  .filter(pro => pro.title.toLowerCase().includes(label.toLowerCase()))
                   .map((item, index) =>
                     <Product key={index.toString()} product={item} href={`/product?product_id=${item.id}`} />
                   )}
